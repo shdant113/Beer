@@ -1,4 +1,23 @@
-User Stories:
+#Project 2 - BeerFridge
+
+####Created by Tim Mandel and Spencer Dant.
+
+What's in your fridge? Tell your friends what you're drinking, rate your favorite beers and breweries, and find your new favorites with BeerFridge!
+
+(this is where we put some inspirational stuff)
+
+***
+
+##Wireframes:
+
+https://puu.sh/CCjEP/db228dd89f.png
+https://puu.sh/CCjEw/277d4ab92f.png
+https://puu.sh/CCjEE/464f31f895.png
+https://puu.sh/CCjEh/59bda072ed.png
+
+***
+
+##User Stories:
 
 The user lands on an index page that has a log in form. They can enter their information (if they have a log in) and click log in. If they do not, they can click register and be taken to a registration page asking for the information necessary to fill out their model. When they finish, they will be taken back to the index page.
 
