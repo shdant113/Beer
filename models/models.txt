@@ -1,0 +1,42 @@
+models
+
+users -->
+	username
+	password
+	email
+	location (city)
+	fridge ([beer.schema])
+	//
+	beyond mvp
+	//
+	user's reviews
+	friends
+	messages
+	blocked users
+
+beer -->
+	name
+	type
+	flavor
+	color
+	ratings
+	maker
+	//
+	beyond mvp
+	//
+
+breweries -->
+	name
+	location (address)
+	beers ([beer.schema])
+	//
+	beyond mvp
+	//
+	reviews
+
+
+
+
+
+
+
