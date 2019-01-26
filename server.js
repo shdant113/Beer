@@ -2,9 +2,6 @@ require('./db');
 const express = require('express');
 const server = express();
 const request = require('superagent');
-	
-
-
 
 
 const bodyParser = require('body-parser');

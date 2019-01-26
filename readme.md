@@ -12,7 +12,7 @@ What's in your fridge? Tell your friends what you're drinking, rate your favorit
 
 https://puu.sh/CCjEP/db228dd89f.png || https://puu.sh/CCjEw/277d4ab92f.png
 
-https://puu.sh/CCjEE/464f31f895.png || https://puu.sh/CCjEh/59bda072ed.png
+https://puu.sh/CCjEE/464f31f895.png || https://puu.sh/CCk0C/95b9fddfda.png
 
 ***
 
