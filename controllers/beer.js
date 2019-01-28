@@ -25,6 +25,7 @@ router.get('/new', async (req, res) => {
 router.post('/', async (req, res) => {
 	try {
 		const newBeer = await Beer.create(req.body);
+		console.log(newBeer);
 		res.redirect('/beers');
 	} catch (err) {
 		res.send(err)

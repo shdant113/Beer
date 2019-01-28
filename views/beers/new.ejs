@@ -1,4 +1,23 @@
 <% include ../partials/head %>
 <body>
+
+	<main>
+		<form action="/beers" method="POST">
+			<input type="text" name="name" placeholder="Beer Name"><br>
+			<input type="text" name="type" placeholder="type"><br>
+			<div>
+				<label for="price">Price</label>
+				<input type="range" name="price" min="1" max="4"><br>
+			</div>
+			<label for="flavor">Taste Description</label>
+			<textarea name="flavor"></textarea><br>
+			<input type="text" name="color" placeholder="Color"><br>
+			<input type="text" name="maker" placeholder="Brewery">
+			<button>New Beer</button>
+		</form>
+	</main>
+
+
+
 <% include ../partials/header %>
 <% include ../partials/footer%>
