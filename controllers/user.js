@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 
 // log in page
 router.get('/login', async (req, res) => {
-	res.render('./user/login.ejs')
+	res.render('users/login.ejs')
 });
 
 // register page
@@ -26,9 +26,9 @@ router.post('/login', async (req, res) => {
 		} else {
 			if (bcrypt.compareSync(req.body.password, existingUser.password)) {
 				req.session.username = existingUser.username;
-				res.session.loggedIn = true;
+				req.session.loggedIn = true;
 				req.session.message = `We've been awaiting your prompt return, ${existingUser.username}`;
-				res.redirect('/beer/index.ejs');
+				res.redirect('/beers');
 			} else {
 				req.session.message = "here's a message";
 				console.log('failed login attempt, incorrect password');
