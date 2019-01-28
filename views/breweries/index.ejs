@@ -1,4 +1,19 @@
 <% include ../partials/head %>
 <body>
-<% include ../partials/header %>
-<% include ../partials/footer%>
+	<% include ../partials/header %>
+
+	<main>
+		<h1>BREWERIES</h1>
+		<h3><a href="/breweries/new">MAKE A NEW BREWERY</a></h3>
+
+		<ul>
+			<% for (let i = 0; i < breweries.length; i++) {%>
+				<li>
+					<a href="/breweries/<%=breweries[i]._id%>"><%=breweries[i].name%></a>
+				</li>
+			<%}%>
+		</ul>
+	</main>
+
+
+	<% include ../partials/footer%>

@@ -1,9 +1,9 @@
 <% include ../partials/head %>
 <body>
-
+	<% include ../partials/header %>
 	<main>
 		<h1>BEER</h1>
-
+		<h3><a href="/beers/new">MAKE NEW BEER</a></h3>
 		<ul>
 			<% for (let i = 0; i < beers.length; i++) {%>
 				<li>
@@ -13,5 +13,5 @@
 		</ul>
 
 	</main>
-<% include ../partials/header %>
+
 <% include ../partials/footer%>

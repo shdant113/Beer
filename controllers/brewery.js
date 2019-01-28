@@ -5,9 +5,9 @@ const Brewery = require('../models/brewery');
 // index --> get
 router.get('/', async (req, res) => {
 	try {
-		const foundBrewery = await Brewery.find({});
+		const allBreweries = await Brewery.find({});
 		res.render('./breweries/index.ejs', {
-			brewery: foundBrewery
+			breweries: allBreweries
 		})
 	} catch (err) {
 		res.send(err)
@@ -27,6 +27,7 @@ router.get('/new', async (req, res) => {
 router.post('/', async (req, res) => {
 	try {
 		const newBrewery = await Brewery.create(req.body);
+		console.log(newBrewery);
 		res.redirect('/breweries');
 	} catch (err) {
 		res.send(err)
