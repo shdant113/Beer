@@ -5,8 +5,10 @@ const Beer = require('../models/beer');
 // index --> get
 router.get('/', async (req, res) => {
 	try {
-		const foundBeer = Beer.find({});
-		res.render('beers/index.ejs')
+		const allBeers = await Beer.find({});
+		res.render('beers/index.ejs', {
+			beers: allBeers
+		})
 	} catch (err) {
 		res.send(err)
 	}

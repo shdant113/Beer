@@ -1,4 +1,17 @@
 <% include ../partials/head %>
 <body>
+
+	<main>
+		<h1>BEER</h1>
+
+		<ul>
+			<% for (let i = 0; i < beers.length; i++) {%>
+				<li>
+					<a href="/beers/<%=beers[i]._id%>"><%=beers[i].name%></a>
+				</li>
+			<%}%>
+		</ul>
+
+	</main>
 <% include ../partials/header %>
 <% include ../partials/footer%>
