@@ -8,7 +8,7 @@ const beerSchema = new Schema({
 	flavor: String,
 	color: String,
 	rating: [Review.schema],
-	maker: String,
+	maker: { type: String, required: true },
 	user: { type: String, required: true }
 });
 
