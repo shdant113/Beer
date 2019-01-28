@@ -24,6 +24,10 @@
 		<input type="text" name="user" value="<%=beer.user%>"><br>
 		<button>Edit <%= beer.name %></button>
 	</form>
+
+	<form action="/beers/<%=beer._id%>?_method=DELETE" method="POST">
+		<button>DELETE BEER</button>
+	</form>
 </div>
 
 <% include ../partials/footer%>

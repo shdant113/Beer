@@ -132,6 +132,14 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
 	try {
 		const deleteBeer = await Beer.findByIdAndRemove(req.params.id);
+		const usersWithBeer = await User.find({'fridge._id': req.params.id});
+		const breweryWithBeer = await Brewery.findOne({'beers._id': req.params.id});
+		for (let i = 0; i < usersWithBeer.length; i++) {
+			usersWithBeer[i].fridge.id(req.params.id).remove();
+			await usersWithBeer[i].save();
+		}
+		breweryWithBeer.beers.id(req.params.id).remove();
+		await breweryWithBeer.save();
 		res.redirect('/beers');
 	} catch (err) {
 		res.send(err)

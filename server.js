@@ -29,13 +29,13 @@ server.use('/breweries', breweryController);
 server.use('/reviews', reviewController);
 server.use('/users', userController);
 
-Brewery.collection.insertMany(brewerySeed, (err, response) => {
-	if (err) {
-		console.log(err)
-	} else {
-		console.log(response)
-	}
-});
+// Brewery.collection.insertMany(brewerySeed, (err, response) => {
+// 	if (err) {
+// 		console.log(err)
+// 	} else {
+// 		console.log(response)
+// 	}
+// });
 
 server.get('/', (req, res) => {
 	res.render('home.ejs')
