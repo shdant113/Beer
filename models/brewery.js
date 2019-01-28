@@ -4,9 +4,9 @@ const Beer = require('./beer');
 const User = require('./user')
 const brewerySchema = new Schema({
 	name: { type: String, required: true },
-	city: { type: String, required: true },
-	state: { type: String, required: true },
-	creator: { type: String, required: true},
+	city: String,
+	state: String,
+	creator: { type: String, required: true },
 	beers: [Beer.schema]
 })
 

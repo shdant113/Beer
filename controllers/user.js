@@ -20,16 +20,21 @@ router.get('/new', async (req, res) => {
 router.post('/login', async (req, res) => {
 	try {
 		const existingUser = await User.findOne({ username: req.body.username });
+		// if user already exists
 		if (!existingUser) {
-			req.session.message = "here's a message";
+			// print message on redirect page
+			req.session.message = "That username already exists.";
 			console.log('failed login attempt, username did not exist');
 			res.redirect('/user/login');
 		} else {
+			// password comparison
+			// --> if correct password
 			if (bcrypt.compareSync(req.body.password, existingUser.password)) {
 				req.session.username = existingUser.username;
 				req.session.loggedIn = true;
 				req.session.message = `We've been awaiting your prompt return, ${existingUser.username}`;
 				res.redirect('/beers');
+			// --> if incorrect password
 			} else {
 				req.session.message = "here's a message";
 				console.log('failed login attempt, incorrect password');
@@ -43,9 +48,11 @@ router.post('/login', async (req, res) => {
 
 // register route
 router.post('/', async (req, res) => {
+	// username is required to be unique on the model page, so a username cannot be replicated
 	// hash user password
 	const hashedUserPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
 	const userPassEntry = {};
+	// enter user input into database
 	userPassEntry.password = hashedUserPassword;
 	userPassEntry.username = req.body.username;
 	userPassEntry.email = req.body.email;
@@ -56,6 +63,7 @@ router.post('/', async (req, res) => {
 		const newUser = await User.create(userPassEntry);
 		console.log('newUser is: ')
 		console.log(newUser);
+		// log user in upon account creation
 		req.session.loggedIn = true;
 		req.session.username = newUser.username // username
 		req.session.message = `It's a pleasure to meet you, ${newUser.username}`;
@@ -67,6 +75,7 @@ router.post('/', async (req, res) => {
 
 // log out
 router.get('/logout', async (req, res) => {
+	// end session, log user out
 	req.session.destroy((err) => {
 		res.redirect('/users/login')
 	})
@@ -99,16 +108,21 @@ router.get('/:id', async (req, res) => {
 });
 
 
-// 
+// add beer to fridge from beer show page
 router.put('/:id', async (req, res) => {
 	try {
+		// find beer by beerid as designated on beer show page
 		const foundBeer = await Beer.findById(req.body.beerid);
+		// find user that pressed the button on the show page
 		const foundUser = await User.findById(req.params.id);
 		// console.log(foundBeer);
+		// push to user fridge
 		foundUser.fridge.push(foundBeer);
+		// save result in db
 		foundUser.save();
 		// console.log(foundUser);
 		console.log(foundUser.fridge);
+		// redirect to user profile
 		res.redirect(`./${req.params.id}`)
 		// res.render('users/show.ejs', {
 		// 	user: foundUser

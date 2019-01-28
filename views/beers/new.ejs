@@ -9,11 +9,17 @@
 				<label for="price">Price</label>
 				<input type="range" name="price" min="1" max="4"><br>
 			</div>
-			<label for="flavor">Taste Description</label>
+			<label for="flavor">Taste Description</label><br>
 			<textarea name="flavor"></textarea><br>
 			<input type="text" name="color" placeholder="Color"><br>
-			<input type="text" name="maker" placeholder="Brewery"><br>
-			<input type="text" name="user" placeholder="Your User Name">
+			<input type="text" name="maker" list="breweries-option"><br>
+			<datalist id="breweries-option">
+				<% for (let i = 0; i < breweries.length; i++) { -%>
+					<option value="<%= breweries[i]._id %>"><%= breweries[i].name %></option>
+				<% } -%>
+			</datalist><br>
+			<p>Don't see your beer's brewery? Click <a href="/breweries/new">here</a>.</p><br>
+			<input type="text" name="user" placeholder="Your User Name"><br>
 			<button>New Beer</button>
 		</form>
 	</main>

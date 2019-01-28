@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Beer = require('../models/beer');
+const Brewery = require('../models/brewery');
 const User = require('../models/user');
 
 // index --> get
@@ -18,7 +19,12 @@ router.get('/', async (req, res) => {
 // new --> get
 router.get('/new', async (req, res) => {
 	try {
-		res.render('beers/new.ejs')
+		const addBrewery = await Brewery.find({})
+		const foundUser = await User.findOne({ username: req.session.username });
+		res.render('beers/new.ejs', {
+			breweries: addBrewery,
+			user: foundUser
+		})
 	} catch (err) {
 		res.send(err)
 	}
@@ -27,7 +33,11 @@ router.get('/new', async (req, res) => {
 // new --> post
 router.post('/', async (req, res) => {
 	try {
+		const foundBrewery = await Brewery.findOne(req.params.id);
 		const newBeer = await Beer.create(req.body);
+		console.log(newBeer);
+		foundBrewery.beers.push(newBeer);
+		foundBrewery.save();
 		console.log(newBeer);
 		res.redirect('/beers');
 	} catch (err) {
