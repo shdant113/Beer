@@ -1,4 +1,20 @@
 <% include ../partials/head %>
 <body>
 <% include ../partials/header %>
+
+	<main>
+		
+		<h1>Our Users</h1>
+
+		<ul>
+			<% for (let i=0; i < users.length; i++){%>
+				<li>
+					<a href="/users/<%=users[i]._id%>"><%=users[i].username%></a>
+				</li>
+			<%}%>
+		</ul>
+
+
+
+	</main>
 <% include ../partials/footer%>

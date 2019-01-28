@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 const User = require('../models/user');
+const Beer = require('../models/beer');
 const bcrypt = require('bcryptjs');
 
 
@@ -83,8 +84,38 @@ router.get('/', async (req, res) => {
 	}
 });
 
-// 
 
+
+// show
+router.get('/:id', async (req, res) => {
+	try {
+		const foundUser = await User.findById(req.params.id);
+		res.render('users/show.ejs', {
+			user: foundUser
+		})
+	} catch (err) {
+		res.send(err)
+	}
+});
+
+
+// 
+router.put('/:id', async (req, res) => {
+	try {
+		const foundBeer = await Beer.findById(req.body.beerid);
+		const foundUser = await User.findById(req.params.id);
+		// console.log(foundBeer);
+		foundUser.fridge.push(foundBeer);
+		foundUser.save();
+		// console.log(foundUser);
+		console.log(foundUser.fridge);
+		res.redirect(`./${req.params.id}`)
+		// res.render('users/show.ejs', {
+		// 	user: foundUser
+	} catch (err) {
+		res.send(err)
+	}
+});
 
 
 

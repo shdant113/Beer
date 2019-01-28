@@ -14,10 +14,9 @@
 
 		<%if(user !== 0){%>
 		<form action="/users/<%=user._id%>?_method=PUT" method="POST">
+			<input name="beerid" type="hidden" value="<%=beer._id%>">
 			<button>Add To Your Fridge</button>
 		</form>
-		<%} else {%>
-		<p></p>
 		<%}%>
 	</main>
 

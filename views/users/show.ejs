@@ -1,4 +1,16 @@
 <% include ../partials/head %>
 <body>
 <% include ../partials/header %>
+
+Username: <%=user.username%><br>
+Email: <%=user.email%><br>
+<%=user.city%>, <%=user.state%><br>
+Fridge: 
+<ul>
+	<% for (let i = 0; i < user.fridge.length; i++){%>
+		<li>
+			<a href="/beers/<%=user.fridge[i]._id%>"><%=user.fridge[i].name%></a>
+		</li>
+	<%}%>
+</ul>
 <% include ../partials/footer%>
