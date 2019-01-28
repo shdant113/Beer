@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Beer = require('../models/beer');
+const User = require('../models/user');
 
 // index --> get
 router.get('/', async (req, res) => {
@@ -38,9 +39,19 @@ router.post('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
 	try {
 		const foundBeer = await Beer.findById(req.params.id);
-		res.render('beers/show.ejs', {
-			beer: foundBeer
-		})
+
+		const foundUser = await User.findOne({username: req.session.username});
+		if (foundUser) {
+			res.render('beers/show.ejs', {
+			beer: foundBeer,
+			user: foundUser
+			})
+		} else {
+			res.render('beers/show.ejs', {
+			beer: foundBeer,
+			user: 0
+			})
+		}
 	} catch (err) {
 		res.send(err)
 	}
