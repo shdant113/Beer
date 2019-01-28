@@ -11,8 +11,8 @@ router.get('/login', async (req, res) => {
 });
 
 // register page
-router.get('/register', async (req, res) => {
-	res.render('./user/register.ejs')
+router.get('/new', async (req, res) => {
+	res.render('users/new.ejs')
 });
 
 // log in route
@@ -41,27 +41,24 @@ router.post('/login', async (req, res) => {
 });
 
 // register route
-router.post('/register', async (req, res) => {
+router.post('/', async (req, res) => {
+	// hash user password
+	const hashedUserPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+	const userPassEntry = {};
+	userPassEntry.password = hashedUserPassword;
+	userPassEntry.username = req.body.username;
+	userPassEntry.email = req.body.email;
+	userPassEntry.city = req.body.city;
+	userPassEntry.state = req.body.state;
 	try {
-		const existingUser = await User.findOne({ username: req.body.username });
-		if (!existingUser) {
-			// hash user password
-			const hashedUserPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(20));
-			// create user
-			const newUser = await User.create({
-				username: req.body.username,
-				password: hashedUserPassword,
-				email: req.body.email,
-				location: req.body.location
-			})
-			req.session.loggedIn = true;
-			req.session.username = newUser.username // username
-			req.session.message = `It's a pleasure to meet you, ${newUser.username}`;
-			res.redirect('/beer');
-		} else {
-			req.session.message = `Username ${existingUser.username} already taken.`
-			res.redirect('/user/register');
-		}
+		// create user
+		const newUser = await User.create(userPassEntry);
+		console.log('newUser is: ')
+		console.log(newUser);
+		req.session.loggedIn = true;
+		req.session.username = newUser.username // username
+		req.session.message = `It's a pleasure to meet you, ${newUser.username}`;
+		res.redirect('/');
 	} catch (err) {
 		res.send(err)
 	}
@@ -73,5 +70,24 @@ router.get('/logout', async (req, res) => {
 		res.redirect('/user/login')
 	})
 });
+
+// index
+router.get('/', async (req, res) => {
+	try {
+		const foundUser = await User.find({});
+		res.render('users/index.ejs', {
+			users: foundUser
+		})
+	} catch (err) {
+		res.send(err)
+	}
+});
+
+// 
+
+
+
+
+
 
 module.exports = router;
