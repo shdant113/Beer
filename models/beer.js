@@ -8,7 +8,8 @@ const beerSchema = new Schema({
 	flavor: String,
 	color: String,
 	rating: [Review.schema],
-	maker: String
+	maker: String,
+	user: { type: String, required: true }
 });
 
 const Beer = mongoose.model('Beer', beerSchema);
