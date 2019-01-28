@@ -5,6 +5,10 @@ const request = require('superagent');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const User = require('./models/user');
+const Brewery = require('./models/brewery');
+const userSeed = require('./seedUserData');
+const brewerySeed = require('./seedBreweryData');
 
 server.use(express.static('public'));
 server.use(methodOverride('_method'));
@@ -24,6 +28,22 @@ server.use('/beers', beerController);
 server.use('/breweries', breweryController);
 server.use('/reviews', reviewController);
 server.use('/users', userController);
+
+// Brewery.collection.insertMany(brewerySeed, (err, response) => {
+// 	if (err) {
+// 		console.log(err)
+// 	} else {
+// 		console.log(response)
+// 	}
+// });
+
+// User.collection.insertMany(userSeed, (err, response) => {
+// 	if (err) {
+// 		console.log(err)
+// 	} else {
+// 		console.log(response)
+// 	}
+// });
 
 server.get('/', (req, res) => {
 	res.render('home.ejs')
