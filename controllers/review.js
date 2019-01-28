@@ -61,7 +61,7 @@ router.get('/:id/edit', async (req, res) => {
 router.put('/:id', async (req, res) => {
 	try {
 		const updateReview = Review.findByIdAndUpdate(req.params.id, req.body, { new: true });
-		res.redirect('/review')/
+		res.redirect('/review')
 	} catch (err) {
 		res.send(err)
 	}

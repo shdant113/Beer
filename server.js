@@ -15,6 +15,20 @@ server.use(session({
 	saveUnititialized: false
 }))
 
+const beerController = require('./controllers/beer');
+const breweryController = require('./controllers/brewery');
+const reviewController = require('./controllers/review');
+const userController = require('./controllers/user');
+
+server.use('/beers', beerController);
+server.use('/breweries', breweryController);
+server.use('/reviews', reviewController);
+server.use('/users', userController);
+
+server.get('/', (req, res) => {
+	res.render('home.ejs')
+});
+
 server.listen(3000, () => {
 	const date = new Date(Date.now())
 	const dayOfWeek = date.toLocaleString('en-US', { weekday: 'long' })
