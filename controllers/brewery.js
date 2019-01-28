@@ -6,7 +6,7 @@ const Brewery = require('../models/brewery');
 router.get('/', async (req, res) => {
 	try {
 		const foundBrewery = await Brewery.find({});
-		res.render('./brewery/index.ejs', {
+		res.render('./breweries/index.ejs', {
 			brewery: foundBrewery
 		})
 	} catch (err) {
@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 // new --> get
 router.get('/new', async (req, res) => {
 	try {
-		res.render('./brewery/new.ejs');
+		res.render('./breweries/new.ejs');
 	} catch (err) {
 		res.send(err)
 	}
@@ -27,7 +27,7 @@ router.get('/new', async (req, res) => {
 router.post('/', async (req, res) => {
 	try {
 		const newBrewery = await Brewery.create(req.body);
-		res.redirect('/brewery');
+		res.redirect('/breweries');
 	} catch (err) {
 		res.send(err)
 	}
@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
 	try {
 		const foundBrewery = await Brewery.findById(req.params.id);
-		res.render('./brewery/show.ejs', {
+		res.render('./breweries/show.ejs', {
 			brewery: foundBrewery
 		})
 	} catch (err) {
@@ -49,7 +49,7 @@ router.get('/:id', async (req, res) => {
 router.get('/:id/edit', async (req, res) => {
 	try {
 		const foundBrewery = await Brewery.findById(req.params.id);
-		res.render('./brewery/edit.ejs', {
+		res.render('./breweries/edit.ejs', {
 			brewery: foundBrewery
 		})
 	} catch (err) {
@@ -61,7 +61,7 @@ router.get('/:id/edit', async (req, res) => {
 router.put('/:id', async (req, res) => {
 	try {
 		const updateBrewery = await Brewery.findByIdAndUpdate(req.params.id, req.body, { new: true });
-		res.redirect('/brewery');
+		res.redirect('/breweries');
 	} catch (err) {
 		res.send(err)
 	}
@@ -71,7 +71,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
 	try {
 		const breweryDelete = await Brewery.findByIdAndRemove(req.params.id);
-		res.redirect('/brewery');
+		res.redirect('/breweries');
 	} catch (err) {
 		res.send(err)
 	}

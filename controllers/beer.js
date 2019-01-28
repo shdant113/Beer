@@ -6,7 +6,7 @@ const Beer = require('../models/beer');
 router.get('/', async (req, res) => {
 	try {
 		const foundBeer = Beer.find({});
-		res.render('./beer/index.ejs')
+		res.render('beers/index.ejs')
 	} catch (err) {
 		res.send(err)
 	}
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 // new --> get
 router.get('/new', async (req, res) => {
 	try {
-		res.render('./beer/new.ejs')
+		res.render('beers/new.ejs')
 	} catch (err) {
 		res.send(err)
 	}
@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
 	try {
 		const foundBeer = await Beer.findById(req.params.id);
-		res.render('./beers/show.ejs', {
+		res.render('beers/show.ejs', {
 			beer: foundBeer
 		})
 	} catch (err) {
@@ -47,7 +47,7 @@ router.get('/:id', async (req, res) => {
 router.get('/:id/edit', async (req, res) => {
 	try {
 		const foundBeer = await Beer.findById(req.params.id);
-		res.render('./beers/edit.ejs', {
+		res.render('beers/edit.ejs', {
 			beer: foundBeer
 		})
 	} catch (err) {
