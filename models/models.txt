@@ -17,9 +17,10 @@ users -->
 beer -->
 	name
 	type
+	price
 	flavor
 	color
-	ratings
+	ratings  {[reviews]}
 	maker
 	//
 	beyond mvp
