@@ -94,19 +94,12 @@ router.put('/:id', async (req, res) => {
 	try {
 		// update beer
 		const updateBeer = await Beer.findByIdAndUpdate(req.params.id, req.body, { new: true });
-		console.log('beer is: ' + updateBeer);
 		// find brewery with the beer being updated
 		const beerBrewery = await Brewery.findOne({'beers._id': req.params.id});
-		console.log('brewery is: ' + beerBrewery);	
-		// find any user with the beer in their fridge
+		// find any user with the beer in their fridge, and return in an array
 		const userFridge = await User.find({'fridge._id': req.params.id});
-
-		console.log(userFridge);
-		console.log('users with this beer in fridge are: ' + userFridge);
 		// if old brewery != new brewery
 		if (beerBrewery._id.toString() != req.body.maker.toString()) {
-			console.log('if')
-			console.log(beerBrewery.name, req.body.maker);	
 			// remove beer
 			beerBrewery.beers.id(req.params.id).remove();
 			// save brewery
@@ -117,25 +110,18 @@ router.put('/:id', async (req, res) => {
 			// save new brewery
 			await newBrewery.save();
 		} else {
-			console.log('else')
 			// if old brewery = new brewery
-			console.log(beerBrewery.name)
 			beerBrewery.beers.id(req.params.id).remove();
 			beerBrewery.beers.push(updateBeer);
 			await beerBrewery.save();
 		}
-		console.log('past if else')
-		console.log(req.params.id);
-		console.log(userFridge);
-		console.log("")
-		console.log(userFridge.id);
-		// remove beer from user fridge
-		userFridge.fridge.id(req.params.id).remove();
-		console.log('removed')
-		// push new updated beer to user fridge    
-		userFridge.fridge.push(updateBeer);
-		// save user
-		await userFridge.save();
+		for (let i = 0; i < userFridge.length; i++) {
+			userFridge[i].fridge.id(req.params.id).remove();
+			// push new updated beer to user fridge    
+			userFridge[i].fridge.push(updateBeer);
+			// save user
+			await userFridge[i].save();
+		}
 		res.redirect('/beers');
 	} catch (err) {
 		res.send(err)
