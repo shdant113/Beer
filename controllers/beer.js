@@ -19,7 +19,9 @@ router.get('/', async (req, res) => {
 // new --> get
 router.get('/new', async (req, res) => {
 	try {
+		// find breweries for dropdown
 		const addBrewery = await Brewery.find({})
+		// find user for user option
 		const foundUser = await User.findOne({ username: req.session.username });
 		res.render('beers/new.ejs', {
 			breweries: addBrewery,
@@ -33,12 +35,15 @@ router.get('/new', async (req, res) => {
 // new --> post
 router.post('/', async (req, res) => {
 	try {
+		// find brewery that was inputted
 		const foundBrewery = await Brewery.findOne(req.params.id);
+		// create the new beer
 		const newBeer = await Beer.create(req.body);
-		console.log(newBeer);
+		// console.log(newBeer);
+		// push the new beer into the brewery it belongs in
 		foundBrewery.beers.push(newBeer);
 		foundBrewery.save();
-		console.log(newBeer);
+		// console.log(newBeer);
 		res.redirect('/beers');
 	} catch (err) {
 		res.send(err)
@@ -48,15 +53,18 @@ router.post('/', async (req, res) => {
 // show --> get
 router.get('/:id', async (req, res) => {
 	try {
+		// beer to show
 		const foundBeer = await Beer.findById(req.params.id);
-
+		// finding the user in order to determine if the user is logged in
 		const foundUser = await User.findOne({username: req.session.username});
 		if (foundUser) {
+			// if the user is logged in, they can add the beer to their fridge
 			res.render('beers/show.ejs', {
 			beer: foundBeer,
 			user: foundUser
 			})
 		} else {
+			// if the user is not logged in (username of 0 cannot exist because username must be a string), they cannot add a beer to their fridge, so the page renders but the button does not show up
 			res.render('beers/show.ejs', {
 			beer: foundBeer,
 			user: 0
