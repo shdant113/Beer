@@ -1,5 +1,6 @@
 <% include ../partials/head %>
 <body>
+	<% include ../partials/header %>
 
 	<main>
 		<form action="/beers" method="POST">
@@ -11,13 +12,12 @@
 			</div>
 			<label for="flavor">Taste Description</label><br>
 			<textarea name="flavor"></textarea><br>
-			<input type="text" name="color" placeholder="Color"><br>
-			<input type="text" name="maker" list="breweries-option"><br>
-			<datalist id="breweries-option">
+			<input type="text" name="color" placeholder="Color"><br><br>
+			<select name="maker" id="breweries-option-new">
 				<% for (let i = 0; i < breweries.length; i++) { -%>
-					<option value="<%= breweries[i]._id %>"><%= breweries[i].name %></option>
+					<option value="<%= breweries[i].name %>"><%= breweries[i].name %></option>
 				<% } -%>
-			</datalist><br>
+			</select><br>
 			<p>Don't see your beer's brewery? Click <a href="/breweries/new">here</a>.</p><br>
 			<input type="text" name="user" placeholder="Your User Name"><br>
 			<button>New Beer</button>
@@ -26,5 +26,5 @@
 
 
 
-<% include ../partials/header %>
+
 <% include ../partials/footer%>
