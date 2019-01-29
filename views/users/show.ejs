@@ -14,6 +14,7 @@ Fridge:
 	<%}%>
 </ul>
 
+<a href="/users/<%=user._id%>/edit">Edit Yourself</a>
 <form action="/users/<%=user._id%>?_method=DELETE" method="POST">
 	<button>DELETE USER</button>
 </form>

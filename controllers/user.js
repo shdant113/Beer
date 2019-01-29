@@ -61,8 +61,6 @@ router.post('/', async (req, res) => {
 	try {
 		// create user
 		const newUser = await User.create(userPassEntry);
-		console.log('newUser is: ')
-		console.log(newUser);
 		// log user in upon account creation
 		req.session.loggedIn = true;
 		req.session.username = newUser.username // username
@@ -107,6 +105,17 @@ router.get('/:id', async (req, res) => {
 	}
 });
 
+router.get('/:id/edit', async (req, res) => {
+	try {
+		const foundUser = await User.findById(req.params.id);
+		res.render('users/edit.ejs', {
+			user: foundUser
+		})
+	} catch (err) {
+		res.send(err)
+	}
+})
+
 
 // add beer to fridge from beer show page
 router.put('/:id', async (req, res) => {
@@ -126,6 +135,36 @@ router.put('/:id', async (req, res) => {
 		res.redirect(`./${req.params.id}`)
 		// res.render('users/show.ejs', {
 		// 	user: foundUser
+	} catch (err) {
+		res.send(err)
+	}
+});
+
+router.put('/:id/edited', async (req, res) => {
+	try {
+		const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
+// THIS WAS US MAKING THINGS TOO COMPLICATED
+		// const foundUser = await User.findById(req.params.id);
+		
+		// const foundUsersFridge = foundUser.fridge;
+		// foundUser.fridge = [];
+		// console.log(foundUser.fridge);
+		// console.log("----------------");
+		// console.log(foundUsersFridge);
+		// await foundUser.save();
+		// const updateUser = await User.updateOne(foundUser, 
+		// 	{
+		// 		username: req.body.username,
+		// 		// password: req.body.password,
+		// 		email: req.body.email,
+		// 		city: req.body.city,
+		// 		state: req.body.state,
+		// 		// fridge: foundUser.fridge
+		// 	}, {new: true});
+		// updateUser.fridge.push(foundUsersFridge);
+		// await updateUser.save();
+		// console.log(updateUser);
+		res.redirect('/users');
 	} catch (err) {
 		res.send(err)
 	}
