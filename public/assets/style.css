@@ -2,19 +2,22 @@ body {
 	background-image: url('/images/beer-on-bar-background_ect7bbkyl__F0000.png');
 	max-width: 950px;
 	margin: 0 auto;
-	border: 5px solid black;
 	background-size: cover;
 	min-height: 100%;
 }
 
 #body{
 	background-color: rgba(255,255,255,0.5);
-	background-size: cover;
+	position: fixed;
+	max-width: 950px;
+	margin: 0 auto;
+	border: 5px solid black;
 }
 
-.wrap, #body, html{
+#body, html{
 	height: 100%;
-	min-height: 100%;
+	left: 0;
+	right: 0;
 }
 
 a:hover{
@@ -112,5 +115,7 @@ p{
 footer{
 	font-family: 'Arvo', serif;
 	text-align: center;
-	position: relative;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
 }
