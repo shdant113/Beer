@@ -13,8 +13,8 @@
 			<input type="range" name="price" min="1" max="4" value="<%=beer.price%>"><br>
 		</div>
 		<label for="flavor">Taste Description</label><br>
-		<textarea name="flavor" value="<%=beer.flavor%>"></textarea><br>
-		<input type="text" name="color" value="<%=beer.flavor%>"><br>
+		<textarea name="flavor"><%=beer.flavor%></textarea><br>
+		<input type="text" name="color" value="<%=beer.color%>"><br>
 		<select name="maker" id="breweries-option-edit">
 			<% for (let i = 0; i < breweries.length; i++) { -%>
 				<option value="<%= breweries[i].name %>"><%= breweries[i].name %></option>
