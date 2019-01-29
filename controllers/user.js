@@ -100,9 +100,9 @@ router.get('/:id', async (req, res) => {
 		const currentUser = await User.findOne({username: req.session.username});
 		console.log(currentUser);
 		res.render('users/show.ejs', {
-				user: foundUser,
-				currentUser: currentUser
-			})
+			user: foundUser,
+			currentUser: currentUser
+		})
 	} catch (err) {
 		res.send(err)
 	}

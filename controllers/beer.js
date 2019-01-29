@@ -7,9 +7,11 @@ const User = require('../models/user');
 // index --> get
 router.get('/', async (req, res) => {
 	try {
+		const currentUser = await User.findOne({username: req.session.username});
 		const allBeers = await Beer.find({});
 		res.render('beers/index.ejs', {
-			beers: allBeers
+			beers: allBeers,
+			currentUser: currentUser
 		})
 	} catch (err) {
 		res.send(err)

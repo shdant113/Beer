@@ -4,7 +4,9 @@
 
 	<main>
 		<h1>BREWERIES</h1>
+		<%if(currentUser) {%>
 		<h3><a href="/breweries/new">MAKE A NEW BREWERY</a></h3>
+		<%}%>
 
 		<ul>
 			<% for (let i = 0; i < breweries.length; i++) {%>
