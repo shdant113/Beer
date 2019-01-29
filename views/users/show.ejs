@@ -13,4 +13,8 @@ Fridge:
 		</li>
 	<%}%>
 </ul>
+
+<form action="/users/<%=user._id%>?_method=DELETE" method="POST">
+	<button>DELETE USER</button>
+</form>
 <% include ../partials/footer%>

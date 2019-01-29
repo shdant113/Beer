@@ -33,12 +33,12 @@ router.post('/login', async (req, res) => {
 				req.session.username = existingUser.username;
 				req.session.loggedIn = true;
 				req.session.message = `We've been awaiting your prompt return, ${existingUser.username}`;
-				res.redirect('/beers');
+				res.redirect(`/users/${existingUser._id}`);
 			// --> if incorrect password
 			} else {
 				req.session.message = "here's a message";
 				console.log('failed login attempt, incorrect password');
-				res.redirect('/user/login');
+				res.redirect('/users/login');
 			}
 		}
 	} catch (err) {
@@ -131,7 +131,14 @@ router.put('/:id', async (req, res) => {
 	}
 });
 
-
+router.delete('/:id', async (req, res) => {
+	try {
+		const userDelete = await User.findByIdAndRemove(req.params.id);
+		res.redirect('/');
+	} catch (err) {
+		res.send(err)
+	}
+});
 
 
 
