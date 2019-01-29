@@ -19,7 +19,9 @@ router.get('/', async (req, res) => {
 router.get('/new', async (req, res) => {
 	try {
 		// const foundUser = await User.find({});
-		res.render('./breweries/new.ejs');
+		res.render('./breweries/new.ejs', {
+			user: req.session.username
+		});
 	} catch (err) {
 		res.send(err)
 	}

@@ -97,20 +97,28 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
 	try {
 		const foundUser = await User.findById(req.params.id);
+		const currentUser = await User.findOne({username: req.session.username});
+		console.log(currentUser);
 		res.render('users/show.ejs', {
-			user: foundUser
-		})
+				user: foundUser,
+				currentUser: currentUser
+			})
 	} catch (err) {
 		res.send(err)
 	}
 });
 
+// edit
 router.get('/:id/edit', async (req, res) => {
 	try {
 		const foundUser = await User.findById(req.params.id);
-		res.render('users/edit.ejs', {
-			user: foundUser
-		})
+		if (req.session.username === foundUser.username) {
+			res.render('users/edit.ejs', {
+				user: foundUser
+			})
+		} else {
+			res.redirect('/');
+		}
 	} catch (err) {
 		res.send(err)
 	}
@@ -140,6 +148,7 @@ router.put('/:id', async (req, res) => {
 	}
 });
 
+// update
 router.put('/:id/edited', async (req, res) => {
 	try {
 		const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
@@ -170,6 +179,7 @@ router.put('/:id/edited', async (req, res) => {
 	}
 });
 
+// delete
 router.delete('/:id', async (req, res) => {
 	try {
 		const userDelete = await User.findByIdAndRemove(req.params.id);

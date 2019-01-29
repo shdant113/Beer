@@ -4,9 +4,9 @@
 
 
 <main>
+	<h1>Update <%=user.username%></h1>
 	<form action="/users/<%=user._id%>/edited?_method=PUT" method="POST">
-		<input type="text" name="username" value="<%=user.username%>" />
-
+		<input type="hidden" name="username" value="<%=user.username%>" />
 		<input type="email" name="email" value="<%=user.email%>" />
 		<input type="text" name="city" value="<%=user.city%>" />
 		<select name="state" id="user-state-edit">

@@ -21,7 +21,7 @@
 			<% } -%>
 		</select><br>
 		<p>Don't see your beer's brewery? Click <a href="/breweries/new">here</a>.</p><br>
-		<input type="text" name="user" value="<%=beer.user%>"><br>
+		<input type="hidden" name="user" value="<%=beer.user%>"><br>
 		<button>Edit <%= beer.name %></button>
 	</form>
 
