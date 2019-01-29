@@ -36,7 +36,7 @@ router.get('/new', async (req, res) => {
 router.post('/', async (req, res) => {
 	try {
 		// find brewery that was inputted
-		const foundBrewery = await Brewery.findOne(req.params.id);
+		const foundBrewery = await Brewery.findOne({name: req.body.maker});
 		// create the new beer
 		const newBeer = await Beer.create(req.body);
 		// console.log(newBeer);
@@ -99,13 +99,13 @@ router.put('/:id', async (req, res) => {
 		// find any user with the beer in their fridge, and return in an array
 		const userFridge = await User.find({'fridge._id': req.params.id});
 		// if old brewery != new brewery
-		if (beerBrewery._id.toString() != req.body.maker.toString()) {
+		if (beerBrewery.name.toString() != req.body.maker.toString()) {
 			// remove beer
 			beerBrewery.beers.id(req.params.id).remove();
 			// save brewery
 			await beerBrewery.save();
 			// add beer to new brewery
-			const newBrewery = await Brewery.findById(req.body.maker);
+			const newBrewery = await Brewery.findOne({name: req.body.maker});
 			newBrewery.beers.push(updateBeer);
 			// save new brewery
 			await newBrewery.save();

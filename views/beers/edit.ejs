@@ -17,7 +17,7 @@
 		<input type="text" name="color" value="<%=beer.flavor%>"><br>
 		<select name="maker" id="breweries-option-edit">
 			<% for (let i = 0; i < breweries.length; i++) { -%>
-				<option value="<%= breweries[i]._id %>"><%= breweries[i].name %></option>
+				<option value="<%= breweries[i].name %>"><%= breweries[i].name %></option>
 			<% } -%>
 		</select><br>
 		<p>Don't see your beer's brewery? Click <a href="/breweries/new">here</a>.</p><br>
