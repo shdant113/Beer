@@ -1,8 +1,8 @@
 <% include ../partials/head %>
-<body>
-	<% include ../partials/header %>
+<% include ../partials/header %>
 
-	<main>
+<div class="wrap">
+	<div class="ejs-text">
 		<h1><%=beer.name%></h1>
 
 		<p>The Type is: <%=beer.type%></p><br>
@@ -19,8 +19,7 @@
 		</form>
 		<%}%>
 		<button><a href="/beers/<%= beer._id %>/edit">Edit This Beer</a></button>
-	</main>
-
-
+	</div>
+</div>
 
 <% include ../partials/footer%>
