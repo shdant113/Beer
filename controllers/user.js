@@ -151,7 +151,15 @@ router.put('/:id', async (req, res) => {
 // update
 router.put('/:id/edited', async (req, res) => {
 	try {
-		const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
+		const foundUser = await User.findById(req.params.id)
+		if(req.body.password.toString() === foundUser.password) {
+			const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
+		} else {
+			const hashedUserPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+			const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
+			updatedUser.password = hashedUserPassword;
+			await updatedUser.save();
+		}
 // THIS WAS US MAKING THINGS TOO COMPLICATED
 		// const foundUser = await User.findById(req.params.id);
 		
