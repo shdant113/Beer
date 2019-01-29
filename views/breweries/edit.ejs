@@ -6,9 +6,10 @@
 		<form action="/breweries/<%=brewery._id%>?_method=PUT" method="POST">
 			<input type="text" name="name" value="<%=brewery.name%>"><br>
 			<input type="text" name="city" value="<%=brewery.city%>"><br>
-			<select name="state" id="brewer-state-edit">
+			<select name="state" id="brewery-state-edit">
 		<!-- <input type="text" name="state" list="statename" /> -->
 		<!-- <datalist id="statename"> -->
+				<option value="<%=brewery.state%>" selected><%=brewery.state%></option>
 				<option value="Alabama">Alabama</option>
 				<option value="Alaska">Alaska</option>
 				<option value="Arizona">Arizona</option>
