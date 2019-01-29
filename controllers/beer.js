@@ -22,7 +22,10 @@ router.get('/', async (req, res) => {
 router.get('/new', async (req, res) => {
 	try {
 		// find breweries for dropdown
-		const addBrewery = await Brewery.find({})
+		const addBrewery = await Brewery.find({});
+		addBrewery.sort((a, b) => {
+			return a.name - b.name
+		})
 		// find user for user option
 		const foundUser = await User.findOne({ username: req.session.username });
 		res.render('beers/new.ejs', {
