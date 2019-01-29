@@ -1,7 +1,8 @@
 <% include ../partials/head %>
-<body>
-	<% include ../partials/header %>
-	<main>
+<% include ../partials/header %>
+
+<main>
+	<div class="wrap">
 		<h1>BEERS</h1>
 		<%if (currentUser) {%>
 			<h3><a href="/beers/new">MAKE NEW BEER</a></h3>
@@ -13,7 +14,7 @@
 				</li>
 			<%}%>
 		</ul>
-
-	</main>
+	</div>
+</main>
 
 <% include ../partials/footer%>
