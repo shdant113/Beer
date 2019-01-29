@@ -1,8 +1,8 @@
 <% include ../partials/head %>
-<body>
 <% include ../partials/header %>
 
-	<main>
+<div class="wrap">
+	<div class="ejs-text">
 		<form action="/breweries/<%=brewery._id%>?_method=PUT" method="POST">
 			<input type="text" name="name" value="<%=brewery.name%>"><br>
 			<input type="text" name="city" value="<%=brewery.city%>"><br>
@@ -70,6 +70,7 @@
 		<form action="/breweries/<%=brewery._id%>?_method=DELETE" method="POST">
 			<button>DELETE THIS BREWERY</button>
 		</form>
-	</main>
+	</div>
+</div>
 
 <% include ../partials/footer%>

@@ -1,11 +1,9 @@
 <% include ../partials/head %>
-<body>
 <% include ../partials/header %>
 
-	<main>
-		
-		<h1>Our Users</h1>
-
+<div class="wrap">
+	<h1>Our Users</h1>
+	<div class="ejs-text">
 		<ul>
 			<% for (let i=0; i < users.length; i++){%>
 				<li>
@@ -13,8 +11,7 @@
 				</li>
 			<%}%>
 		</ul>
+	</div>
+</div>
 
-
-
-	</main>
 <% include ../partials/footer%>

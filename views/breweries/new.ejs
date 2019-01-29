@@ -1,9 +1,9 @@
 <% include ../partials/head %>
-<body>
-
-	<% include ../partials/header %>
+<% include ../partials/header %>
 	
-	<main>
+<div class="wrap">
+	<h1>Make A New Brewery</h1>
+	<div class="ejs-text">
 		<form action="/breweries" method="POST">
 			<input type="text" name="name" placeholder="Name"><br>
 			<input type="text" name="city" placeholder="City"><br>
@@ -67,6 +67,7 @@
 			<input type="hidden" name="creator" value="<%=user%>">
 			<button>Make a Brewery</button>
 		</form>
-	</main>
+	</div>
+</div>
 
 <% include ../partials/footer%>

@@ -20,8 +20,8 @@ body {
 	right: 0;
 }
 
-a:hover{
-	color: #007bff;
+a, a:hover, .nav-bar{
+	color: #1701ad;
 }
 
 hr{
@@ -55,7 +55,7 @@ hr{
 	font-family: 'Arvo', serif;
 	font-weight: 700;
 	font-size: 20px;
-	color: #007bff;
+	text-shadow: 1px 1px 2px #FFFFFF;
 }
 
 .nav-bar:hover{
@@ -87,6 +87,7 @@ li{
 }
 
 .nav-bar:hover ul li{
+	color: #1701ad;
 	visibility: visible;
 	opacity: 1;
 	list-style: none;
@@ -95,7 +96,7 @@ li{
 #intro{
 	margin: 0 auto;
 	font-family: 'Caudex', serif;
-	font-size: 40px;
+	font-size: 25px;
 	text-align: center;
 }
 
@@ -103,7 +104,7 @@ li{
 	max-width: 500px;
 	max-height: 500px;
 	display: block;
-	margin: 0 auto;
+	margin: -100px auto;
 }
 
 p{
@@ -118,4 +119,6 @@ footer{
 	position: absolute;
 	bottom: 0;
 	width: 100%;
+	background-color: transparent;
+	opacity: 0.3;
 }

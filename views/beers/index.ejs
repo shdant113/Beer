@@ -1,9 +1,9 @@
 <% include ../partials/head %>
 <% include ../partials/header %>
 
-<main>
-	<div class="wrap">
-		<h1>BEERS</h1>
+<div class="wrap">
+	<h1>Beers</h1>
+	<div class="ejs-text">
 		<%if (currentUser) {%>
 			<h3><a href="/beers/new">MAKE NEW BEER</a></h3>
 		<%}%>
@@ -15,6 +15,6 @@
 			<%}%>
 		</ul>
 	</div>
-</main>
+</div>
 
 <% include ../partials/footer%>
