@@ -58,18 +58,18 @@ router.get('/:id', async (req, res) => {
 		// beer to show
 		const foundBeer = await Beer.findById(req.params.id);
 		// finding the user in order to determine if the user is logged in
-		const foundUser = await User.findOne({username: req.session.username});
-		if (foundUser) {
+		const currentUser = await User.findOne({username: req.session.username});
+		if (currentUser) {
 			// if the user is logged in, they can add the beer to their fridge
 			res.render('beers/show.ejs', {
-			beer: foundBeer,
-			user: foundUser
+				beer: foundBeer,
+				user: currentUser
 			})
 		} else {
 			// if the user is not logged in (username of 0 cannot exist because username must be a string), they cannot add a beer to their fridge, so the page renders but the button does not show up
 			res.render('beers/show.ejs', {
-			beer: foundBeer,
-			user: 0
+				beer: foundBeer,
+				user: 0
 			})
 		}
 	} catch (err) {
@@ -82,10 +82,17 @@ router.get('/:id/edit', async (req, res) => {
 	try {
 		const foundBeer = await Beer.findById(req.params.id);
 		const allBreweries = await Brewery.find({});
-		res.render('beers/edit.ejs', {
-			beer: foundBeer,
-			breweries: allBreweries
-		})
+		const foundUser = await User.find({username: foundBeer.user});
+		const currentUser = await User.find({username: req.session.username});
+		if(req.session.username === foundBeer.user){
+			res.render('beers/edit.ejs', {
+				beer: foundBeer,
+				breweries: allBreweries,
+
+			})
+		} else {
+			res.redirect('/')
+		}
 	} catch (err) {
 		res.send(err)
 	}

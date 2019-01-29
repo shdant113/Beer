@@ -33,7 +33,6 @@ router.get('/new', async (req, res) => {
 router.post('/', async (req, res) => {
 	try {
 		const newBrewery = await Brewery.create(req.body);
-		console.log(newBrewery);
 		res.redirect('/breweries');
 	} catch (err) {
 		res.send(err)
@@ -45,13 +44,13 @@ router.get('/:id', async (req, res) => {
 	try {
 		// finding brewery
 		const foundBrewery = await Brewery.findById(req.params.id);
-		console.log(foundBrewery);
 		// finding user that created the brewery
 		const foundUser = await User.findOne({ username: foundBrewery.creator });
-		console.log(foundBrewery.creator);
+		const currentUser = await User.findOne({username: req.session.username});
 		res.render('./breweries/show.ejs', {
 			brewery: foundBrewery,
-			user: foundUser
+			user: foundUser,
+			currentUser: currentUser
 		})
 	} catch (err) {
 		res.send(err)
@@ -62,9 +61,14 @@ router.get('/:id', async (req, res) => {
 router.get('/:id/edit', async (req, res) => {
 	try {
 		const foundBrewery = await Brewery.findById(req.params.id);
-		res.render('./breweries/edit.ejs', {
-			brewery: foundBrewery
-		})
+		const foundMaker = await User.find({username: foundBrewery.creator});
+		if(req.session.username === foundBrewery.creator) {
+			res.render('./breweries/edit.ejs', {
+				brewery: foundBrewery
+			})
+		} else {
+			res.redirect('/');
+		}
 	} catch (err) {
 		res.send(err)
 	}
