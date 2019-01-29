@@ -151,7 +151,8 @@ router.put('/:id', async (req, res) => {
 // update
 router.put('/:id/edited', async (req, res) => {
 	try {
-		const foundUser = await User.findById(req.params.id)
+		const foundUser = await User.findById(req.params.id);
+		console.log(foundUser);
 		if(req.body.password.toString() === foundUser.password) {
 			const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
 		} else {
@@ -159,6 +160,8 @@ router.put('/:id/edited', async (req, res) => {
 			const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
 			updatedUser.password = hashedUserPassword;
 			await updatedUser.save();
+			console.log("---------------");
+			console.log(updatedUser);
 		}
 // THIS WAS US MAKING THINGS TOO COMPLICATED
 		// const foundUser = await User.findById(req.params.id);
