@@ -23,9 +23,25 @@ router.get('/new', async (req, res) => {
 	try {
 		// find breweries for dropdown
 		const addBrewery = await Brewery.find({});
+		// console.log(addBrewery);
+
 		addBrewery.sort((a, b) => {
-			return a.name - b.name
-		})
+			let nameA = a.name.toUpperCase(); // ignore upper and lowercase
+			let nameB = b.name.toUpperCase(); // ignore upper and lowercase
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
+		});
+
+
+
+		// addBrewery.sort((a, b) => {
+		// 	return a.name - b.name
+		// })
+		// await addBrewery.save();
 		// find user for user option
 		const foundUser = await User.findOne({ username: req.session.username });
 		res.render('beers/new.ejs', {
@@ -62,19 +78,21 @@ router.get('/:id', async (req, res) => {
 		const foundBeer = await Beer.findById(req.params.id);
 		// finding the user in order to determine if the user is logged in
 		const currentUser = await User.findOne({username: req.session.username});
-		if (currentUser) {
+		const foundUser = await User.find({username: foundBeer.user});
+		// if (currentUser) {
 			// if the user is logged in, they can add the beer to their fridge
 			res.render('beers/show.ejs', {
 				beer: foundBeer,
-				user: currentUser
+				user: foundUser,
+				currentUser: currentUser
 			})
-		} else {
+		// } else {
 			// if the user is not logged in (username of 0 cannot exist because username must be a string), they cannot add a beer to their fridge, so the page renders but the button does not show up
-			res.render('beers/show.ejs', {
-				beer: foundBeer,
-				user: 0
-			})
-		}
+			// res.render('beers/show.ejs', {
+			// 	beer: foundBeer,
+			// 	user: 0
+			// })
+		// }
 	} catch (err) {
 		res.send(err)
 	}
@@ -87,11 +105,20 @@ router.get('/:id/edit', async (req, res) => {
 		const allBreweries = await Brewery.find({});
 		const foundUser = await User.find({username: foundBeer.user});
 		const currentUser = await User.find({username: req.session.username});
+		allBreweries.sort((a, b) => {
+			let nameA = a.name.toUpperCase(); // ignore upper and lowercase
+			let nameB = b.name.toUpperCase(); // ignore upper and lowercase
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
+		});
 		if(req.session.username === foundBeer.user){
 			res.render('beers/edit.ejs', {
 				beer: foundBeer,
-				breweries: allBreweries,
-
+				breweries: allBreweries
 			})
 		} else {
 			res.redirect('/')

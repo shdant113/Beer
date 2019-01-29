@@ -12,7 +12,9 @@
 			<li><a href="/beers/<%= brewery.beers[i]._id %>"><%= brewery.beers[i].name %></a></li>
 		<% } -%>
 	</ul>
-	<a href="/breweries/<%=brewery._id%>/edit">Edit This Brewery</a>
+	<%if(currentUser){%>
+		<button><a href="/breweries/<%=brewery._id%>/edit">Edit This Brewery</a></button>
+	<%}%>
 </main>
 
 <% include ../partials/footer%>

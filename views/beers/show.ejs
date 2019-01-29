@@ -12,13 +12,13 @@
 		<p>It's color is: <%=beer.color%></p>
 
 
-		<%if(user !== 0){%>
-		<form action="/users/<%=user._id%>?_method=PUT" method="POST">
-			<input name="beerid" type="hidden" value="<%=beer._id%>">
-			<button>Add To Your Fridge</button>
-		</form>
+		<%if(currentUser){%>
+			<form action="/users/<%=user._id%>?_method=PUT" method="POST">
+				<input name="beerid" type="hidden" value="<%=beer._id%>">
+				<button>Add To Your Fridge</button>
+			</form>
+			<button><a href="/beers/<%= beer._id %>/edit">Edit This Beer</a></button>
 		<%}%>
-		<button><a href="/beers/<%= beer._id %>/edit">Edit This Beer</a></button>
 	</div>
 </div>
 
