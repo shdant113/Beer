@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const Beer = require('./beer');
 const User = require('./user')
 const brewerySchema = new Schema({
-	name: { type: String, required: true },
+	name: { type: String, required: true, unique: true },
 	city: String,
 	state: String,
 	creator: { type: String, required: true },
