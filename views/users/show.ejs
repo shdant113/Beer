@@ -16,12 +16,10 @@
 			<%}%>
 		</ul>
 
-		<%if(currentUser) {%>
+		<%if(isCurrent) {%>
 
 			<button><a href="/users/<%=user._id%>/edit">Edit Yourself</a></button>
-			<form action="/users/<%=user._id%>?_method=DELETE" method="POST">
-				<button>DELETE USER</button>
-			</form>
+			
 
 		<%}%>
 	</div>

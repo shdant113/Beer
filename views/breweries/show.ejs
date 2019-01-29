@@ -11,7 +11,7 @@
 				<li><a href="/beers/<%= brewery.beers[i]._id %>"><%= brewery.beers[i].name %></a></li>
 			<% } -%>
 		</ul>
-		<%if(currentUser){%>
+		<%if(isCurrent){%>
 			<button><a href="/breweries/<%=brewery._id%>/edit">Edit This Brewery</a></button>
 		<%}%>
 	</div>

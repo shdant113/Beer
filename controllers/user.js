@@ -98,10 +98,18 @@ router.get('/:id', async (req, res) => {
 	try {
 		const foundUser = await User.findById(req.params.id);
 		const currentUser = await User.findOne({username: req.session.username});
-		console.log(currentUser);
+		let isCurrent = false;
+		if (currentUser === null) {
+			isCurrent = false;
+		} else if (foundUser._id.toString() !== currentUser._id.toString()) {
+			isCurrent = false;
+		} else {
+			isCurrent = true;
+		}
 		res.render('users/show.ejs', {
 			user: foundUser,
-			currentUser: currentUser
+			currentUser: currentUser,
+			isCurrent: isCurrent
 		})
 	} catch (err) {
 		res.send(err)
