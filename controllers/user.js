@@ -183,8 +183,21 @@ router.put('/:id', async (req, res) => {
 router.put('/:id/edited', upload.single('imageFile'), async (req, res) => {
 	try {
 		const foundUser = await User.findById(req.params.id);
+		// console.log(foundUser.image);
 		// console.log(foundUser);
-
+		// If there is a new picture uploaded:
+		if (req.file) {
+			const imageFilePath = './uploads/' + req.file.filename;
+			const newPicture = {};
+			newPicture.image = {};
+			newPicture.image.data = fs.readFileSync(imageFilePath);
+			newPicture.image.contentType = req.file.mimetype;
+			fs.unlinkSync(imageFilePath);
+			// console.log(newPicture);
+			foundUser.image = newPicture.image;
+			await foundUser.save();
+			// console.log(foundUser.picture);
+		}
 		if(req.body.password.toString() === foundUser.password) {
 			const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
 		} else {
@@ -192,8 +205,8 @@ router.put('/:id/edited', upload.single('imageFile'), async (req, res) => {
 			const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
 			updatedUser.password = hashedUserPassword;
 			await updatedUser.save();
-			console.log("---------------");
-			console.log(updatedUser);
+			// console.log("---------------");
+			// console.log(updatedUser);
 		}
 // THIS WAS US MAKING THINGS TOO COMPLICATED
 		// const foundUser = await User.findById(req.params.id);

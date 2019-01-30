@@ -5,7 +5,7 @@
 	<h1>Edit <%= beer.name %></h1>
 	<br>
 	<div class="ejs-text">
-		<form action="/beers/<%= beer._id %>?_method=PUT" method="POST">
+		<form action="/beers/<%= beer._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
 			<label for="name">Change The Name of <%= beer.name %></label>
 			<input type="text" name="name" value="<%=beer.name%>">
 			<br>
@@ -29,6 +29,7 @@
 			</select>
 			<p>Don't see your beer's brewery? Click <a href="/breweries/new">here</a>.</p>
 			<br>
+			<input type="file" name="imageFile"><br>
 			<input type="hidden" name="user" value="<%=beer.user%>">
 			<button>Edit <%= beer.name %></button>
 		</form>

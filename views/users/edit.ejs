@@ -6,10 +6,10 @@
 	<h1>Update <%=user.username%></h1>
 	<br>
 	<div class="ejs-text">
-		<form action="/users/<%=user._id%>/edited?_method=PUT" method="POST">
+		<form action="/users/<%=user._id%>/edited?_method=PUT" method="POST" enctype="multipart/form-data">
 			<input type="hidden" name="username" value="<%=user.username%>" />
 			<label>Change Your Password:</label>
-			<input type="password" name="password" placeholder="new password here">
+			<input type="password" name="password" value="<%=user.password%>">
 			<label>Change Your Email:</label>
 			<input type="email" name="email" value="<%=user.email%>" />
 			<label>Update Your Location:</label>
@@ -72,6 +72,14 @@
 				<option value="International">International</option>
 			<!-- </datalist> -->
 			</select><br>
+			<img 
+				<%if (user.image.data) {%>
+					src= "/users/<%=user._id%>/image"
+				<%} else {%>
+					src= "/images/beerdefault.png"
+				<%}%> 
+				alt="<%=user.username%> profile">
+			<input type="file" name="imageFile"><br>
 			<button>Edit Your Account</button>
 		</form>
 		<br>

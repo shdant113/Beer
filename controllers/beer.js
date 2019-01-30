@@ -164,7 +164,7 @@ router.get('/:id/image', async (req, res) => {
 });
 
 // update --> put
-router.put('/:id', async (req, res) => {
+router.put('/:id', upload.single('imageFile'), async (req, res) => {
 	try {
 		// update beer
 		const updateBeer = await Beer.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -172,6 +172,19 @@ router.put('/:id', async (req, res) => {
 		const beerBrewery = await Brewery.findOne({'beers._id': req.params.id});
 		// find any user with the beer in their fridge, and return in an array
 		const userFridge = await User.find({'fridge._id': req.params.id});
+		if (req.file) {
+			console.log('inside');
+			const imageFilePath = './uploads/' + req.file.filename;
+			const newPicture = {};
+			newPicture.image = {};
+			newPicture.image.data = fs.readFileSync(imageFilePath);
+			newPicture.image.contentType = req.file.mimetype;
+			fs.unlinkSync(imageFilePath);
+			// console.log(newPicture);
+			updateBeer.image = newPicture.image;
+			await updateBeer.save();
+			// console.log(updateBeer.picture);
+		}
 		// if old brewery != new brewery
 		if (beerBrewery.name.toString() != req.body.maker.toString()) {
 			// remove beer
