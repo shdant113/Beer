@@ -248,106 +248,107 @@ const breweryData = [
 	name: 'Smylie Brothers',
 	city: 'Evanston',
 	state: 'Illinois',
-	creator: 'test',
+	creator: 'admin',
 	beers: []
 },
 {
 	name: 'Danny Boy Beer Works',
 	city: 'Carmel',
 	state: 'Indiana',
-	creator: 'test',
+	creator: 'admin',
 	beers: []
 },
 {
 	name: 'Burn Em Brewing',
 	city: 'Michigan City',
 	state: 'Indiana',
-	creator: 'test',
+	creator: 'admin',
 	beers: []
 },
 {
 	name: 'Avondale Brewing Co',
 	city: 'Birmingham',
 	state: 'Alabama',
-	creator: 'test',
+	creator: 'admin',
 	beers: []
 },
 {
 	name: 'Band of Brothers Brewing Co',
 	city: 'Tuscaloosa',
 	state: 'Alabama',
-	creator: 'test',
+	creator: 'admin',
 	beers: []
 },
 {
 	name: 'Yellowhammer Brewery',
 	city: 'Hunstville',
 	state: 'Alabama',
-	creator: 'test',
+	creator: 'admin',
 	beers: []
 },
 {
 	name: 'King Street Brewing Co',
 	city: 'Anchorage',
 	state: 'Alaska',
-	creator: 'test',
+	creator: 'admin',
 	beers: []
 },
 {
 	name: '1912 Brewing',
 	city: 'Tucson',
 	state: 'Arizona',
-	creator: 'test',
+	creator: 'admin',
 	beers: []
 },
 {
 	name: 'Bad Water Brewing',
 	city: 'Scottsdale',
 	state: 'Arizona',
-	creator: 'test',
+	creator: 'admin',
 	beers: []
 },
 {
 	name: 'Dragoon Brewing Co',
 	city: 'Tuscon',
 	state: 'Arizona',
-	creator: 'test',
+	creator: 'admin',
 	beers: []
 },
 {
 	name: 'Diamond Bear Brewing',
 	city: 'Little Rock',
 	state: 'Arkansas',
-	creator: 'test',
+	creator: 'admin',
 	beers: []
 },
 {
 	name: 'Lost Forty Brewing',
 	city: 'Little Rock',
 	state: 'Arkansas',
-	creator: 'test',
+	creator: 'admin',
 	beers: []
 },
 {
 	name: 'Rapps Barren Brewing Company',
 	city: 'Mountain Home',
 	state: 'Arkansas',
-	creator: 'test',
+	creator: 'admin',
 	beers: []
 },
 {
 	name: 'BarrelHouse Brewing Co.',
 	city: 'Paso Roblems',
 	state: 'California',
-	creator: 'test',
+	creator: 'admin',
 	beers: []
 },
 {
 	name: '',
 	city: '',
 	state: '',
-	creator: 'test',
+	creator: 'admin',
 	beers: []
-},
+}
+]
 
 module.exports = breweryData;

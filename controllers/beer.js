@@ -14,7 +14,8 @@ router.get('/', async (req, res) => {
 		const allBeers = await Beer.find({});
 		res.render('beers/index.ejs', {
 			beers: allBeers,
-			currentUser: currentUser
+			currentUser: currentUser,
+			session: req.session
 		})
 	} catch (err) {
 		res.send(err)
@@ -49,7 +50,8 @@ router.get('/new', async (req, res) => {
 		const foundUser = await User.findOne({ username: req.session.username });
 		res.render('beers/new.ejs', {
 			breweries: addBrewery,
-			user: foundUser
+			user: foundUser,
+			session: req.session
 		})
 	} catch (err) {
 		res.send(err)
@@ -112,7 +114,8 @@ router.get('/:id', async (req, res) => {
 			beer: foundBeer,
 			user: foundUser,
 			currentUser: currentUser,
-			isCurrent: isCurrent
+			isCurrent: isCurrent,
+			session: req.session
 		})
 		// } else {
 			// if the user is not logged in (username of 0 cannot exist because username must be a string), they cannot add a beer to their fridge, so the page renders but the button does not show up
@@ -146,7 +149,8 @@ router.get('/:id/edit', async (req, res) => {
 		if(req.session.username === foundBeer.user){
 			res.render('beers/edit.ejs', {
 				beer: foundBeer,
-				breweries: allBreweries
+				breweries: allBreweries,
+				session: req.session
 			})
 		} else {
 			res.redirect('/')

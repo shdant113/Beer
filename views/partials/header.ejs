@@ -13,9 +13,14 @@
 					</li>
 				</div>
 				<div id="user-nav">
-					<a class="nav-bar" href="/users/login">Login</a> ||
-					<a class="nav-bar" href="/users/new">Register</a> ||
-					<a class="nav-bar" href="/users/logout">Log Out</a>
+					<%if (session.loggedIn) {%>
+						<a class="nav-bar" href="/users/logout">Log Out</a> ||
+						<a class="nav-bar" href="/users/<%=session._id%>">Profile</a>
+					<%} else {%>
+						<a class="nav-bar" href="/users/login">Login</a> ||
+						<a class="nav-bar" href="/users/new">Register</a>
+					<%}%>
+					
 				</div>
 			</nav>
 		</section>
