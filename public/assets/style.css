@@ -1,4 +1,5 @@
 body {
+	margin: 20px 0 0 0;
 	background: url('/images/beer-on-bar-background_ect7bbkyl__F0000.png') no-repeat fixed;
 	background-size: cover;
 	min-height: 100%;
@@ -14,7 +15,7 @@ body {
 	text-shadow: 5px 5px 10px #dc3545c2;
 }
 
-#intro, .ejs-text > ul > li, .inside-container > ul > li, input, button, select {
+#intro, .ejs-text > ul > li, #user-show-wrap > ul > li, .inside-container > ul > li, input, button, select {
 	font-family: 'Caudex', serif;
 	font-size: 25px;
 }
@@ -33,7 +34,7 @@ input, button, select, textarea {
 	border: 5px solid black;
 }
 
-.ejs-text, .inside-container{
+.ejs-text, #user-show-wrap, .inside-container{
 	background-color: rgba(255,255,255,0.3);
 	padding: 10px 0;
 	border-radius: 20px;
@@ -127,10 +128,8 @@ li {
 
 #img-contain-wrap{
 	background: url(/images/580b57fbd9996e24bc43c097.png) no-repeat center;
-	background-width: 500px;
-	background-height: 500px;
-	min-width: 500px;
 	min-height: 500px;
+	min-width: 500px;
 }
 
 #home-img{
@@ -139,6 +138,27 @@ li {
 	display: block;
 	margin: 0 auto;
 	overflow: hidden;
+}
+
+#user-show-wrap{
+	display: flex;
+	justify-content: center;
+}
+
+#user-show, #user-profile-img{
+	margin: auto;
+}
+
+#user-profile-img{
+	width: 200px;
+	height: 200px;
+}
+
+.upload-img{
+	width: 200px;
+	height: 200px;
+	border-radius: 100px;
+	border: 1px solid black;
 }
 
 p, label, textarea{
@@ -171,7 +191,7 @@ textarea{
 footer{
 	font-family: 'Arvo', serif;
 	width: 100%;
-	position: fixed;
+	position: relative;
 	bottom: 0;
-	opacity: 0.3;
+	color: white;
 }
