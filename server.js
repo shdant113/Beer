@@ -42,7 +42,9 @@ server.use('/users', userController);
 // });
 
 server.get('/', (req, res) => {
-	res.render('home.ejs')
+	res.render('home.ejs', {
+		session: req.session
+	})
 });
 
 server.listen(3000, () => {

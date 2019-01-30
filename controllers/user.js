@@ -12,7 +12,7 @@ const fs = require('fs');
 // log in page
 router.get('/login', async (req, res) => {
 	res.render('users/login.ejs', {
-		message: req.session.message,
+		message: req.session.loginMessage,
 		session: req.session
 	})
 });
@@ -26,14 +26,15 @@ router.get('/new', async (req, res) => {
 
 // log in route
 router.post('/login', async (req, res) => {
+	req.session.loginMessage = '';
 	try {
 		const existingUser = await User.findOne({ username: req.body.username });
 		// if user already exists
 		if (!existingUser) {
 			// print message on redirect page
-			req.session.message = "Incorrect login, please try again.";
+			req.session.loginMessage = "Incorrect login, please try again.";
 			console.log('failed login attempt, username did not exist');
-			res.redirect('/user/login');
+			res.redirect('/users/login');
 		} else {
 			// password comparison
 			// --> if correct password
@@ -41,11 +42,11 @@ router.post('/login', async (req, res) => {
 				req.session.username = existingUser.username;
 				req.session._id = existingUser._id;
 				req.session.loggedIn = true;
-				req.session.message = `We've been awaiting your prompt return, ${existingUser.username}`;
+				req.session.loginMessage = `We've been awaiting your prompt return, ${existingUser.username}`;
 				res.redirect(`/users/${existingUser._id}`);
 			// --> if incorrect password
 			} else {
-				req.session.message = "Incorrect login, please try again.";
+				req.session.loginMessage = "Incorrect login, please try again.";
 				console.log('failed login attempt, incorrect password');
 				res.redirect('/users/login');
 			}
@@ -58,6 +59,7 @@ router.post('/login', async (req, res) => {
 // register route
 router.post('/', upload.single('imageFile'), async (req, res) => {
 	// username is required to be unique on the model page, so a username cannot be replicated
+	req.session.userMessage = '';
 	// hash user password
 	const hashedUserPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
 	const userPassEntry = {};
@@ -83,11 +85,13 @@ router.post('/', upload.single('imageFile'), async (req, res) => {
 		req.session.loggedIn = true;
 		req.session._id = newUser._id;
 		req.session.username = newUser.username // username
-		req.session.message = `It's a pleasure to meet you, ${newUser.username}`;
+		req.session.userMessage = `It's a pleasure to meet you, ${newUser.username}`;
 		// console.log(newUser);
 		res.redirect('/');
 	} catch (err) {
-		res.send(err)
+		req.session.userMessage = `Username and email are required`;
+		res.redirect('/users/new')
+		// res.send(err)
 	}
 });
 
@@ -190,6 +194,7 @@ router.put('/:id', async (req, res) => {
 
 // update
 router.put('/:id/edited', upload.single('imageFile'), async (req, res) => {
+	req.session.editMessage = '';
 	try {
 		const foundUser = await User.findById(req.params.id);
 		// console.log(foundUser.image);
@@ -240,7 +245,9 @@ router.put('/:id/edited', upload.single('imageFile'), async (req, res) => {
 		// console.log(updateUser);
 		res.redirect('/users');
 	} catch (err) {
-		res.send(err)
+		req.session.editMessage = `Username and email are required`;
+		res.redirect(`/users/${req.params.id}/edit`)
+		// res.send(err)
 	}
 });
 

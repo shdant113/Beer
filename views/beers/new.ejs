@@ -4,6 +4,7 @@
 <div class="wrap">
 	<h1>Make A New Beer</h1>
 	<br>
+	<p><%=session.beerMessage%></p>
 	<div class="ejs-text">
 		<form action="/beers" method="POST" enctype="multipart/form-data">
 			<label for="name">Name of New Beer</label>

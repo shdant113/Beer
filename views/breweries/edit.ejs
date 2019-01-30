@@ -4,6 +4,7 @@
 <div class="wrap">
 	<h1>Edit <%= brewery.name %></h1>
 	<br>
+	<p><%=session.breweryMessage%></p>
 	<div class="ejs-text">
 		<form action="/breweries/<%=brewery._id%>?_method=PUT" method="POST">
 			<label for="name">Change The Name of <%= brewery.name %></label>

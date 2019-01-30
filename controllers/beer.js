@@ -60,6 +60,7 @@ router.get('/new', async (req, res) => {
 
 // new --> post
 router.post('/', upload.single('imageFile'), async (req, res) => {
+	req.session.beerMessage = '';
 	const beerEntry = {};
 	beerEntry.name = req.body.name;
 	beerEntry.type = req.body.type;
@@ -88,7 +89,9 @@ router.post('/', upload.single('imageFile'), async (req, res) => {
 		// console.log(newBeer);
 		res.redirect('/beers');
 	} catch (err) {
-		res.send(err)
+		req.session.beerMessage = `Need a name and brewery`;
+		res.redirect('/beers/new');
+		// res.send(err)
 	}
 });
 
@@ -169,6 +172,7 @@ router.get('/:id/image', async (req, res) => {
 
 // update --> put
 router.put('/:id', upload.single('imageFile'), async (req, res) => {
+	req.session.beerMessage = '';
 	try {
 		// update beer
 		const updateBeer = await Beer.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -215,7 +219,9 @@ router.put('/:id', upload.single('imageFile'), async (req, res) => {
 		}
 		res.redirect('/beers');
 	} catch (err) {
-		res.send(err)
+		req.session.beerMessage = `Need a name and brewery`;
+		res.redirect(`/beers/${req.params.id}/edit`);
+		// res.send(err)
 	}
 });
 

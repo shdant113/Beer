@@ -4,6 +4,7 @@
 <div class="wrap">
 	<h1>Edit <%= beer.name %></h1>
 	<br>
+	<p><%=session.beerMessage%></p>
 	<div class="ejs-text">
 		<form action="/beers/<%= beer._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
 			<label for="name">Change The Name of <%= beer.name %></label>

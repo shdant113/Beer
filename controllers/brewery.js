@@ -43,11 +43,14 @@ router.get('/new', async (req, res) => {
 
 // new --> post
 router.post('/', async (req, res) => {
+	req.session.breweryMessage = '';
 	try {
 		const newBrewery = await Brewery.create(req.body);
 		res.redirect('/breweries');
 	} catch (err) {
-		res.send(err)
+		req.session.breweryMessage = `Brewery needs a name cannot be duplicated`;
+		res.redirect('/breweries/new')
+		// res.send(err)
 	}
 });
 
@@ -99,10 +102,13 @@ router.get('/:id/edit', async (req, res) => {
 
 // update --> put
 router.put('/:id', async (req, res) => {
+	req.session.breweryMessage = '';
 	try {
 		const updateBrewery = await Brewery.findByIdAndUpdate(req.params.id, req.body, { new: true });
 		res.redirect('/breweries');
 	} catch (err) {
+		req.session.breweryMessage = `Brewery needs a name cannot be duplicated`;
+		res.redirect(`/breweries/${req.params.id}/edit`)
 		res.send(err)
 	}
 });
