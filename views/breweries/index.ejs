@@ -4,10 +4,6 @@
 <div class="wrap">
 	<h1>Breweries</h1>
 	<div class="ejs-text">
-		<%if(currentUser) {%>
-		<h3><a href="/breweries/new">MAKE A NEW BREWERY</a></h3>
-		<%}%>
-
 		<ul>
 			<% for (let i = 0; i < breweries.length; i++) {%>
 				<li>
@@ -16,6 +12,11 @@
 			<%}%>
 		</ul>
 	</div>
+	<br>
+	<%if(currentUser) {%>
+		<button><a href="/breweries/new">Make a New Brewery</a></button>
+	<%}%>
+	<br>
 </div>
 
 <% include ../partials/footer%>

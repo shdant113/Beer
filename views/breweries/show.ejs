@@ -4,13 +4,18 @@
 <div class="wrap">
 	<h1><%= brewery.name %></h1>
 	<div class="ejs-text">
-		<%= brewery.city %>, <%= brewery.state %><br>
-		Created by: <a href="/users/<%= user._id %>"><%= user.username %></a><br>
-		<ul>
-			<% for (let i = 0; i < brewery.beers.length; i++) { -%>
-				<li><a href="/beers/<%= brewery.beers[i]._id %>"><%= brewery.beers[i].name %></a></li>
-			<% } -%>
-		</ul>
+		<p>Brewery Location: <%= brewery.city %>, <%= brewery.state %></p>
+		<p>Created by: <a href="/users/<%= user._id %>"><%= user.username %></a>
+		</p>
+		<div class="inside-container">
+			<h3><%= brewery.name %>'s Beer Selection:</h3>
+			<ul>
+				<% for (let i = 0; i < brewery.beers.length; i++) { -%>
+					<li><a href="/beers/<%= brewery.beers[i]._id %>"><%= brewery.beers[i].name %></a></li>
+				<% } -%>
+			</ul>
+		</div>
+		<br>
 		<%if(isCurrent){%>
 			<button><a href="/breweries/<%=brewery._id%>/edit">Edit This Brewery</a></button>
 		<%}%>

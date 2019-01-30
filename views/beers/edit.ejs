@@ -3,27 +3,36 @@
 
 <div class="wrap">
 	<h1>Edit <%= beer.name %></h1>
+	<br>
 	<div class="ejs-text">
 		<form action="/beers/<%= beer._id %>?_method=PUT" method="POST">
-			<input type="text" name="name" value="<%=beer.name%>"><br>
-			<input type="text" name="type" value="<%=beer.type%>"><br>
-			<div>
-				<label for="price">Price</label>
-				<input type="range" name="price" min="1" max="4" value="<%=beer.price%>"><br>
-			</div>
-			<label for="flavor">Taste Description</label><br>
-			<textarea name="flavor"><%=beer.flavor%></textarea><br>
-			<input type="text" name="color" value="<%=beer.color%>"><br>
+			<label for="name">Change The Name of <%= beer.name %></label>
+			<input type="text" name="name" value="<%=beer.name%>">
+			<br>
+			<label for="type">Change The Type of <%= beer.name %></label>
+			<input type="text" name="type" value="<%=beer.type%>">
+			<br>
+			<label for="price">Change the Price of <%= beer.name %></label>
+			<input type="range" name="price" min="1" max="4" value="<%=beer.price%>">
+			<br>
+			<label for="flavor">How Does <%= beer.name %> Taste?</label><br>
+			<textarea name="flavor"><%=beer.flavor%></textarea>
+			<br>
+			<label for="color">Change the Color of <%= beer.name %></label>
+			<input type="text" name="color" value="<%=beer.color%>">
+			<br>
+			<label for="maker">Change Where <%= beer.name %> is Brewed</label>
 			<select name="maker" id="breweries-option-edit">
 				<% for (let i = 0; i < breweries.length; i++) { -%>
 					<option value="<%= breweries[i].name %>"><%= breweries[i].name %></option>
 				<% } -%>
-			</select><br>
-			<p>Don't see your beer's brewery? Click <a href="/breweries/new">here</a>.</p><br>
-			<input type="hidden" name="user" value="<%=beer.user%>"><br>
+			</select>
+			<p>Don't see your beer's brewery? Click <a href="/breweries/new">here</a>.</p>
+			<br>
+			<input type="hidden" name="user" value="<%=beer.user%>">
 			<button>Edit <%= beer.name %></button>
 		</form>
-
+		<br>
 		<form action="/beers/<%=beer._id%>?_method=DELETE" method="POST">
 			<button>DELETE BEER</button>
 		</form>

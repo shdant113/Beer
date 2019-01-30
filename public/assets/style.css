@@ -4,12 +4,50 @@ body {
 	min-height: 100%;
 }
 
+#home-head, h1, ul, #intro, p, footer, input, button, label, textarea, .inside-container > h3{
+	text-align: center;
+}
+
+#img-contain-wrap > h1, .wrap > h1, .inside-container > h3{
+	font-family: 'Slackey', cursive;
+	font-weight: 500;
+	text-shadow: 5px 5px 10px #dc3545c2;
+}
+
+#intro, .ejs-text > ul > li, .inside-container > ul > li, input, button, select {
+	font-family: 'Caudex', serif;
+	font-size: 25px;
+}
+
+input, button, select, textarea {
+	margin: 0 auto;
+	display: block;
+	border-radius: 3px;
+}
+
 #body{
 	background-color: rgba(255,255,255,0.5);
 	max-width: 950px;
 	min-height: 100%;
 	margin: 0 auto;
 	border: 5px solid black;
+}
+
+.ejs-text, .inside-container{
+	background-color: rgba(255,255,255,0.3);
+	padding: 10px 0;
+	border-radius: 20px;
+}
+
+.inside-container{
+	border: 2px solid #000000;
+	width: 50%;
+	display: block;
+	margin: 0 auto;
+}
+
+.inside-container > h3{
+	font-size: 25px;
 }
 
 body, html{
@@ -32,8 +70,8 @@ hr{
 	border-radius: 40px; 
 }
 
-#home-head, h1, ul, #intro, footer{
-	text-align: center;
+#user-nav, #site-nav{
+	margin: 20px 50px 0 50px;
 }
 
 #home-head{
@@ -43,12 +81,6 @@ hr{
 	margin: 0 auto;
 	text-shadow: 5px 5px 10px #dc3545c2;
 	text-decoration: underline;
-}
-
-.wrap > h1{
-	font-family: 'Slackey', cursive;
-	font-weight: 500;
-	text-shadow: 5px 5px 10px #dc3545c2;
 }
 
 .nav-bar{
@@ -76,10 +108,6 @@ li {
 	list-style-type: none;
 }
 
-#user-nav, #site-nav{
-	margin: 20px 50px 0 50px;
-}
-
 .nav-bar > ul > li{
 	display: inline;
 	visibility: hidden;
@@ -97,22 +125,47 @@ li {
 	list-style: none;
 }
 
-#intro, .ejs-text > ul > li {
-	font-family: 'Caudex', serif;
-	font-size: 25px;
+#img-contain-wrap{
+	background: url(/images/580b57fbd9996e24bc43c097.png) no-repeat center;
+	background-width: 500px;
+	background-height: 500px;
+	min-width: 500px;
+	min-height: 500px;
 }
 
 #home-img{
 	max-width: 500px;
 	max-height: 500px;
 	display: block;
-	margin: -100px auto;
+	margin: 0 auto;
+	overflow: hidden;
 }
 
-p{
-	font-size: 15px;
-	padding: 0;
-	margin: 10px 0 0 0;
+p, label, textarea{
+	font-size: 20px;
+	font-family: 'Marcellus SC', serif;
+}
+
+select {
+	width: 278px;
+	height: 43px;
+	text-align-last: center;
+	direction: ltr;
+}
+
+label {
+	background-color: rgba(255,255,255,0.5);
+	width: max-content;
+	padding: 0 10px;
+	max-width: 50%;
+	display: block;
+	margin: 20px auto 10px auto;
+}
+
+textarea{
+	line-height: 1.5;
+	box-shadow: 1px 1px 1px #FFFFFF;
+	width: 278px;
 }
 
 footer{

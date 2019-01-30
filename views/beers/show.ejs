@@ -3,21 +3,21 @@
 
 <div class="wrap">
 	<h1><%=beer.name%></h1>
+	<br>
 	<div class="ejs-text">
-		<p>The Type is: <%=beer.type%></p><br>
-		<p>Made By: <%=beer.maker%></p><br>
-		<p>The Price is: <%=beer.price%>/4</p><br>
-		<p>The beer has been described as: <%=beer.flavor%></p><br>
-		<p>It's color is: <%=beer.color%></p>
-
-
+		<p>Type of Beer: <%=beer.type%></p>
+		<p>Made By: <%=beer.maker%></p>
+		<p>Price: <%=beer.price%>/4</p>
+		<p>The beer has been described as: <%=beer.flavor%></p>
+		<p>Color: <%=beer.color%></p>
+		<br>
 		<%if(currentUser){%>
 			<form action="/users/<%=user._id%>?_method=PUT" method="POST">
 				<input name="beerid" type="hidden" value="<%=beer._id%>">
 				<button>Add To Your Fridge</button>
 			</form>
 		<%}%>
-
+		<br>
 		<%if(isCurrent) {%>
 			<button><a href="/beers/<%= beer._id %>/edit">Edit This Beer</a></button>
 		<%}%>

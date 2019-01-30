@@ -5,8 +5,13 @@
 	<h1>Make A New Brewery</h1>
 	<div class="ejs-text">
 		<form action="/breweries" method="POST">
-			<input type="text" name="name" placeholder="Name"><br>
-			<input type="text" name="city" placeholder="City"><br>
+			<label for="name">Name of New Brewery</label>
+			<input type="text" name="name" placeholder="Brewery Name">
+			<br>
+			<label for="city">City of New Brewery</label>
+			<input type="text" name="city" placeholder="City Name">
+			<br>
+			<label for="state">State of New Beer</label>
 			<select name="state" id="brewery-state-new">
 		<!-- <input type="text" name="state" list="statename" /> -->
 		<!-- <datalist id="statename"> -->
@@ -64,7 +69,8 @@
 				<option value="District of Columbia">District of Columbia</option>
 				<option value="International">International</option>
 			<!-- </datalist> -->
-			</select><br>
+			</select>
+			<br>
 			<input type="hidden" name="creator" value="<%=user%>">
 			<button>Make a Brewery</button>
 		</form>

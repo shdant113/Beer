@@ -4,12 +4,15 @@
 
 <div class="wrap">
 	<h1>Update <%=user.username%></h1>
+	<br>
 	<div class="ejs-text">
 		<form action="/users/<%=user._id%>/edited?_method=PUT" method="POST">
 			<input type="hidden" name="username" value="<%=user.username%>" />
-			<label>Password:</label>
-			<input type="password" name="password" value="<%=user.password%>">
+			<label>Change Your Password:</label>
+			<input type="password" name="password" placeholder="new password here">
+			<label>Change Your Email:</label>
 			<input type="email" name="email" value="<%=user.email%>" />
+			<label>Update Your Location:</label>
 			<input type="text" name="city" value="<%=user.city%>" />
 			<select name="state" id="user-state-edit" value="<%=user.state%>">
 			<!-- <input type="text" name="state" list="statename" /> -->
@@ -69,12 +72,13 @@
 				<option value="International">International</option>
 			<!-- </datalist> -->
 			</select><br>
-			<button>Edit</button>
+			<button>Edit Your Account</button>
 		</form>
-
+		<br>
 		<form action="/users/<%=user._id%>?_method=DELETE" method="POST">
-			<button>DELETE USER</button>
+			<button>Permanently Delete Your Account</button>
 		</form>
+		<br>
 	</div>
 </div>
 
