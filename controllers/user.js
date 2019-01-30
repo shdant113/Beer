@@ -146,7 +146,7 @@ router.put('/:id', async (req, res) => {
 		// save result in db
 		foundUser.save();
 		// console.log(foundUser);
-		console.log(foundUser.fridge);
+		// console.log(foundUser.fridge);
 		// redirect to user profile
 		res.redirect(`./${req.params.id}`)
 		// res.render('users/show.ejs', {
@@ -207,6 +207,42 @@ router.delete('/:id', async (req, res) => {
 		res.send(err)
 	}
 });
+
+
+// remove beer from fridge
+
+router.delete('/:id/fridge', async (req, res) => {
+	try {
+		// find the User we are working on
+		const foundUser = await User.findById(req.params.id);
+		// filter all the beers that aren't being drank
+		const removalIndex = foundUser.fridge.findIndex((beer) => {
+			return beer._id.toString() === req.body.beerId.toString();
+		})
+		// console.log(removalIndex);
+		foundUser.fridge.splice(removalIndex, 1);
+		// const stillInFridge = foundUser.fridge.filter(beer => beer._id != req.body.beerId);
+		// console.log(stillInFridge);
+		// Make the fridge only contain the non-drank beers
+		// foundUser.fridge = stillInFridge;
+		// console.log(foundUser.fridge);
+		// Save it
+		await foundUser.save();
+		// Stay on their page
+		res.redirect(`/users/${req.params.id}`)
+	} catch (err) {
+		res.send(err)
+	}
+})
+
+
+
+
+
+
+
+
+
 
 
 
