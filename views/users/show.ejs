@@ -3,25 +3,31 @@
 
 <div class="wrap">
 	<h1><%=user.username%></h1>
+	<br>
 	<div class="ejs-text">
-		Username: <%=user.username%><br>
-		Email: <%=user.email%><br>
-		<%=user.city%>, <%=user.state%><br>
+
+		<p>Username: <%=user.username%></p>
+		<p>Email: <%=user.email%></p>
+		<p><%=user.city%>, <%=user.state%></p>
 		Profile Picture: <img src="/users/<%=user._id%>/image" alt="<%=user.username%> profile">
-		Fridge: 
-		<ul>
-			<% for (let i = 0; i < user.fridge.length; i++){%>
-				<li>
-					<a href="/beers/<%=user.fridge[i]._id%>"><%=user.fridge[i].name%></a>
-					<%if(isCurrent) {%>
-						<form action="/users/<%=user._id%>/fridge?_method=DELETE" method="POST">
-							<input type="hidden" name="beerId" value="<%=user.fridge[i]._id%>">
-							<button>Drink It</button>
-						</form>
-					<%}%>
-				</li>
-			<%}%>
-		</ul>
+		<div class="inside-container">
+			<h3>Your Fridge:</h3>
+			<ul>
+				<% for (let i = 0; i < user.fridge.length; i++){%>
+					<li style="margin-bottom: 10px">
+						<a href="/beers/<%=user.fridge[i]._id%>"><%=user.fridge[i].name%></a>
+						<br>
+						<%if(isCurrent) {%>
+							<form action="/users/<%=user._id%>/fridge?_method=DELETE" method="POST" style="margin-top: 5px">
+								<input type="hidden" name="beerId" value="<%=user.fridge[i]._id%>">
+								<button>Drink It</button>
+							</form>
+						<%}%>
+					</li>
+				<%}%>
+			</ul>
+		</div>
+		<br>
 
 		<%if(isCurrent) {%>
 
@@ -30,6 +36,7 @@
 
 		<%}%>
 	</div>
+	<br><br>
 </div>
 
 <% include ../partials/footer%>

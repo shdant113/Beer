@@ -11,7 +11,9 @@ const fs = require('fs');
 
 // log in page
 router.get('/login', async (req, res) => {
-	res.render('users/login.ejs')
+	res.render('users/login.ejs', {
+		message: req.session.message
+	})
 });
 
 // register page
@@ -26,7 +28,7 @@ router.post('/login', async (req, res) => {
 		// if user already exists
 		if (!existingUser) {
 			// print message on redirect page
-			req.session.message = "That username already exists.";
+			req.session.message = "Incorrect login, please try again.";
 			console.log('failed login attempt, username did not exist');
 			res.redirect('/user/login');
 		} else {
@@ -39,7 +41,7 @@ router.post('/login', async (req, res) => {
 				res.redirect(`/users/${existingUser._id}`);
 			// --> if incorrect password
 			} else {
-				req.session.message = "here's a message";
+				req.session.message = "Incorrect login, please try again.";
 				console.log('failed login attempt, incorrect password');
 				res.redirect('/users/login');
 			}
@@ -156,7 +158,7 @@ router.put('/:id', async (req, res) => {
 		// find beer by beerid as designated on beer show page
 		const foundBeer = await Beer.findById(req.body.beerid);
 		// find user that pressed the button on the show page
-		const foundUser = await User.findById(req.params.id);
+		const foundUser = await User.findOne({username: req.session.username});
 		// console.log(foundBeer);
 		// push to user fridge
 		foundUser.fridge.push(foundBeer);
@@ -165,7 +167,7 @@ router.put('/:id', async (req, res) => {
 		// console.log(foundUser);
 		// console.log(foundUser.fridge);
 		// redirect to user profile
-		res.redirect(`./${req.params.id}`)
+		res.redirect(`./${foundUser._id}`)
 		// res.render('users/show.ejs', {
 		// 	user: foundUser
 	} catch (err) {

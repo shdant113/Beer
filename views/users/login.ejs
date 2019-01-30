@@ -3,10 +3,12 @@
 
 <div class="wrap">
 	<h1>Log In!</h1>
+	<br><br><br>
+	<p><%= message %></p>
 	<div class="ejs-text">
 		<form action="/users/login" method="POST">
-			<input type="text" name="username" placeholder="username" />
-			<input type="password" name="password" placeholder="password" />
+			<input type="text" name="username" placeholder="username" /><br>
+			<input type="password" name="password" placeholder="password" /><br>
 			<button>Log in!</button>
 		</form>
 	</div>

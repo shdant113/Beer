@@ -1,10 +1,15 @@
-<% include ../partials/head %>
+ <% include ../partials/head %>
 <% include ../partials/header %>
 
 <div class="wrap">
+	<h1>Edit <%= brewery.name %></h1>
+	<br>
 	<div class="ejs-text">
 		<form action="/breweries/<%=brewery._id%>?_method=PUT" method="POST">
-			<input type="text" name="name" value="<%=brewery.name%>"><br>
+			<label for="name">Change The Name of <%= brewery.name %></label>
+			<input type="text" name="name" value="<%=brewery.name%>">
+			<br>
+			<label for="city">Change The Location of <%= brewery.name %></label>
 			<input type="text" name="city" value="<%=brewery.city%>"><br>
 			<select name="state" id="brewery-state-edit">
 		<!-- <input type="text" name="state" list="statename" /> -->
@@ -63,13 +68,14 @@
 				<option value="District of Columbia">District of Columbia</option>
 				<option value="International">International</option>
 			<!-- </datalist> -->
-			</select><br>
+			</select>
+			<br>
 			<input type="hidden" name="creator" value="<%=brewery.creator%>">
 			<button>Edit this brewery</button>
 		</form>
-
+		<br><br>
 		<form action="/breweries/<%=brewery._id%>?_method=DELETE" method="POST">
-			<button>DELETE THIS BREWERY</button>
+			<button>Permanently Delete This Brewery</button>
 		</form>
 	</div>
 </div>

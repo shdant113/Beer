@@ -3,26 +3,37 @@
 
 <div class="wrap">
 	<h1>Make A New Beer</h1>
+	<br>
 	<div class="ejs-text">
 		<form action="/beers" method="POST" enctype="multipart/form-data">
-			<input type="text" name="name" placeholder="Beer Name"><br>
-			<input type="text" name="type" placeholder="type"><br>
-			<div>
-				<label for="price">Price</label>
-				<input type="range" name="price" min="1" max="4"><br>
-			</div>
-			<label for="flavor">Taste Description</label><br>
-			<textarea name="flavor"></textarea><br>
-			<input type="text" name="color" placeholder="Color"><br><br>
-			<select name="maker" id="breweries-option-new">
+			<label for="name">Name of New Beer</label>
+			<input type="text" name="name" placeholder="Beer Name">
+			<br>
+			<label for="type">Type of Beer</label>
+			<input type="text" name="type" placeholder="lager, stout, ale, etc">
+			<br>
+			<label for="price">Price ($ - $$$$)</label>
+			<input type="range" name="price" min="1" max="4" style="width: 278px">
+			<br>
+			<label for="flavor">How Does It Taste?</label>
+			<textarea name="flavor" placeholder="if it's good, tell us how"></textarea>
+			<br>
+			<label for="color">Color of Beer</label>
+			<input type="text" name="color" placeholder="yellow, amber, etc">
+			<br>
+			<label for="maker">Where Is It Brewed?</label>
+			<select name="maker" id="breweries-option-new" style="margin-bottom: 10px">
 				<% for (let i = 0; i < breweries.length; i++) { -%>
 					<option value="<%= breweries[i].name %>"><%= breweries[i].name %></option>
 				<% } -%>
-			</select><br>
-			<p>Don't see your beer's brewery? Click <a href="/breweries/new">here</a>.</p><br>
+			</select>
+			<p>Don't see your beer's brewery? Click <a href="/breweries/new">here</a>.</p>
+			<br>
 			<input type="file" name="imageFile"><br>
-			<input type="hidden" name="user" value="<%=user.username%>"><br>
-			<button>New Beer</button>
+			<input type="hidden" name="user" value="<%=user.username%>">
+			<button>Add Your New Beer</button>
+			<br><br>
+
 		</form>
 	</div>
 </div>
