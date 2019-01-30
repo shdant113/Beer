@@ -144,6 +144,7 @@ router.get('/:id/edit', async (req, res) => {
 	}
 })
 
+// multer profile pictures
 router.get('/:id/image', async (req, res) => {
 	const foundUser = await User.findById(req.params.id);
 	const image = foundUser.image;
@@ -253,15 +254,6 @@ router.delete('/:id/fridge', async (req, res) => {
 		res.send(err)
 	}
 })
-
-
-
-
-
-
-
-
-
 
 
 

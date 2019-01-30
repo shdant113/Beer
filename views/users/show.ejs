@@ -4,37 +4,36 @@
 <div class="wrap">
 	<h1><%=user.username%></h1>
 	<br>
-	<div class="ejs-text">
-
-		<p>Username: <%=user.username%></p>
-		<p>Email: <%=user.email%></p>
-		<p><%=user.city%>, <%=user.state%></p>
-		Profile Picture: <img src="/users/<%=user._id%>/image" alt="<%=user.username%> profile">
-		<div class="inside-container">
-			<h3>Your Fridge:</h3>
-			<ul>
-				<% for (let i = 0; i < user.fridge.length; i++){%>
-					<li style="margin-bottom: 10px">
-						<a href="/beers/<%=user.fridge[i]._id%>"><%=user.fridge[i].name%></a>
-						<br>
-						<%if(isCurrent) {%>
-							<form action="/users/<%=user._id%>/fridge?_method=DELETE" method="POST" style="margin-top: 5px">
-								<input type="hidden" name="beerId" value="<%=user.fridge[i]._id%>">
-								<button>Drink It</button>
-							</form>
-						<%}%>
-					</li>
-				<%}%>
-			</ul>
+	<div id="user-show-wrap">
+		<div id="user-profile-img">
+			<img class="upload-img" src="/users/<%=user._id%>/image" alt="<%=user.username%> profile">
+		</div>
+		<div id="user-show">
+			<p>Email: <%=user.email%></p>
+			<p>Located In: <%=user.city%>, <%=user.state%></p>
+			<%if(isCurrent) {%>
+				<button><a href="/users/<%=user._id%>/edit">Edit Yourself</a></button>
+			<%}%>
 		</div>
 		<br>
-
-		<%if(isCurrent) {%>
-
-			<button><a href="/users/<%=user._id%>/edit">Edit Yourself</a></button>
-			
-
-		<%}%>
+	</div>
+	<br><br>
+	<div class="inside-container">
+		<h3><%= user.username %>'s Fridge:</h3>
+		<ul>
+			<% for (let i = 0; i < user.fridge.length; i++){%>
+				<li style="margin-bottom: 10px">
+					<a href="/beers/<%=user.fridge[i]._id%>"><%=user.fridge[i].name%></a>
+					<br>
+					<%if(isCurrent) {%>
+						<form action="/users/<%=user._id%>/fridge?_method=DELETE" method="POST" style="margin-top: 5px">
+							<input type="hidden" name="beerId" value="<%=user.fridge[i]._id%>">
+							<button>Drink It</button>
+						</form>
+					<%}%>
+				</li>
+			<%}%>
+		</ul>
 	</div>
 	<br><br>
 </div>
