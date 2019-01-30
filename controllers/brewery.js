@@ -8,6 +8,16 @@ router.get('/', async (req, res) => {
 	try {
 		const currentUser = await User.findOne({username: req.session.username});
 		const allBreweries = await Brewery.find({});
+		allBreweries.sort((a, b) => {
+			let nameA = a.name.toUpperCase(); // ignore upper and lowercase
+			let nameB = b.name.toUpperCase(); // ignore upper and lowercase
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
+		});
 		res.render('./breweries/index.ejs', {
 			breweries: allBreweries,
 			currentUser: currentUser
