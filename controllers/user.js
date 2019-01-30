@@ -53,8 +53,6 @@ router.post('/login', async (req, res) => {
 router.post('/', upload.single('imageFile'), async (req, res) => {
 	// username is required to be unique on the model page, so a username cannot be replicated
 	// hash user password
-	console.log(req.body);
-	console.log(req.file);
 	const hashedUserPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
 	const userPassEntry = {};
 	// enter user input into database
@@ -64,7 +62,7 @@ router.post('/', upload.single('imageFile'), async (req, res) => {
 	userPassEntry.city = req.body.city;
 	userPassEntry.state = req.body.state;
 	userPassEntry.image = {};
-	const imageFilePath = './uploads/' + req.file.filename
+	const imageFilePath = './uploads/' + req.file.filename;
 	userPassEntry.image.data = fs.readFileSync(imageFilePath);
 	userPassEntry.image.contentType = req.file.mimetype;
 	fs.unlinkSync(imageFilePath);
@@ -147,10 +145,8 @@ router.get('/:id/edit', async (req, res) => {
 router.get('/:id/image', async (req, res) => {
 	const foundUser = await User.findById(req.params.id);
 	const image = foundUser.image;
-	// set content type as explained here: https://expressjs.com/en/api.html#res.send
 	res.set('Content-Type', image.contentType);
-	// send the response with the Buffer from our model as its body
-	res.send(image.data)
+	res.send(image.data);
 })
 
 

@@ -4,7 +4,7 @@
 <div class="wrap">
 	<h1>Make A New Beer</h1>
 	<div class="ejs-text">
-		<form action="/beers" method="POST">
+		<form action="/beers" method="POST" enctype="multipart/form-data">
 			<input type="text" name="name" placeholder="Beer Name"><br>
 			<input type="text" name="type" placeholder="type"><br>
 			<div>
@@ -20,6 +20,7 @@
 				<% } -%>
 			</select><br>
 			<p>Don't see your beer's brewery? Click <a href="/breweries/new">here</a>.</p><br>
+			<input type="file" name="imageFile"><br>
 			<input type="hidden" name="user" value="<%=user.username%>"><br>
 			<button>New Beer</button>
 		</form>

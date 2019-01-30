@@ -3,6 +3,9 @@ const router = express.Router();
 const Beer = require('../models/beer');
 const Brewery = require('../models/brewery');
 const User = require('../models/user');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+const fs = require('fs');
 
 // index --> get
 router.get('/', async (req, res) => {
@@ -54,16 +57,30 @@ router.get('/new', async (req, res) => {
 });
 
 // new --> post
-router.post('/', async (req, res) => {
+router.post('/', upload.single('imageFile'), async (req, res) => {
+	const beerEntry = {};
+	beerEntry.name = req.body.name;
+	beerEntry.type = req.body.type;
+	beerEntry.price = req.body.price;
+	beerEntry.flavor = req.body.flavor;
+	beerEntry.color = req.body.color;
+	beerEntry.rating = [];
+	beerEntry.maker = req.body.maker;
+	beerEntry.user = req.body.user;
+	beerEntry.image = {};
+	const imageFilePath = './uploads/' + req.file.filename;
+	beerEntry.image.data = fs.readFileSync(imageFilePath);
+	beerEntry.image.contentType = req.file.mimetype;
+	fs.unlinkSync(imageFilePath);
 	try {
 		// find brewery that was inputted
 		const foundBrewery = await Brewery.findOne({name: req.body.maker});
 		// create the new beer
-		const newBeer = await Beer.create(req.body);
+		const newBeer = await Beer.create(beerEntry);
 		// console.log(newBeer);
 		// push the new beer into the brewery it belongs in
 		foundBrewery.beers.push(newBeer);
-		foundBrewery.save();
+		await foundBrewery.save();
 		// console.log(newBeer);
 		res.redirect('/beers');
 	} catch (err) {
@@ -135,6 +152,13 @@ router.get('/:id/edit', async (req, res) => {
 	} catch (err) {
 		res.send(err)
 	}
+});
+
+router.get('/:id/image', async (req, res) => {
+	const foundBeer = await Beer.findById(req.params.id);
+	const image = foundBeer.image;
+	res.set('Content-Type', image.contentType);
+	res.send(image.data);
 });
 
 // update --> put
