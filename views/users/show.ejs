@@ -12,6 +12,12 @@
 			<% for (let i = 0; i < user.fridge.length; i++){%>
 				<li>
 					<a href="/beers/<%=user.fridge[i]._id%>"><%=user.fridge[i].name%></a>
+					<%if(isCurrent) {%>
+						<form action="/users/<%=user._id%>/fridge?_method=DELETE" method="POST">
+							<input type="hidden" name="beerId" value="<%=user.fridge[i]._id%>">
+							<button>Drink It</button>
+						</form>
+					<%}%>
 				</li>
 			<%}%>
 		</ul>
