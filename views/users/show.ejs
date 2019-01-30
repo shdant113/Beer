@@ -7,6 +7,7 @@
 		Username: <%=user.username%><br>
 		Email: <%=user.email%><br>
 		<%=user.city%>, <%=user.state%><br>
+		Profile Picture: <img src="/users/<%=user._id%>/image" alt="<%=user.username%> profile">
 		Fridge: 
 		<ul>
 			<% for (let i = 0; i < user.fridge.length; i++){%>

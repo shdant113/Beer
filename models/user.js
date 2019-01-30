@@ -7,7 +7,11 @@ const userSchema = new Schema({
 	email: { type: String, required: true },
 	city: String,
 	state: String,
-	fridge: [Beer.schema]
+	fridge: [Beer.schema],
+	image: {
+		data: Buffer,
+		contentType: String
+	}
 });
 
 const User = mongoose.model('User', userSchema);

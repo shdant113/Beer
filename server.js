@@ -5,10 +5,14 @@ const request = require('superagent');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const multer = require('multer');
 const User = require('./models/user');
 const Brewery = require('./models/brewery');
 const userSeed = require('./seedUserData');
 const brewerySeed = require('./seedBreweryData');
+const upload = multer({ dest: 'uploads/' });
+const fs = require('fs');
+
 
 server.use(express.static('public'));
 server.use(methodOverride('_method'));

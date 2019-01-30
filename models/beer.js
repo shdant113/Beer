@@ -9,7 +9,11 @@ const beerSchema = new Schema({
 	color: String,
 	rating: [Review.schema],
 	maker: { type: String, required: true },
-	user: { type: String, required: true }
+	user: { type: String, required: true },
+	image: {
+		data: Buffer,
+		contentType: String
+	}
 });
 
 const Beer = mongoose.model('Beer', beerSchema);

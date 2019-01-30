@@ -4,7 +4,7 @@
 <div class="wrap">
 	<h1>Register Your New Account!</h1>
 	<div class="ejs-text">
-		<form action="/users" method="POST">
+		<form action="/users" method="POST" enctype="multipart/form-data">
 			<input type="text" name="username" placeholder="username" />
 			<input type="password" name="password" placeholder="password" />
 			<input type="email" name="email" placeholder="email" />
@@ -67,6 +67,7 @@
 				<option value="International">International</option>
 			<!-- </datalist> -->
 			</select><br>
+			<input type="file" name="imageFile"><br>
 			<button>Register</button>
 		</form>
 	</div>
