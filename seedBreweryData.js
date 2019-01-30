@@ -170,7 +170,7 @@ const breweryData = [
 {
 	name: 'Abita',
 	city: 'Abita Springs',
-	state: 'Louisiana'
+	state: 'Louisiana',
 	creator: 'admin',
 	beers: []
 },
@@ -1261,7 +1261,7 @@ const breweryData = [
 	beers: []
 },
 {
-	name: "Le Chien Brewing Company"
+	name: "Le Chien Brewing Company",
 	city: "Greenwell Springs",
 	state: "Louisiana",
 	creator: 'admin',
@@ -1270,7 +1270,7 @@ const breweryData = [
 {
 	name: "Mudbug Brewery",
 	city: "Thibodaux",
-	state: "Louisiana"
+	state: "Louisiana",
 	creator: 'admin',
 	beers: [],
 }]
