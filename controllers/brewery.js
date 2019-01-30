@@ -20,7 +20,8 @@ router.get('/', async (req, res) => {
 		});
 		res.render('./breweries/index.ejs', {
 			breweries: allBreweries,
-			currentUser: currentUser
+			currentUser: currentUser,
+			session: req.session
 		})
 	} catch (err) {
 		res.send(err)
@@ -32,7 +33,8 @@ router.get('/new', async (req, res) => {
 	try {
 		// const foundUser = await User.find({});
 		res.render('./breweries/new.ejs', {
-			user: req.session.username
+			user: req.session.username,
+			session: req.session
 		});
 	} catch (err) {
 		res.send(err)
@@ -69,7 +71,8 @@ router.get('/:id', async (req, res) => {
 			brewery: foundBrewery,
 			user: foundUser,
 			currentUser: currentUser,
-			isCurrent: isCurrent
+			isCurrent: isCurrent,
+			session: req.session
 		})
 	} catch (err) {
 		res.send(err)
@@ -83,7 +86,8 @@ router.get('/:id/edit', async (req, res) => {
 		const foundMaker = await User.find({username: foundBrewery.creator});
 		if(req.session.username === foundBrewery.creator) {
 			res.render('./breweries/edit.ejs', {
-				brewery: foundBrewery
+				brewery: foundBrewery,
+				session: req.session
 			})
 		} else {
 			res.redirect('/');

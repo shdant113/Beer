@@ -23,6 +23,7 @@
 			<br>
 			<label for="maker">Change Where <%= beer.name %> is Brewed</label>
 			<select name="maker" id="breweries-option-edit">
+				<option value="<%=beer.maker%>" disabled selected><%=beer.maker%></option>
 				<% for (let i = 0; i < breweries.length; i++) { -%>
 					<option value="<%= breweries[i].name %>"><%= breweries[i].name %></option>
 				<% } -%>

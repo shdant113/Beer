@@ -12,13 +12,16 @@ const fs = require('fs');
 // log in page
 router.get('/login', async (req, res) => {
 	res.render('users/login.ejs', {
-		message: req.session.message
+		message: req.session.message,
+		session: req.session
 	})
 });
 
 // register page
 router.get('/new', async (req, res) => {
-	res.render('users/new.ejs')
+	res.render('users/new.ejs', {
+		session: req.session
+	})
 });
 
 // log in route
@@ -36,6 +39,7 @@ router.post('/login', async (req, res) => {
 			// --> if correct password
 			if (bcrypt.compareSync(req.body.password, existingUser.password)) {
 				req.session.username = existingUser.username;
+				req.session._id = existingUser._id;
 				req.session.loggedIn = true;
 				req.session.message = `We've been awaiting your prompt return, ${existingUser.username}`;
 				res.redirect(`/users/${existingUser._id}`);
@@ -77,9 +81,10 @@ router.post('/', upload.single('imageFile'), async (req, res) => {
 		const newUser = await User.create(userPassEntry);
 		// log user in upon account creation
 		req.session.loggedIn = true;
+		req.session._id = newUser._id;
 		req.session.username = newUser.username // username
 		req.session.message = `It's a pleasure to meet you, ${newUser.username}`;
-		console.log(newUser);
+		// console.log(newUser);
 		res.redirect('/');
 	} catch (err) {
 		res.send(err)
@@ -99,7 +104,8 @@ router.get('/', async (req, res) => {
 	try {
 		const foundUser = await User.find({});
 		res.render('users/index.ejs', {
-			users: foundUser
+			users: foundUser,
+			session: req.session
 		})
 	} catch (err) {
 		res.send(err)
@@ -124,7 +130,8 @@ router.get('/:id', async (req, res) => {
 		res.render('users/show.ejs', {
 			user: foundUser,
 			currentUser: currentUser,
-			isCurrent: isCurrent
+			isCurrent: isCurrent,
+			session: req.session
 		})
 	} catch (err) {
 		res.send(err)
@@ -138,7 +145,8 @@ router.get('/:id/edit', async (req, res) => {
 		const foundUser = await User.findById(req.params.id);
 		if (req.session.username === foundUser.username) {
 			res.render('users/edit.ejs', {
-				user: foundUser
+				user: foundUser,
+				session: req.session
 			})
 		} else {
 			res.redirect('/');

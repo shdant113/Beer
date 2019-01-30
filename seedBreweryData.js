@@ -441,13 +441,6 @@ const breweryData = [
 	beers: []
 },
 {
-	name: '',
-	city: '',
-	state: '',
-	creator: 'admin',
-	beers: []
-},
-{
 	name: "Abide Brewing Company",
 	city: "Newnan",
 	state: "Georgia",
