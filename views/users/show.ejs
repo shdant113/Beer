@@ -9,7 +9,13 @@
 		<p>Username: <%=user.username%></p>
 		<p>Email: <%=user.email%></p>
 		<p><%=user.city%>, <%=user.state%></p>
-		Profile Picture: <img src="/users/<%=user._id%>/image" alt="<%=user.username%> profile">
+		Profile Picture: <img 
+			<%if (user.image.data) {%>
+				src= "/users/<%=user._id%>/image"
+			<%} else {%>
+				src= "/images/beerdefault.png"
+			<%}%> 
+			alt="<%=user.username%> profile">
 		<div class="inside-container">
 			<h3>Your Fridge:</h3>
 			<ul>

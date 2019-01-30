@@ -68,10 +68,12 @@ router.post('/', upload.single('imageFile'), async (req, res) => {
 	beerEntry.maker = req.body.maker;
 	beerEntry.user = req.body.user;
 	beerEntry.image = {};
-	const imageFilePath = './uploads/' + req.file.filename;
-	beerEntry.image.data = fs.readFileSync(imageFilePath);
-	beerEntry.image.contentType = req.file.mimetype;
-	fs.unlinkSync(imageFilePath);
+	if (req.file) {
+		const imageFilePath = './uploads/' + req.file.filename;
+		beerEntry.image.data = fs.readFileSync(imageFilePath);
+		beerEntry.image.contentType = req.file.mimetype;
+		fs.unlinkSync(imageFilePath);
+	}
 	try {
 		// find brewery that was inputted
 		const foundBrewery = await Brewery.findOne({name: req.body.maker});

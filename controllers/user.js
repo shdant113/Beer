@@ -64,10 +64,14 @@ router.post('/', upload.single('imageFile'), async (req, res) => {
 	userPassEntry.city = req.body.city;
 	userPassEntry.state = req.body.state;
 	userPassEntry.image = {};
-	const imageFilePath = './uploads/' + req.file.filename;
-	userPassEntry.image.data = fs.readFileSync(imageFilePath);
-	userPassEntry.image.contentType = req.file.mimetype;
-	fs.unlinkSync(imageFilePath);
+	// console.log(req.body);
+	// console.log(req.file);
+	if (req.file) {
+		const imageFilePath = './uploads/' + req.file.filename;
+		userPassEntry.image.data = fs.readFileSync(imageFilePath);
+		userPassEntry.image.contentType = req.file.mimetype;
+		fs.unlinkSync(imageFilePath);
+	}
 	try {
 		// create user
 		const newUser = await User.create(userPassEntry);
@@ -176,10 +180,11 @@ router.put('/:id', async (req, res) => {
 });
 
 // update
-router.put('/:id/edited', async (req, res) => {
+router.put('/:id/edited', upload.single('imageFile'), async (req, res) => {
 	try {
 		const foundUser = await User.findById(req.params.id);
-		console.log(foundUser);
+		// console.log(foundUser);
+
 		if(req.body.password.toString() === foundUser.password) {
 			const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
 		} else {

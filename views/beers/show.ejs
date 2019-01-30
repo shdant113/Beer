@@ -11,7 +11,13 @@
 		<p>The beer has been described as: <%=beer.flavor%></p>
 		<p>Color: <%=beer.color%></p>
 		<br>
-		<img src="/beers/<%=beer._id%>/image" alt="<%=beer.name%> picture">
+		<img 
+		<%if (beer.image.data) {%>
+				src= "/beers/<%=beer._id%>/image"
+			<%} else {%>
+				src= "/images/beerdefault.png"
+			<%}%>
+			alt="<%=beer.name%> picture">
 
 		<%if(currentUser){%>
 			<form action="/users/<%=user._id%>?_method=PUT" method="POST">
