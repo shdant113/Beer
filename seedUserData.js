@@ -1,8 +1,8 @@
 const userData = [
 {
-	username: 'test',
-	password: 'test',
-	email: 'test@test.com',
+	username: 'admin',
+	password: 'admin',
+	email: 'admin@admin.com',
 	city: 'Milwaukee',
 	state: 'Wisconsin',
 	fridge: []
@@ -22,6 +22,7 @@ const userData = [
 	city: 'Nashville',
 	state: 'Tennessee',
 	fridge: []
-}]
+}	
+]
 
 module.exports = userData;
