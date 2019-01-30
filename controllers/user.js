@@ -67,10 +67,10 @@ router.post('/', upload.single('imageFile'), async (req, res) => {
 	const imageFilePath = './uploads/' + req.file.filename
 	userPassEntry.image.data = fs.readFileSync(imageFilePath);
 	userPassEntry.image.contentType = req.file.mimetype;
+	fs.unlinkSync(imageFilePath);
 	try {
 		// create user
 		const newUser = await User.create(userPassEntry);
-		fs.unlinkSync(imageFilePath);
 		// log user in upon account creation
 		req.session.loggedIn = true;
 		req.session.username = newUser.username // username
