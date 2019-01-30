@@ -8,6 +8,16 @@ router.get('/', async (req, res) => {
 	try {
 		const currentUser = await User.findOne({username: req.session.username});
 		const allBreweries = await Brewery.find({});
+		allBreweries.sort((a, b) => {
+			let nameA = a.name.toUpperCase(); // ignore upper and lowercase
+			let nameB = b.name.toUpperCase(); // ignore upper and lowercase
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
+		});
 		res.render('./breweries/index.ejs', {
 			breweries: allBreweries,
 			currentUser: currentUser
@@ -47,10 +57,19 @@ router.get('/:id', async (req, res) => {
 		// finding user that created the brewery
 		const foundUser = await User.findOne({ username: foundBrewery.creator });
 		const currentUser = await User.findOne({username: req.session.username});
+		let isCurrent = false;
+		if (currentUser === null) {
+			isCurrent = false;
+		} else if (foundUser._id.toString() !== currentUser._id.toString()) {
+			isCurrent = false;
+		} else {
+			isCurrent = true;
+		}
 		res.render('./breweries/show.ejs', {
 			brewery: foundBrewery,
 			user: foundUser,
-			currentUser: currentUser
+			currentUser: currentUser,
+			isCurrent: isCurrent
 		})
 	} catch (err) {
 		res.send(err)

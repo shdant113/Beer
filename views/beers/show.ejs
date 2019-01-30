@@ -16,6 +16,9 @@
 				<input name="beerid" type="hidden" value="<%=beer._id%>">
 				<button>Add To Your Fridge</button>
 			</form>
+		<%}%>
+
+		<%if(isCurrent) {%>
 			<button><a href="/beers/<%= beer._id %>/edit">Edit This Beer</a></button>
 		<%}%>
 	</div>
