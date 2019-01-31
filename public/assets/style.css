@@ -62,6 +62,12 @@ input, button, select, textarea, .custom {
 	text-align: center
 }
 
+.user-beer-fridge-ul {
+	overflow: scroll;
+	max-height: 350px;
+	max-width: 400px;
+}
+
 .user-fridge-link:hover {
 	text-decoration: underline;
 	font-weight: bold;
@@ -72,7 +78,6 @@ input, button, select, textarea, .custom {
 	display: flex;
 	justify-content: space-between;
 	max-height: 420px;
-	overflow: scroll;
 }
 
 .custom{
@@ -249,13 +254,15 @@ li {
 }
 
 #fridge{
+	width: 420px;
+	height: 420px;
 	margin: 0 auto 10px auto;
 	display: none;
 	position: relative;
 }
 
 #fridge > .inside-container, #beer-index, #show-fridges, .ejs-text {
-	width: max-content;
+	width: 420px;
 	padding: 20px 20px;
 }
 
