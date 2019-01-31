@@ -4,17 +4,17 @@
 <div class="wrap">
 	<h1><%=user.username%>'s Profile</h1>
 	<br>
-	<div id="user-show-wrap">
-		<div id="user-profile-img">
+	<div class="show-wrap">
+		<div class="show-img">
 			<img class="upload-img" 
-				<%if (user.image.data) {%>
-					src= "/users/<%=user._id%>/image"
-				<%} else {%>
-					src= "/images/beerdefault.png"
-				<%}%>
-				alt="<%=user.username%> profile">
+			<%if (user.image.data) {%>
+				src= "/users/<%=user._id%>/image"
+			<%} else {%>
+				src= "/images/beerdefault.png"
+			<%}%>
+			alt="<%=user.username%> profile">
 		</div>
-		<div id="user-show">
+		<div class="show-text">
 			<p>Email: <%=user.email%></p>
 			<p>Located In: <%=user.city%>, <%=user.state%></p>
 			<%if(isCurrent) {%>

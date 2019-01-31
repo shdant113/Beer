@@ -31,7 +31,10 @@
 			</select>
 			<p>Don't see your beer's brewery? Click <a href="/breweries/new">here</a>.</p>
 			<br>
-			<input type="file" name="imageFile"><br>
+			<label>Choose Beer's Picture</label>
+			<label class="custom">Upload a File<br>
+			<input type="file" name="imageFile" /></label>
+			<br><br>
 			<input type="hidden" name="user" value="<%=user.username%>">
 			<button>Add Your New Beer</button>
 			<br><br>

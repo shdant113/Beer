@@ -8,10 +8,17 @@
 	<div class="ejs-text">
 
 		<form action="/users" method="POST" enctype="multipart/form-data">
-			<input type="text" name="username" placeholder="username" /><br>
-			<input type="password" name="password" placeholder="password" /><br>
-			<input type="email" name="email" placeholder="email" /><br>
-			<input type="text" name="city" placeholder="city" /><br>
+			<label>Choose Your Username:</label>
+			<input type="text" name="username" placeholder="New username" />
+			<br>
+			<label>Choose Your Password:</label>
+			<input type="password" name="password" placeholder="New password" />
+			<br>
+			<label>Enter Your Email:</label>
+			<input type="email" name="email" placeholder="Your email" />
+			<br>
+			<label>Set Your Location:</label>
+			<input type="text" name="city" placeholder="Enter Your City" /><br>
 			<select name="state" id="user-state-new">
 			<!-- <input type="text" name="state" list="statename" /> -->
 			<!-- <datalist id="statename"> -->
@@ -69,9 +76,15 @@
 				<option value="District of Columbia">District of Columbia</option>
 				<option value="International">International</option>
 			<!-- </datalist> -->
-			</select><br>
-			<input type="file" name="imageFile"><br>
-			<button>Register</button>
+			</select>
+			<br>
+			<img class="upload-img" src= "/images/beerdefault.png" alt="default profile picture of beer">
+			<br>
+			<label>Choose a Profile Picture</label>
+			<label class="custom">Upload a File<br>
+			<input type="file" name="imageFile" /></label>
+			<br><br>
+			<button>Register With BeerFridge!</button>
 		</form>
 	</div>
 </div>

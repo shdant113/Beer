@@ -8,6 +8,7 @@ const methodOverride = require('method-override');
 const multer = require('multer');
 const User = require('./models/user');
 const Brewery = require('./models/brewery');
+const Beer = require('./models/beer');
 const userSeed = require('./seedUserData');
 const beerSeed = require('./seedBeerData');
 const brewerySeed = require('./seedBreweryData');

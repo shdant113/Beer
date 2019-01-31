@@ -15,15 +15,25 @@ body {
 	text-shadow: 5px 5px 10px #dc3545c2;
 }
 
-#intro, .ejs-text > ul > li, #user-show-wrap > ul > li, .inside-container > ul > li, input, button, select {
+#intro, .ejs-text > ul > li, .show-wrap > ul > li, .inside-container > ul > li, input, button, select, .custom {
 	font-family: 'Caudex', serif;
 	font-size: 25px;
 }
 
-input, button, select, textarea {
+input, button, select, textarea, .custom {
 	margin: 0 auto;
 	display: block;
 	border-radius: 3px;
+}
+
+.custom{
+	background-color: buttonface;
+	border: 1px solid rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+	padding: 1px 7px 2px;
+}
+
+input[type="file"]{
+	display: none;
 }
 
 #body{
@@ -34,7 +44,7 @@ input, button, select, textarea {
 	border: 5px solid black;
 }
 
-.ejs-text, #user-show-wrap, .inside-container{
+.ejs-text, .show-wrap, .inside-container{
 	background-color: rgba(255,255,255,0.3);
 	padding: 10px 0;
 	border-radius: 20px;
@@ -140,21 +150,23 @@ li {
 	overflow: hidden;
 }
 
-#user-show-wrap{
+.show-wrap{
 	display: flex;
 	justify-content: center;
 }
 
-#user-show, #user-profile-img{
+.show-text, .show-img{
 	margin: auto;
 }
 
-#user-profile-img{
+.show-img{
 	width: 200px;
 	height: 200px;
 }
 
 .upload-img{
+	margin: 0 auto;
+	display: block;
 	width: 200px;
 	height: 200px;
 	border-radius: 100px;

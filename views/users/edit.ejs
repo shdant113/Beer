@@ -73,14 +73,17 @@
 				<option value="International">International</option>
 			<!-- </datalist> -->
 			</select><br>
-			<img 
+			<img class="upload-img" 
 				<%if (user.image.data) {%>
 					src= "/users/<%=user._id%>/image"
 				<%} else {%>
 					src= "/images/beerdefault.png"
 				<%}%> 
 				alt="<%=user.username%> profile">
-			<input type="file" name="imageFile"><br>
+			<label>Choose a New Profile Picture</label>
+			<label class="custom">Upload a File<br>
+			<input type="file" name="imageFile" /></label>
+			<br><br>
 			<button>Edit Your Account</button>
 		</form>
 		<br>

@@ -4,21 +4,27 @@
 <div class="wrap">
 	<h1><%=beer.name%></h1>
 	<br>
-	<div class="ejs-text">
-		<p>Type of Beer: <%=beer.type%></p>
-		<p>Made By: <%=beer.maker%></p>
-		<p>Price: <%=beer.price%>/4</p>
-		<p>The beer has been described as: <%=beer.flavor%></p>
-		<p>Color: <%=beer.color%></p>
-		<br>
-		<img 
-		<%if (beer.image.data) {%>
+	<div class="show-wrap">
+		<div class="show-img">
+			<img class="upload-img" 
+			<%if (beer.image.data) {%>
 				src= "/beers/<%=beer._id%>/image"
 			<%} else {%>
 				src= "/images/beerdefault.png"
 			<%}%>
 			alt="<%=beer.name%> picture">
-
+		</div>
+		<br><br>
+		<div class="show-text">
+			<p>Type of Beer: <%=beer.type%></p>
+			<p>Made By: <%=beer.maker%></p>
+			<p>Price: <%=beer.price%>/4</p>
+			<p>The beer has been described as: <%=beer.flavor%></p>
+			<p>Color: <%=beer.color%></p>
+		</div>
+	</div>
+		<br>
+	<div>
 		<%if(currentUser){%>
 			<form action="/users/<%=user._id%>?_method=PUT" method="POST">
 				<input name="beerid" type="hidden" value="<%=beer._id%>">
