@@ -17,7 +17,9 @@
 		</div>
 		<br>
 		<%if(isCurrent){%>
-			<button><a href="/breweries/<%=brewery._id%>/edit">Edit This Brewery</a></button>
+			<form action="/breweries/<%brewery._id%>/edit" method="GET">
+				<button>Edit This Brewery</button>
+			</form>
 		<%}%>
 	</div>
 </div>

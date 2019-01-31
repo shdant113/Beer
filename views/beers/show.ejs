@@ -33,7 +33,9 @@
 		<%}%>
 		<br>
 		<%if(isCurrent) {%>
-			<button><a href="/beers/<%= beer._id %>/edit">Edit This Beer</a></button>
+			<form action="/beers/<%=beer._id%>/edit" method="get">
+				<button>Edit This Beer</button>
+			</form>
 		<%}%>
 	</div>
 	<div id="show-fridges">

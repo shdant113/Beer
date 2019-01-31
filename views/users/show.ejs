@@ -18,7 +18,9 @@
 			<p>Email: <%=user.email%></p>
 			<p>Located In: <%=user.city%>, <%=user.state%></p>
 			<%if(isCurrent) {%>
-				<button><a href="/users/<%=user._id%>/edit">Edit Yourself</a></button>
+				<form action="/users/<%=user._id%>/edit" method="get">
+					<button>Edit Yourself</a></button>
+				</form>
 			<%}%>
 		</div>
 		<br>

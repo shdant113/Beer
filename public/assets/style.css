@@ -5,6 +5,11 @@ body {
 	min-height: 100%;
 }
 
+button:hover {
+	box-shadow: 2px 2px 4px black;
+	cursor: pointer;
+}
+
 #home-head, h1, ul, #intro, p, footer, input, button, label, textarea, .inside-container > h3{
 	text-align: center;
 }
@@ -20,14 +25,18 @@ body {
 	font-size: 25px;
 }
 
+.inside-container > ul > li > a:hover {
+	text-decoration: underline;
+}
+
 .inside-container > ul > li > a{
 	font-family: 'Slackey', cursive;
 	font-weight: 200;
 	font-size: 20px;
-	text-shadow: 5px 5px 10px #000000;
+	text-shadow: 5px 5px 10px #dc3545c2;
 	text-decoration: none;
 	list-style-type: none;
-	color: white;
+	color: #1701ad;
 }
 
 input, button, select, textarea, .custom {
