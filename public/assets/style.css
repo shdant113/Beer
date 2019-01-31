@@ -26,8 +26,21 @@ input, button, select, textarea, .custom {
 	border-radius: 3px;
 }
 
+.drink-it-button {
+	width: 80px;
+	height: 25px;
+	font-size: 16px;
+	text-align: center
+}
+
+.user-beer-fridge-ul {
+	
+}
 .user-fridge-li {
 	margin-bottom: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: space-around;
 }
 
 #remove-beer-form {
