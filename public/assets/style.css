@@ -1,97 +1,15 @@
+/* main */
+
 body {
 	margin: 20px 0 0 0;
 	background: url('/images/beer-on-bar-background_ect7bbkyl__F0000.png') no-repeat fixed;
 	background-size: cover;
-	min-height: 100%;
 }
 
-button:hover {
-	box-shadow: 2px 2px 4px black;
-	cursor: pointer;
-}
-
-.wrap{
-	max-width: 950px;
-	display: block;
-}
-
-#home-head, h1, ul, #intro, p, footer, input, button, label, textarea, .inside-container > h3{
-	text-align: center;
-}
-
-#upvote{
-	font-size: 40px;
-}
-
-#img-contain-wrap > h1, .wrap > h1, .inside-container > h3, #show-fridges > ul{
-	font-family: 'Slackey', cursive;
-	font-weight: 500;
-	text-shadow: 5px 5px 10px #dc3545c2;
-}
-
-#intro, .ejs-text > ul > li, .show-wrap > ul > li, input, button, select, .custom, #show-fridges > ul > li {
-	font-family: 'Caudex', serif;
-	font-size: 25px;
-}
-
-.inside-container > ul > li > a:hover {
-	text-decoration: underline;
-}
-
-.inside-container > ul > li > a{
-	font-family: 'Slackey', cursive;
-	font-weight: 200;
-	font-size: 20px;
-	text-shadow: 5px 5px 10px #dc3545c2;
-	text-decoration: none;
-	list-style-type: none;
-	color: #1701ad;
-}
-
-input, button, select, textarea, .custom {
-	margin: 0 auto;
-	display: block;
-	border-radius: 3px;
-}
-
-.drink-it-button {
-	margin-left: 20px;
-	width: 80px;
-	height: 25px;
-	font-size: 16px;
-	text-align: center
-}
-
-.user-beer-fridge-ul {
-	overflow: scroll;
-	max-height: 350px;
-	max-width: 400px;
-}
-
-.user-fridge-link:hover {
-	text-decoration: underline;
-	font-weight: bold;
-}
-
-.user-fridge-li {
-	margin-bottom: 10px;
-	display: flex;
-	justify-content: space-between;
-	max-height: 420px;
-}
-
-.custom{
-	background-color: buttonface;
-	border: 1px solid rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
-	padding: 1px 7px 2px;
-}
-
-#breweries-option-new {
-	margin-bottom: 10px;
-}
-
-input[type="file"]{
-	display: none;
+body, html {
+	height: 100%;
+	left: 0;
+	right: 0;
 }
 
 #body{
@@ -102,195 +20,45 @@ input[type="file"]{
 	border: 5px solid black;
 }
 
-.ejs-text, .show-wrap, .inside-container, #show-fridges{
-	background-color: rgba(255,255,255,0.3);
-	padding: 10px 20px;
-	border-radius: 20px;
+
+/* common */
+
+#home-head, h1, ul, #intro, p, footer, input, button, 
+label, textarea, .inside-container > h3 {
+	text-align: center;
 }
 
-.inside-container{
-	border: 2px solid #000000;
-	height: 100%;
-	margin: 0 auto;
-	max-width: 900px;
+#img-contain-wrap > h1, .wrap > h1, .inside-container > h3, #show-fridges > ul {
+	font-family: 'Slackey', cursive;
+	font-weight: 500;
+	text-shadow: 5px 5px 10px #dc3545c2;
 }
 
-.inside-container > h3, #show-fridges > ul{
-	box-sizing: border-box;
+#intro, .ejs-text > ul > li, .show-wrap > ul > li, input, button, select,
+ .custom, #show-fridges > ul > li {
+	font-family: 'Caudex', serif;
 	font-size: 25px;
 }
 
-body, html{
-	height: 100%;
-	left: 0;
-	right: 0;
-}
-
-a, a:hover, .nav-bar{
-	color: #1701ad;
-}
-
-hr{
+.wrap{
+	max-width: 950px;
 	display: block;
-	height: 30px; 
-	margin-top: -45px; 
-	border-style: solid; 
-	border-color: #000000; 
-	border-width: 0 0 1px 0; 
-	border-radius: 40px; 
 }
 
-#user-nav, #site-nav{
-	margin: 20px 50px 0 50px;
-}
-
-#home-head{
-	font-family: 'Slackey', cursive;
-	font-weight: 500;
-	font-size: 80px;
-	margin: 0 auto;
-	text-shadow: 5px 5px 10px #dc3545c2;
-	text-decoration: underline;
-}
-
-.nav-bar{
-	font-family: 'Arvo', serif;
-	font-weight: 700;
-	font-size: 20px;
-	text-shadow: 1px 1px 2px #FFFFFF;
-}
-
-#site-nav:focus-within{
-	background-color: rgba(255,255,255,0.3);
-}
-
-.nav-bar:hover{
-	text-decoration: underline
-}
-
-nav{
-	display: flex;
-	justify-content: space-between;
-}
-
-ul{
-	margin: 0;
-	padding: 0;
-}
-
-li {
-	list-style-type: none;
-}
-
-.nav-bar > ul > li{
-	display: inline;
-	visibility: hidden;
-	opacity: 0;
-	position: relative;
-	transition: all 0.5s ease;
-	box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.7);
-	box-sizing: border-box;
-}
-
-.nav-bar:hover ul li{
-	color: #1701ad;
-	visibility: visible;
-	opacity: 1;
-	list-style: none;
-}
-
-#img-contain-wrap{
-	background: url(/images/580b57fbd9996e24bc43c097.png) no-repeat center;
-	min-height: 500px;
-	min-width: 500px;
-}
-
-#click-to-close {
-	display: none;
-}
-
-#click-to-close, #click-to-open {
-	padding: 10px 20px;
+#beer-index, .ejs-text {
 	width: max-content;
-}
-
-/*.fridge-bkgd{
-	background: url('/images/fridge.png') no-repeat center;
-	height: 420px;
-	width: 420px;
-}*/
-
-#home-img{
-	max-width: 500px;
-	max-height: 500px;
-	display: block;
-	margin: 0 auto;
-	overflow: hidden;
-}
-
-.show-wrap{
-	display: flex;
-	justify-content: center;
-}
-
-.show-text, .show-img{
-	margin: auto;
-}
-
-.show-img{
-	width: 200px;
-	height: 200px;
-}
-
-#fridge-picture {
-	height: 420px;
-	width: 420px;
-	margin: 0 auto;
-	display: block;
-}
-
-#fridge-picture:hover {
-	cursor: pointer;
-}
-
-#fridge{
-	width: 420px;
-	height: 420px;
-	margin: 0 auto 10px auto;
-	display: none;
-	position: relative;
-}
-
-#fridge > .inside-container, #beer-index, #show-fridges, .ejs-text {
-	width: 420px;
 	padding: 20px 20px;
 }
 
-#beer-index, #show-fridges, .ejs-text {
-	display: block;
-	margin: 0 auto;
-}
-
-#fridge:hover {
+button:hover {
+	box-shadow: 2px 2px 4px black;
 	cursor: pointer;
 }
 
-
-/*#fridge-btn{
-	display: block;
-}
-
-#fridge-btn:hover{
-	cursor: pointer;
-}*/
-
-.upload-img{
+input, button, select, textarea, .custom {
 	margin: 0 auto;
 	display: block;
-	width: 200px;
-	height: 200px;
-	border-radius: 100px;
-	border: 1px solid black;
+	border-radius: 3px;
 }
 
 p, label, textarea{
@@ -317,6 +85,241 @@ textarea{
 	line-height: 1.5;
 	box-shadow: 1px 1px 1px #FFFFFF;
 	width: 278px;
+}
+
+a, a:hover, .nav-bar{
+	color: #1701ad;
+}
+
+hr{
+	display: block;
+	height: 30px; 
+	margin-top: -45px; 
+	border-style: solid; 
+	border-color: #000000; 
+	border-width: 0 0 1px 0; 
+	border-radius: 40px; 
+}
+
+ul{
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style-type: none;
+}
+
+input[type="file"]{
+	display: none;
+}
+
+
+/* nav/head */
+
+#home-head{
+	font-family: 'Slackey', cursive;
+	font-weight: 500;
+	font-size: 80px;
+	margin: 0 auto;
+	text-shadow: 5px 5px 10px #dc3545c2;
+	text-decoration: underline;
+}
+
+nav{
+	display: flex;
+	justify-content: space-between;
+}
+
+#user-nav, #site-nav{
+	margin: 20px 50px 0 50px;
+}
+
+.nav-bar{
+	font-family: 'Arvo', serif;
+	font-weight: 700;
+	font-size: 20px;
+	text-shadow: 1px 1px 2px #FFFFFF;
+}
+
+#site-nav:focus-within{
+	background-color: rgba(255,255,255,0.3);
+}
+
+.nav-bar:hover{
+	text-decoration: underline
+}
+
+.nav-bar > ul > li{
+	display: inline;
+	visibility: hidden;
+	opacity: 0;
+	position: relative;
+	transition: all 0.5s ease;
+	box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.7);
+	box-sizing: border-box;
+}
+
+.nav-bar:hover ul li{
+	color: #1701ad;
+	visibility: visible;
+	opacity: 1;
+	list-style: none;
+}
+
+/* pages */
+
+#home-img{
+	max-width: 500px;
+	max-height: 500px;
+	display: block;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+#beer-index, #show-fridges, .ejs-text {
+	display: block;
+	margin: 0 auto;
+}
+
+.ejs-text, .show-wrap, .inside-container, #show-fridges {
+	background-color: rgba(255,255,255,0.3);
+	border-radius: 20px;
+}
+
+.show-wrap, .inside-container, #show-fridges {
+	padding: 10px 20px;
+}
+
+#fridge > .inside-container, #show-fridges {
+	width: 420px;
+}
+
+#fridge {
+	width: 420px;
+	height: 420px;
+	margin: 0 auto 10px auto;
+	display: none;
+	position: relative;
+}
+
+#fridge-picture {
+	height: 420px;
+	width: 420px;
+	margin: 0 auto;
+	display: block;
+}
+
+#fridge-picture:hover {
+	cursor: pointer;
+}
+
+.user-beer-fridge-ul {
+	overflow: scroll;
+	max-height: 350px;
+	max-width: 400px;
+}
+
+.drink-it-button {
+	margin-left: 20px;
+	width: 80px;
+	height: 25px;
+	font-size: 16px;
+	text-align: center
+}
+
+.user-fridge-link:hover {
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+.user-fridge-li {
+	margin-bottom: 10px;
+	display: flex;
+	justify-content: space-between;
+	max-height: 420px;
+}
+
+#fridge:hover {
+	cursor: pointer;
+}
+
+#click-to-close {
+	display: none;
+}
+
+#click-to-close, #click-to-open {
+	padding: 10px 20px;
+	width: max-content;
+}
+
+.inside-container{
+	border: 2px solid #000000;
+	height: 100%;
+	margin: 0 auto;
+	max-width: 900px;
+}
+
+.inside-container > h3, #show-fridges > ul{
+	box-sizing: border-box;
+	font-size: 25px;
+}
+
+.inside-container > ul > li > a {
+	font-family: 'Slackey', cursive;
+	font-weight: 200;
+	font-size: 20px;
+	text-shadow: 5px 5px 10px #dc3545c2;
+	text-decoration: none;
+	list-style-type: none;
+	color: #1701ad;
+}
+
+.inside-container > ul > li > a:hover {
+	text-decoration: underline;
+}
+
+#upvote{
+	font-size: 40px;
+}
+
+.custom{
+	background-color: buttonface;
+	border: 1px solid rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+	padding: 1px 7px 2px;
+}
+
+#breweries-option-new {
+	margin-bottom: 10px;
+}
+
+.show-wrap{
+	display: flex;
+	justify-content: center;
+}
+
+.show-text, .show-img{
+	margin: auto;
+}
+
+.show-img{
+	width: 200px;
+	height: 200px;
+}
+
+#img-contain-wrap{
+	background: url(/images/580b57fbd9996e24bc43c097.png) no-repeat center;
+	min-height: 500px;
+	min-width: 500px;
+}
+
+.upload-img{
+	margin: 0 auto;
+	display: block;
+	width: 200px;
+	height: 200px;
+	border-radius: 100px;
+	border: 1px solid black;
 }
 
 .price-range {
