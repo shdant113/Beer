@@ -115,6 +115,16 @@ router.get('/:id', async (req, res) => {
 		const currentUser = await User.findOne({username: req.session.username});
 		const foundUser = await User.findOne({username: foundBeer.user});
 		const usersWithBeer = await User.find({'fridge._id': req.params.id});
+		let alreadyVoted = false;
+		if (currentUser) {
+			for (let i = 0; i < foundBeer.plusOnes.length; i++) {
+				if (foundBeer.plusOnes[i].toString() === currentUser._id.toString()) {
+					alreadyVoted = true;
+				}
+			}
+		} else {
+			alreadyVoted = true
+		};
 		let isCurrent = false;
 		if (currentUser === null) {
 			isCurrent = false;
@@ -132,7 +142,8 @@ router.get('/:id', async (req, res) => {
 			isCurrent: isCurrent,
 			session: req.session,
 			beerBrewery: beerBrewery,
-			beerOwners: usersWithBeer
+			beerOwners: usersWithBeer,
+			alreadyVoted: alreadyVoted
 		})
 		// } else {
 			// if the user is not logged in (username of 0 cannot exist because username must be a string), they cannot add a beer to their fridge, so the page renders but the button does not show up
@@ -236,6 +247,32 @@ router.put('/:id', upload.single('imageFile'), async (req, res) => {
 		req.session.beerMessage = `Need a name and brewery`;
 		res.redirect(`/beers/${req.params.id}/edit`);
 		// res.send(err)
+	}
+});
+
+router.put('/:id/upvote/upvote', async (req, res) => {
+	try {
+		const foundBeer = await Beer.findById(req.params.id);
+		const currentUser = await User.findById(req.session._id);
+		let alreadyVoted = false;
+		if (currentUser){
+			for (let i = 0; i < foundBeer.plusOnes.length; i++) {
+				if (foundBeer.plusOnes[i].toString() === currentUser._id.toString()) {
+					alreadyVoted = true;
+				}
+			}
+		} else {
+			alreadyVoted = true;
+		}
+		if (alreadyVoted) {
+			res.redirect(`/beers/${req.params.id}`)
+		} else {
+			foundBeer.plusOnes.push(currentUser._id);
+			await foundBeer.save();
+			res.redirect(`/beers/${req.params.id}`)
+		}
+	} catch (err) {
+		res.send(err)
 	}
 });
 
