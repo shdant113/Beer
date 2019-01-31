@@ -10,6 +10,11 @@ button:hover {
 	cursor: pointer;
 }
 
+.wrap{
+	max-width: 950px;
+	display: block;
+}
+
 #home-head, h1, ul, #intro, p, footer, input, button, label, textarea, .inside-container > h3{
 	text-align: center;
 }
@@ -100,11 +105,12 @@ input[type="file"]{
 .inside-container{
 	border: 2px solid #000000;
 	height: 100%;
-	display: block;
 	margin: 0 auto;
+	max-width: 900px;
 }
 
 .inside-container > h3, #show-fridges > ul{
+	box-sizing: border-box;
 	font-size: 25px;
 }
 
@@ -247,12 +253,12 @@ li {
 	position: relative;
 }
 
-#fridge > .inside-container, #beer-index, #show-fridges {
+#fridge > .inside-container, #beer-index, #show-fridges, .ejs-text {
 	width: max-content;
 	padding: 20px 20px;
 }
 
-#beer-index, #show-fridges {
+#beer-index, #show-fridges, .ejs-text {
 	display: block;
 	margin: 0 auto;
 }
