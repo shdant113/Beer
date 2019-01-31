@@ -148,6 +148,10 @@ hr{
 	text-shadow: 1px 1px 2px #FFFFFF;
 }
 
+#site-nav:focus-within{
+	background-color: rgba(255,255,255,0.3);
+}
+
 .nav-bar:hover{
 	text-decoration: underline
 }
@@ -193,6 +197,11 @@ li {
 	display: none;
 }
 
+#click-to-close, #click-to-open {
+	padding: 10px 20px;
+	width: max-content;
+}
+
 /*.fridge-bkgd{
 	background: url('/images/fridge.png') no-repeat center;
 	height: 420px;
@@ -232,17 +241,22 @@ li {
 	cursor: pointer;
 }
 
-#fridge /*#fridge-btn*/{
-/*	background: url('/images/fridge.png') no-repeat center;*/
-	height: 420px;
-	width: 420px;
-	margin: 0 auto;
-}
-
 #fridge{
+	margin: 0 auto 10px auto;
 	display: none;
 	position: relative;
 }
+
+#fridge > .inside-container, #beer-index, #show-fridges {
+	width: max-content;
+	padding: 20px 20px;
+}
+
+#beer-index, #show-fridges {
+	display: block;
+	margin: 0 auto;
+}
+
 #fridge:hover {
 	cursor: pointer;
 }
