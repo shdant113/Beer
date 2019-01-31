@@ -255,10 +255,14 @@ router.put('/:id/upvote/upvote', async (req, res) => {
 		const foundBeer = await Beer.findById(req.params.id);
 		const currentUser = await User.findById(req.session._id);
 		let alreadyVoted = false;
-		for (let i = 0; i < foundBeer.plusOnes.length; i++) {
-			if (foundBeer.plusOnes[i].toString() === currentUser._id.toString()) {
-				alreadyVoted = true;
+		if (currentUser){
+			for (let i = 0; i < foundBeer.plusOnes.length; i++) {
+				if (foundBeer.plusOnes[i].toString() === currentUser._id.toString()) {
+					alreadyVoted = true;
+				}
 			}
+		} else {
+			alreadyVoted = true;
 		}
 		if (alreadyVoted) {
 			res.redirect(`/beers/${req.params.id}`)
