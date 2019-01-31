@@ -1,6 +1,9 @@
 <% include ../partials/head %>
 <% include ../partials/header %>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
 <div class="wrap">
 	<h1>Register Your New Account!</h1>
 	<br><br>
@@ -78,11 +81,30 @@
 			<!-- </datalist> -->
 			</select>
 			<br>
-			<img class="upload-img" src= "/images/beerdefault.png" alt="default profile picture of beer">
+			<img id="profImgUpload" class="upload-img" src= "/images/beerdefault.png" alt="default profile picture of beer">
 			<br>
 			<label>Choose a Profile Picture</label>
-			<label class="custom">Upload a File<br>
-			<input type="file" name="imageFile" /></label>
+			<script> 
+				document.addEventListener("DOMContentLoaded", function(event){
+					$('#profImg').on("click", function(event){
+						$('#imageFile').change(function(){
+							readImgUrlAndPreview(this);
+							function readImgUrlAndPreview(input){
+								if (input.files && input.files[0]) {
+									const newReader = new FileReader();
+									newReader.onload = function(e) {
+										$('#profImgUpload').attr('src', e.target.result);
+									}
+									newReader.readAsDataURL(input.files[0]);
+								};
+								
+							}
+						})
+					})
+				});
+			</script>
+			<label id="profImg" class="custom">Upload a File<br>
+			<input id="imageFile" type="file" name="imageFile" /></label>
 			<br><br>
 			<button>Register With BeerFridge!</button>
 		</form>
