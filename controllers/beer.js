@@ -12,6 +12,16 @@ router.get('/', async (req, res) => {
 	try {
 		const currentUser = await User.findOne({username: req.session.username});
 		const allBeers = await Beer.find({});
+		allBeers.sort((a, b) => {
+			let nameA = a.name.toUpperCase(); // ignore upper and lowercase
+			let nameB = b.name.toUpperCase(); // ignore upper and lowercase
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
+		});
 		res.render('beers/index.ejs', {
 			beers: allBeers,
 			currentUser: currentUser,
@@ -100,6 +110,7 @@ router.get('/:id', async (req, res) => {
 	try {
 		// beer to show
 		const foundBeer = await Beer.findById(req.params.id);
+		console.log(foundBeer);
 		// finding the user in order to determine if the user is logged in
 		const currentUser = await User.findOne({username: req.session.username});
 		const foundUser = await User.findOne({username: foundBeer.user});
