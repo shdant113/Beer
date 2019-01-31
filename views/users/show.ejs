@@ -24,18 +24,14 @@
 		<br>
 	</div>
 	<br><br>
-	<div id="fridge-btn">
-		<div class="inside-container">
-			<h3>Click to open my fridge!</h3>
-		</div>
-	</div>
+	<img src="/images/fridge.png" id="fridge-picture">
 	<div id="fridge">
 		<div class="inside-container">
 			<h3><%= user.username %>'s Fridge:</h3>
 			<ul class="user-beer-fridge-ul">
 				<% for (let i = 0; i < user.fridge.length; i++){%>
 					<li class="user-fridge-li">
-						<a href="/beers/<%=user.fridge[i]._id%>"><%=user.fridge[i].name%></a>
+						<a href="/beers/<%=user.fridge[i]._id%>" class="user-fridge-link"><%=user.fridge[i].name%></a>
 						<br>
 						<%if(isCurrent) {%>
 							<form id="remove-beer-form" action="/users/<%=user._id%>/fridge?_method=DELETE" method="POST">
@@ -48,11 +44,25 @@
 			</ul>
 		</div>
 	</div>
+	<div class="inside-container" id="click-to-open">
+		<h3>Click to open my fridge!</h3>
+	</div>
+	<div class="inside-container" id="click-to-close">
+		<h3>Click the beers!</h3>
+	</div>
 	<script>
 		document.addEventListener("DOMContentLoaded", function(){
-			$('#fridge-btn').on('click', function(){
+			$('#fridge-picture').on('click', function(){
 				$('#fridge').show();
-				$('#fridge-btn').hide();
+				$('#click-to-close').show();
+				$('#click-to-open').hide();
+				$('#fridge-picture').hide();
+			})
+			$('#fridge').on('click', function(){
+				$('#fridge').hide();
+				$('#click-to-close').hide();
+				$('#click-to-open').show();
+				$('#fridge-picture').show();
 			})
 		});
 	</script>

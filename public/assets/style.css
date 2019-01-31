@@ -43,8 +43,9 @@ input, button, select, textarea, .custom {
 	text-align: center
 }
 
-.user-beer-fridge-ul {
-	
+.user-fridge-link:hover {
+	text-decoration: underline;
+	font-weight: bold;
 }
 .user-fridge-li {
 	margin-bottom: 10px;
@@ -177,6 +178,10 @@ li {
 	min-width: 500px;
 }
 
+#click-to-close {
+	display: none;
+}
+
 /*.fridge-bkgd{
 	background: url('/images/fridge.png') no-repeat center;
 	height: 420px;
@@ -205,8 +210,19 @@ li {
 	height: 200px;
 }
 
-#fridge, #fridge-btn{
-	background: url('/images/fridge.png') no-repeat center;
+#fridge-picture {
+	height: 420px;
+	width: 420px;
+	margin: 0 auto;
+	display: block;
+}
+
+#fridge-picture:hover {
+	cursor: pointer;
+}
+
+#fridge /*#fridge-btn*/{
+/*	background: url('/images/fridge.png') no-repeat center;*/
 	height: 420px;
 	width: 420px;
 	margin: 0 auto;
@@ -216,14 +232,18 @@ li {
 	display: none;
 	position: relative;
 }
+#fridge:hover {
+	cursor: pointer;
+}
 
-#fridge-btn{
+
+/*#fridge-btn{
 	display: block;
 }
 
 #fridge-btn:hover{
 	cursor: pointer;
-}
+}*/
 
 .upload-img{
 	margin: 0 auto;
