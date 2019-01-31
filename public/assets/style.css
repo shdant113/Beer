@@ -9,13 +9,13 @@ body {
 	text-align: center;
 }
 
-#img-contain-wrap > h1, .wrap > h1, .inside-container > h3{
+#img-contain-wrap > h1, .wrap > h1, .inside-container > h3, #show-fridges > ul{
 	font-family: 'Slackey', cursive;
 	font-weight: 500;
 	text-shadow: 5px 5px 10px #dc3545c2;
 }
 
-#intro, .ejs-text > ul > li, .show-wrap > ul > li, input, button, select, .custom {
+#intro, .ejs-text > ul > li, .show-wrap > ul > li, input, button, select, .custom, #show-fridges > ul > li {
 	font-family: 'Caudex', serif;
 	font-size: 25px;
 }
@@ -37,15 +37,13 @@ input, button, select, textarea, .custom {
 }
 
 .drink-it-button {
+	margin-left: 20px;
 	width: 80px;
 	height: 25px;
 	font-size: 16px;
 	text-align: center
 }
 
-.user-beer-fridge-ul {
-	
-}
 .user-fridge-li {
 	margin-bottom: 10px;
 	display: flex;
@@ -79,7 +77,7 @@ input[type="file"]{
 	border: 5px solid black;
 }
 
-.ejs-text, .show-wrap, .inside-container{
+.ejs-text, .show-wrap, .inside-container, #show-fridges{
 	background-color: rgba(255,255,255,0.3);
 	padding: 10px 0;
 	border-radius: 20px;
@@ -92,7 +90,7 @@ input[type="file"]{
 	margin: 0 auto;
 }
 
-.inside-container > h3{
+.inside-container > h3, #show-fridges > ul{
 	font-size: 25px;
 }
 
@@ -203,6 +201,10 @@ li {
 .show-img{
 	width: 200px;
 	height: 200px;
+}
+
+#show-fridges > ul{
+
 }
 
 #fridge, #fridge-btn{
