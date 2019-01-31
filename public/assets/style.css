@@ -200,6 +200,10 @@ textarea{
 	width: 278px;
 }
 
+.price-range {
+	width: 278px
+}
+
 footer{
 	font-family: 'Arvo', serif;
 	width: 100%;
