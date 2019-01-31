@@ -107,6 +107,16 @@ router.get('/logout', async (req, res) => {
 router.get('/', async (req, res) => {
 	try {
 		const foundUser = await User.find({});
+		foundUser.sort((a, b) => {
+			let nameA = a.username.toUpperCase(); // ignore upper and lowercase
+			let nameB = b.username.toUpperCase(); // ignore upper and lowercase
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
+		});
 		res.render('users/index.ejs', {
 			users: foundUser,
 			session: req.session
