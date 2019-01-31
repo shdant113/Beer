@@ -62,6 +62,16 @@ router.get('/:id', async (req, res) => {
 		// finding user that created the brewery
 		const foundUser = await User.findOne({ username: foundBrewery.creator });
 		const currentUser = await User.findOne({username: req.session.username});
+		foundBrewery.beers.sort((a, b) => {
+			let nameA = a.name.toUpperCase(); // ignore upper and lowercase
+			let nameB = b.name.toUpperCase(); // ignore upper and lowercase
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
+		});
 		let isCurrent = false;
 		if (currentUser === null) {
 			isCurrent = false;
