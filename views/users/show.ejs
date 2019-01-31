@@ -32,7 +32,7 @@
 				<% for (let i = 0; i < user.fridge.length; i++){%>
 					<li class="user-fridge-li">
 						<a href="/beers/<%=user.fridge[i]._id%>" class="user-fridge-link"><%=user.fridge[i].name%></a>
-						<br>
+						<br><br>
 						<%if(isCurrent) {%>
 							<form id="remove-beer-form" action="/users/<%=user._id%>/fridge?_method=DELETE" method="POST">
 								<input type="hidden" name="beerId" value="<%=user.fridge[i]._id%>">

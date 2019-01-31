@@ -36,7 +36,7 @@
 			<button><a href="/beers/<%= beer._id %>/edit">Edit This Beer</a></button>
 		<%}%>
 	</div>
-	<div>
+	<div id="show-fridges">
 		<ul><%=beer.name%> is in these fridges:
 			<% for (let i = 0; i < beerOwners.length; i++) { %>
 				<li>
@@ -46,6 +46,7 @@
 			
 		</ul>
 	</div>
+	<br><br>
 </div>
 
 <% include ../partials/footer%>
