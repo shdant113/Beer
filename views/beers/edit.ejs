@@ -10,21 +10,57 @@
 			<label for="name">Change The Name of <%= beer.name %></label>
 			<input type="text" name="name" value="<%=beer.name%>">
 			<br>
-			<label for="type">Change The Type of <%= beer.name %></label>
-			<input type="text" name="type" value="<%=beer.type%>">
+			<label for="type">Change the Style of <%=beer.name%></label>
+			<select name="type" id="beer-type-edit">
+				<option value="<%=beer.type%>" selected><%=beer.type%></option>
+				<option value="Ale">Ale</option>
+				<option value="Amber">Amber</option>
+				<option value="Blonde">Blonde</option>
+				<option value="Brown">Brown</option>
+				<option value="Cream">Cream</option>
+				<option value="Fruit">Fruit</option>
+				<option value="IPA">IPA</option>
+				<option value="Light">Light</option>
+				<option value="Pale">Pale</option>
+				<option value="Pilsner">Pilsner</option>
+				<option value="Porter">Porter</option>
+				<option value="Strong">Strong</option>
+				<option value="Stout">Stout</option>
+				<option value="Wheat">Wheat</option>
+			</select>
 			<br>
-			<label for="price">Change the Price of <%= beer.name %></label>
-			<input type="range" name="price" min="1" max="4" value="<%=beer.price%>">
+			<label for="price">Change the Price of <%= beer.name %> ($-$$$$)</label>
+			<input class="price-range" type="range" name="price" min="1" max="4" value="<%=beer.price%>" list="tickmarks">
+				<datalist id="tickmarks">
+					<option value="1">
+					<option value="2">
+					<option value="3">
+					<option value="4">
+				</datalist>
 			<br>
 			<label for="flavor">How Does <%= beer.name %> Taste?</label><br>
 			<textarea name="flavor"><%=beer.flavor%></textarea>
 			<br>
-			<label for="color">Change the Color of <%= beer.name %></label>
-			<input type="text" name="color" value="<%=beer.color%>">
+			<label for="color">Change the Color of <%=beer.name%></label>
+			<select name="color" id="beer-color-edit">
+				<option value="<%=beer.color%>" selected><%=beer.color%></option>
+				<option value="Pale Straw">Pale Straw</option>
+				<option value="Straw">Straw</option>
+				<option value="Pale Gold">Pale Gold</option>
+				<option value="Deep Gold">Deep Gold</option>
+				<option value="Pale Amber">Pale Amber</option>
+				<option value="Medium Amber">Medium Amber</option>
+				<option value="Deep Amber">Deep Amber</option>
+				<option value="Amber-Brown">Amber-Brown</option>
+				<option value="Brown">Brown</option>
+				<option value="Ruby-Brown">Ruby-Brown</option>
+				<option value="Deep Brown">Deep Brown</option>
+				<option value="Black">Black</option>
+			</select>
 			<br>
 			<label for="maker">Change Where <%= beer.name %> is Brewed</label>
 			<select name="maker" id="breweries-option-edit">
-				<option value="<%=beer.maker%>" disabled selected><%=beer.maker%></option>
+				<option value="<%=beer.maker%>" selected><%=beer.maker%></option>
 				<% for (let i = 0; i < breweries.length; i++) { -%>
 					<option value="<%= breweries[i].name %>"><%= breweries[i].name %></option>
 				<% } -%>

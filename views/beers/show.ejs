@@ -18,7 +18,7 @@
 		<div class="show-text">
 			<p>Type of Beer: <%=beer.type%></p>
 			<p>Made By: <%=beer.maker%></p>
-			<p>Price: <%=beer.price%>/4</p>
+			<p>Price: <% for(let i = 1; i <= beer.price; i++) { %>$<%}%></p>
 			<p>The beer has been described as: <%=beer.flavor%></p>
 			<p>Color: <%=beer.color%></p>
 		</div>

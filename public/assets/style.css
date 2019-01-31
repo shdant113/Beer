@@ -26,10 +26,22 @@ input, button, select, textarea, .custom {
 	border-radius: 3px;
 }
 
+.user-fridge-li {
+	margin-bottom: 10px;
+}
+
+#remove-beer-form {
+	margin-top: 5px;
+}
+
 .custom{
 	background-color: buttonface;
 	border: 1px solid rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
 	padding: 1px 7px 2px;
+}
+
+#breweries-option-new {
+	margin-bottom: 10px;
 }
 
 input[type="file"]{
@@ -198,6 +210,10 @@ textarea{
 	line-height: 1.5;
 	box-shadow: 1px 1px 1px #FFFFFF;
 	width: 278px;
+}
+
+.price-range {
+	width: 278px
 }
 
 footer{
