@@ -17,7 +17,7 @@
 		<br><br>
 		<div class="show-text">
 			<p>Type of Beer: <%=beer.type%></p>
-			<p>Made By: <%=beer.maker%></p>
+			<p>Made By: <%if(beerBrewery !== null){%><a href="/breweries/<%=beerBrewery._id%>"><%}%><%=beer.maker%></a></p>
 			<p>Price: <% for(let i = 1; i <= beer.price; i++) { %>$<%}%></p>
 			<p>The beer has been described as: <%=beer.flavor%></p>
 			<p>Color: <%=beer.color%></p>
@@ -35,6 +35,16 @@
 		<%if(isCurrent) {%>
 			<button><a href="/beers/<%= beer._id %>/edit">Edit This Beer</a></button>
 		<%}%>
+	</div>
+	<div>
+		<ul><%=beer.name%> is in these fridges:
+			<% for (let i = 0; i < beerOwners.length; i++) { %>
+				<li>
+					<a href="/users/<%=beerOwners[i]._id%>"><%=beerOwners[i].username%></a>
+				</li>
+			<% } %>
+			
+		</ul>
 	</div>
 </div>
 

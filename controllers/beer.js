@@ -110,10 +110,11 @@ router.get('/:id', async (req, res) => {
 	try {
 		// beer to show
 		const foundBeer = await Beer.findById(req.params.id);
-		console.log(foundBeer);
+		const beerBrewery = await Brewery.findOne({'beers._id': req.params.id});
 		// finding the user in order to determine if the user is logged in
 		const currentUser = await User.findOne({username: req.session.username});
 		const foundUser = await User.findOne({username: foundBeer.user});
+		const usersWithBeer = await User.find({'fridge._id': req.params.id});
 		let isCurrent = false;
 		if (currentUser === null) {
 			isCurrent = false;
@@ -129,7 +130,9 @@ router.get('/:id', async (req, res) => {
 			user: foundUser,
 			currentUser: currentUser,
 			isCurrent: isCurrent,
-			session: req.session
+			session: req.session,
+			beerBrewery: beerBrewery,
+			beerOwners: usersWithBeer
 		})
 		// } else {
 			// if the user is not logged in (username of 0 cannot exist because username must be a string), they cannot add a beer to their fridge, so the page renders but the button does not show up
