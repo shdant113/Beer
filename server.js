@@ -1,4 +1,9 @@
 require('./db');
+
+/*
+MODULES --> express, superagent, bodyparser, 
+methodoverride, multer, express-session
+*/
 const express = require('express');
 const server = express();
 const request = require('superagent');
@@ -34,21 +39,30 @@ server.use('/breweries', breweryController);
 server.use('/reviews', reviewController);
 server.use('/users', userController);
 
-// Brewery.collection.insertMany(brewerySeed, (err, response) => {
-// 	if (err) {
-// 		console.log(err)
-// 	} else {
-// 		console.log(response)
-// 	}
-// });
+/* 
+TO POPULATE DATABASE, UNCOMMENT THESE
+COMMENT THEM OUT AGAIN AFTER YOU RUN THEM OR IT WILL BE UGLY
+*/
 
-// Beer.collection.insertMany(beerSeed, (err, response) => {
-// 	if (err) {
-// 		console.log(err)
-// 	} else {
-// 		console.log(response)
-// 	}
-// });
+/*
+
+Brewery.collection.insertMany(brewerySeed, (err, response) => {
+	if (err) {
+		console.log(err)
+	} else {
+		console.log(response)
+	}
+});
+
+Beer.collection.insertMany(beerSeed, (err, response) => {
+	if (err) {
+		console.log(err)
+	} else {
+		console.log(response)
+	}
+});
+
+*/
 
 server.get('/', (req, res) => {
 	res.render('home.ejs', {

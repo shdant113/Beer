@@ -8,7 +8,6 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const fs = require('fs');
 
-
 // log in page
 router.get('/login', async (req, res) => {
 	res.render('users/login.ejs', {
@@ -58,7 +57,7 @@ router.post('/login', async (req, res) => {
 
 // register route
 router.post('/', upload.single('imageFile'), async (req, res) => {
-	// username is required to be unique on the model page, so a username cannot be replicated
+	// username is required to be unique on the model page, so a username cannot be replicated, no logic necessary
 	req.session.userMessage = '';
 	// hash user password
 	const hashedUserPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
@@ -70,14 +69,14 @@ router.post('/', upload.single('imageFile'), async (req, res) => {
 	userPassEntry.city = req.body.city;
 	userPassEntry.state = req.body.state;
 	userPassEntry.image = {};
-	// console.log(req.body);
-	// console.log(req.file);
+	// for image uploads
 	if (req.file) {
 		const imageFilePath = './uploads/' + req.file.filename;
 		userPassEntry.image.data = fs.readFileSync(imageFilePath);
 		userPassEntry.image.contentType = req.file.mimetype;
 		fs.unlinkSync(imageFilePath);
 	}
+	// after information has been entered
 	try {
 		// create user
 		const newUser = await User.create(userPassEntry);
@@ -106,7 +105,9 @@ router.get('/logout', async (req, res) => {
 // index
 router.get('/', async (req, res) => {
 	try {
+		// find all users
 		const foundUser = await User.find({});
+		// sort users alphabetically
 		foundUser.sort((a, b) => {
 			let nameA = a.username.toUpperCase(); // ignore upper and lowercase
 			let nameB = b.username.toUpperCase(); // ignore upper and lowercase
@@ -126,13 +127,14 @@ router.get('/', async (req, res) => {
 	}
 });
 
-
-
 // show
 router.get('/:id', async (req, res) => {
 	try {
+		// find shown user
 		const foundUser = await User.findById(req.params.id);
+		// find logged in user
 		const currentUser = await User.findOne({username: req.session.username});
+		// sort foundUser's fridge alphabetically
 		foundUser.fridge.sort((a, b) => {
 			let nameA = a.name.toUpperCase(); // ignore upper and lowercase
 			let nameB = b.name.toUpperCase(); // ignore upper and lowercase
@@ -143,8 +145,10 @@ router.get('/:id', async (req, res) => {
 				return 1;
 			}
 		});
+		// checking if currentUser is on their own profile or someone else's
 		let isCurrent = false;
 		if (currentUser === null) {
+			// if not logged in
 			isCurrent = false;
 		} else if (foundUser._id.toString() !== currentUser._id.toString()) {
 			isCurrent = false;
@@ -162,11 +166,19 @@ router.get('/:id', async (req, res) => {
 	}
 });
 
-
 // edit
 router.get('/:id/edit', async (req, res) => {
 	try {
+		// find user to edit
 		const foundUser = await User.findById(req.params.id);
+		/*
+		if the logged in user is the same as the user being edited, render the edit page
+		otherwise, redirect to home
+		because the edit button will not appear on the show page unless the user 
+		is logged in and looking at their own profile, this should not be a major concern
+		but if someone typed in the actual route in the URL, this stops them from
+		editing or deleting someone else's account
+		*/
 		if (req.session.username === foundUser.username) {
 			res.render('users/edit.ejs', {
 				user: foundUser,
@@ -196,17 +208,12 @@ router.put('/:id', async (req, res) => {
 		const foundBeer = await Beer.findById(req.body.beerid);
 		// find user that pressed the button on the show page
 		const foundUser = await User.findOne({username: req.session.username});
-		// console.log(foundBeer);
 		// push to user fridge
 		foundUser.fridge.push(foundBeer);
 		// save result in db
 		foundUser.save();
-		// console.log(foundUser);
-		// console.log(foundUser.fridge);
 		// redirect to user profile
 		res.redirect(`./${foundUser._id}`)
-		// res.render('users/show.ejs', {
-		// 	user: foundUser
 	} catch (err) {
 		res.send(err)
 	}
@@ -216,10 +223,9 @@ router.put('/:id', async (req, res) => {
 router.put('/:id/edited', upload.single('imageFile'), async (req, res) => {
 	req.session.editMessage = '';
 	try {
+		// find user to update
 		const foundUser = await User.findById(req.params.id);
-		// console.log(foundUser.image);
-		// console.log(foundUser);
-		// If there is a new picture uploaded:
+		// if there is a new picture uploaded:
 		if (req.file) {
 			const imageFilePath = './uploads/' + req.file.filename;
 			const newPicture = {};
@@ -227,11 +233,10 @@ router.put('/:id/edited', upload.single('imageFile'), async (req, res) => {
 			newPicture.image.data = fs.readFileSync(imageFilePath);
 			newPicture.image.contentType = req.file.mimetype;
 			fs.unlinkSync(imageFilePath);
-			// console.log(newPicture);
 			foundUser.image = newPicture.image;
 			await foundUser.save();
-			// console.log(foundUser.picture);
 		}
+		// if the user wants to change their password
 		if(req.body.password.toString() === foundUser.password) {
 			const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
 		} else {
@@ -239,8 +244,6 @@ router.put('/:id/edited', upload.single('imageFile'), async (req, res) => {
 			const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
 			updatedUser.password = hashedUserPassword;
 			await updatedUser.save();
-			// console.log("---------------");
-			// console.log(updatedUser);
 		}
 // THIS WAS US MAKING THINGS TOO COMPLICATED
 		// const foundUser = await User.findById(req.params.id);
@@ -266,14 +269,14 @@ router.put('/:id/edited', upload.single('imageFile'), async (req, res) => {
 		res.redirect('/users');
 	} catch (err) {
 		req.session.editMessage = `Username and email are required`;
-		res.redirect(`/users/${req.params.id}/edit`)
-		// res.send(err)
+		res.redirect(`/users/${req.params.id}/edit`);
 	}
 });
 
 // delete
 router.delete('/:id', async (req, res) => {
 	try {
+		// delete button only appears from edit route
 		const userDelete = await User.findByIdAndRemove(req.params.id);
 		res.redirect('/');
 	} catch (err) {
@@ -281,33 +284,23 @@ router.delete('/:id', async (req, res) => {
 	}
 });
 
-
 // remove beer from fridge
-
 router.delete('/:id/fridge', async (req, res) => {
 	try {
-		// find the User we are working on
+		// find the user we are working on
 		const foundUser = await User.findById(req.params.id);
 		// filter all the beers that aren't being drank
 		const removalIndex = foundUser.fridge.findIndex((beer) => {
 			return beer._id.toString() === req.body.beerId.toString();
-		})
-		// console.log(removalIndex);
+		});
+		// remove only the beer index being drank
 		foundUser.fridge.splice(removalIndex, 1);
-		// const stillInFridge = foundUser.fridge.filter(beer => beer._id != req.body.beerId);
-		// console.log(stillInFridge);
-		// Make the fridge only contain the non-drank beers
-		// foundUser.fridge = stillInFridge;
-		// console.log(foundUser.fridge);
-		// Save it
 		await foundUser.save();
 		// Stay on their page
 		res.redirect(`/users/${req.params.id}`)
 	} catch (err) {
 		res.send(err)
 	}
-})
-
-
+});
 
 module.exports = router;
