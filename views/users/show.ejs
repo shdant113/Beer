@@ -15,8 +15,9 @@
 			alt="<%=user.username%> profile">
 		</div>
 		<div class="show-text">
-			<p>Email: <%=user.email%></p>
-			<p>Located In: <%=user.city%>, <%=user.state%></p>
+			<p><%=user.message%></p>
+			<p><%= user.username %> is located in:
+			<%=user.city%>, <%=user.state%></p>
 			<%if(isCurrent) {%>
 				<form action="/users/<%=user._id%>/edit" method="get">
 					<button>Edit Yourself</a></button>
@@ -34,9 +35,8 @@
 				<% for (let i = 0; i < user.fridge.length; i++){%>
 					<li class="user-fridge-li">
 						<a href="/beers/<%=user.fridge[i]._id%>" class="user-fridge-link"><%=user.fridge[i].name%></a>
-						<br><br>
 						<%if(isCurrent) {%>
-							<form id="remove-beer-form" action="/users/<%=user._id%>/fridge?_method=DELETE" method="POST">
+							<form action="/users/<%=user._id%>/fridge?_method=DELETE" method="POST">
 								<input type="hidden" name="beerId" value="<%=user.fridge[i]._id%>">
 								<button class="drink-it-button">Drink It</button>
 							</form>

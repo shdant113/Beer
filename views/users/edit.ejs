@@ -11,8 +11,13 @@
 			<input type="hidden" name="username" value="<%=user.username%>" />
 			<label>Change Your Password:</label>
 			<input type="password" name="password" value="<%=user.password%>">
+			<br>
 			<label>Change Your Email:</label>
 			<input type="email" name="email" value="<%=user.email%>" />
+			<br>
+			<label>Add A New Profile Message:</label>
+			<textarea></textarea>
+			<br>
 			<label>Update Your Location:</label>
 			<input type="text" name="city" value="<%=user.city%>" />
 			<select name="state" id="user-state-edit" value="<%=user.state%>">
@@ -72,7 +77,8 @@
 				<option value="District of Columbia">District of Columbia</option>
 				<option value="International">International</option>
 			<!-- </datalist> -->
-			</select><br>
+			</select>
+			<br><br>
 			<img id="editProfImgUpload" class="upload-img" 
 				<%if (user.image.data) {%>
 					src= "/users/<%=user._id%>/image"

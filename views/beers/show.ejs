@@ -25,13 +25,14 @@
 	</div>
 		<br>
 	<div>
-		<p>Upvotes <%=beer.plusOnes.length%></p>
+		<p id="upvote">Upvotes: <%=beer.plusOnes.length%></p>
 		<%if(alreadyVoted === false) {%>
 			<form action="/beers/<%=beer._id%>/upvote/upvote?_method=PUT" method="POST">
 				<button>UPVOTE</button>
 			</form>
 		<%}%>
 	</div>
+	<br>
 	<div>
 		<%if(currentUser){%>
 			<form action="/users/<%=user._id%>?_method=PUT" method="POST">

@@ -19,6 +19,10 @@ button:hover {
 	text-align: center;
 }
 
+#upvote{
+	font-size: 40px;
+}
+
 #img-contain-wrap > h1, .wrap > h1, .inside-container > h3, #show-fridges > ul{
 	font-family: 'Slackey', cursive;
 	font-weight: 500;
@@ -66,12 +70,9 @@ input, button, select, textarea, .custom {
 .user-fridge-li {
 	margin-bottom: 10px;
 	display: flex;
-	justify-content: center;
-	align-items: space-around;
-}
-
-#remove-beer-form {
-	margin-top: 5px;
+	justify-content: space-between;
+	max-height: 420px;
+	overflow: scroll;
 }
 
 .custom{
@@ -98,7 +99,7 @@ input[type="file"]{
 
 .ejs-text, .show-wrap, .inside-container, #show-fridges{
 	background-color: rgba(255,255,255,0.3);
-	padding: 10px 0;
+	padding: 10px 20px;
 	border-radius: 20px;
 }
 
@@ -301,7 +302,6 @@ label {
 	background-color: rgba(255,255,255,0.5);
 	width: max-content;
 	padding: 0 10px;
-	max-width: 50%;
 	display: block;
 	margin: 20px auto 10px auto;
 }

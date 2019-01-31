@@ -9,7 +9,6 @@ const multer = require('multer');
 const User = require('./models/user');
 const Brewery = require('./models/brewery');
 const Beer = require('./models/beer');
-const userSeed = require('./seedUserData');
 const beerSeed = require('./seedBeerData');
 const brewerySeed = require('./seedBreweryData');
 const upload = multer({ dest: 'uploads/' });
@@ -44,14 +43,6 @@ server.use('/users', userController);
 // });
 
 // Beer.collection.insertMany(beerSeed, (err, response) => {
-// 	if (err) {
-// 		console.log(err)
-// 	} else {
-// 		console.log(response)
-// 	}
-// });
-
-// User.collection.insertMany(userSeed, (err, response) => {
 // 	if (err) {
 // 		console.log(err)
 // 	} else {
