@@ -13,7 +13,8 @@ const beerSchema = new Schema({
 	image: {
 		data: Buffer,
 		contentType: String
-	}
+	},
+	plusOnes: []
 });
 
 const Beer = mongoose.model('Beer', beerSchema);
