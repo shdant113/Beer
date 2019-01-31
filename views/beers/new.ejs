@@ -60,7 +60,7 @@
 			</select>
 			<br>
 			<label for="maker">Where Is It Brewed?</label>
-			<select name="maker" id="breweries-option-new" style="margin-bottom: 10px">
+			<select name="maker" id="breweries-option-new">
 				<option value="" disabled selected>Brewery</option>
 				<% for (let i = 0; i < breweries.length; i++) { -%>
 					<option value="<%= breweries[i].name %>"><%= breweries[i].name %></option>

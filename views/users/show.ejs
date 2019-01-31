@@ -28,11 +28,11 @@
 		<h3><%= user.username %>'s Fridge:</h3>
 		<ul>
 			<% for (let i = 0; i < user.fridge.length; i++){%>
-				<li style="margin-bottom: 10px">
+				<li class="user-fridge-li">
 					<a href="/beers/<%=user.fridge[i]._id%>"><%=user.fridge[i].name%></a>
 					<br>
 					<%if(isCurrent) {%>
-						<form action="/users/<%=user._id%>/fridge?_method=DELETE" method="POST" style="margin-top: 5px">
+						<form id="remove-beer-form" action="/users/<%=user._id%>/fridge?_method=DELETE" method="POST">
 							<input type="hidden" name="beerId" value="<%=user.fridge[i]._id%>">
 							<button>Drink It</button>
 						</form>
