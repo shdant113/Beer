@@ -88,14 +88,18 @@
 				alt="<%=user.username%> profile">
 			<label>Choose a New Profile Picture</label>
 			<script> 
+				// load DOM
 				document.addEventListener("DOMContentLoaded", function(event){
 					$('#editProfImg').on("click", function(event){
 						$('.imageFile').change(function(){
+							// get image data
 							readImgUrlAndPreview(this);
 							function readImgUrlAndPreview(input){
 								if (input.files && input.files[0]) {
+									// upload new data
 									const newReader = new FileReader();
 									newReader.onload = function(e) {
+										// send new data to profile image so they can see their upload
 										$('#editProfImgUpload').attr('src', e.target.result);
 									}
 									newReader.readAsDataURL(input.files[0]);
