@@ -24,23 +24,38 @@
 		<br>
 	</div>
 	<br><br>
-	<div class="inside-container">
-		<h3><%= user.username %>'s Fridge:</h3>
-		<ul>
-			<% for (let i = 0; i < user.fridge.length; i++){%>
-				<li class="user-fridge-li">
-					<a href="/beers/<%=user.fridge[i]._id%>"><%=user.fridge[i].name%></a>
-					<br>
-					<%if(isCurrent) {%>
-						<form id="remove-beer-form" action="/users/<%=user._id%>/fridge?_method=DELETE" method="POST">
-							<input type="hidden" name="beerId" value="<%=user.fridge[i]._id%>">
-							<button>Drink It</button>
-						</form>
-					<%}%>
-				</li>
-			<%}%>
-		</ul>
+	<div id="fridge-btn">
+		<div class="inside-container">
+			<h3>Click to open my fridge!</h3>
+		</div>
 	</div>
+	<div id="fridge">
+		<div class="inside-container">
+			<h3><%= user.username %>'s Fridge:</h3>
+			<ul>
+				<% for (let i = 0; i < user.fridge.length; i++){%>
+					<li class="user-fridge-li">
+						<a href="/beers/<%=user.fridge[i]._id%>"><%=user.fridge[i].name%></a>
+						<br>
+						<%if(isCurrent) {%>
+							<form id="remove-beer-form" action="/users/<%=user._id%>/fridge?_method=DELETE" method="POST">
+								<input type="hidden" name="beerId" value="<%=user.fridge[i]._id%>">
+								<button>Drink It</button>
+							</form>
+						<%}%>
+					</li>
+				<%}%>
+			</ul>
+		</div>
+	</div>
+	<script>
+		document.addEventListener("DOMContentLoaded", function(){
+			$('#fridge-btn').on('click', function(){
+				$('#fridge').show();
+				$('#fridge-btn').hide();
+			})
+		});
+	</script>
 	<br><br>
 </div>
 

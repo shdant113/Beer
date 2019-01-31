@@ -15,9 +15,19 @@ body {
 	text-shadow: 5px 5px 10px #dc3545c2;
 }
 
-#intro, .ejs-text > ul > li, .show-wrap > ul > li, .inside-container > ul > li, input, button, select, .custom {
+#intro, .ejs-text > ul > li, .show-wrap > ul > li, input, button, select, .custom {
 	font-family: 'Caudex', serif;
 	font-size: 25px;
+}
+
+.inside-container > ul > li > a{
+	font-family: 'Slackey', cursive;
+	font-weight: 200;
+	font-size: 20px;
+	text-shadow: 5px 5px 10px #000000;
+	text-decoration: none;
+	list-style-type: none;
+	color: white;
 }
 
 input, button, select, textarea, .custom {
@@ -64,7 +74,7 @@ input[type="file"]{
 
 .inside-container{
 	border: 2px solid #000000;
-	width: 50%;
+	height: 100%;
 	display: block;
 	margin: 0 auto;
 }
@@ -154,6 +164,12 @@ li {
 	min-width: 500px;
 }
 
+/*.fridge-bkgd{
+	background: url('/images/fridge.png') no-repeat center;
+	height: 420px;
+	width: 420px;
+}*/
+
 #home-img{
 	max-width: 500px;
 	max-height: 500px;
@@ -174,6 +190,26 @@ li {
 .show-img{
 	width: 200px;
 	height: 200px;
+}
+
+#fridge, #fridge-btn{
+	background: url('/images/fridge.png') no-repeat center;
+	height: 420px;
+	width: 420px;
+	margin: 0 auto;
+}
+
+#fridge{
+	display: none;
+	position: relative;
+}
+
+#fridge-btn{
+	display: block;
+}
+
+#fridge-btn:hover{
+	cursor: pointer;
 }
 
 .upload-img{
