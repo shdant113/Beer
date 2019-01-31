@@ -73,7 +73,7 @@
 				<option value="International">International</option>
 			<!-- </datalist> -->
 			</select><br>
-			<img class="upload-img" 
+			<img id="editProfImgUpload" class="upload-img" 
 				<%if (user.image.data) {%>
 					src= "/users/<%=user._id%>/image"
 				<%} else {%>
@@ -81,8 +81,27 @@
 				<%}%> 
 				alt="<%=user.username%> profile">
 			<label>Choose a New Profile Picture</label>
-			<label class="custom">Upload a File<br>
-			<input type="file" name="imageFile" /></label>
+			<script> 
+				document.addEventListener("DOMContentLoaded", function(event){
+					$('#editProfImg').on("click", function(event){
+						$('.imageFile').change(function(){
+							readImgUrlAndPreview(this);
+							function readImgUrlAndPreview(input){
+								if (input.files && input.files[0]) {
+									const newReader = new FileReader();
+									newReader.onload = function(e) {
+										$('#editProfImgUpload').attr('src', e.target.result);
+									}
+									newReader.readAsDataURL(input.files[0]);
+								};
+								
+							}
+						})
+					})
+				});
+			</script>
+			<label id="editProfImg" class="custom">Upload a File<br>
+			<input class="imageFile" type="file" name="imageFile" /></label>
 			<br><br>
 			<button>Edit Your Account</button>
 		</form>

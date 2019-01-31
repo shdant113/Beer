@@ -68,9 +68,28 @@
 			</select>
 			<p>Don't see your beer's brewery? Click <a href="/breweries/new">here</a>.</p>
 			<br>
+			<img id="beerImgUpload" class="upload-img" src= "/images/beerdefault.png" alt="default profile picture of beer">
 			<label>Choose Beer's Picture</label>
-			<label class="custom">Upload a File<br>
-			<input type="file" name="imageFile" /></label>
+			<script> 
+				document.addEventListener("DOMContentLoaded", function(event){
+					$('#beerImg').on("click", function(event){
+						$('.imageFile').change(function(){
+							readImgUrlAndPreview(this);
+							function readImgUrlAndPreview(input){
+								if (input.files && input.files[0]) {
+									const newReader = new FileReader();
+									newReader.onload = function(e) {
+										$('#beerImgUpload').attr('src', e.target.result);
+									}
+									newReader.readAsDataURL(input.files[0]);
+								};
+							}
+						})
+					})
+				});
+			</script>
+			<label id="beerImg" class="custom">Upload a File<br>
+			<input class="imageFile" type="file" name="imageFile" /></label>
 			<br><br>
 			<input type="hidden" name="user" value="<%=user.username%>">
 			<button>Add Your New Beer</button>

@@ -1,8 +1,6 @@
 <% include ../partials/head %>
 <% include ../partials/header %>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
 
 <div class="wrap">
 	<h1>Register Your New Account!</h1>
@@ -87,7 +85,7 @@
 			<script> 
 				document.addEventListener("DOMContentLoaded", function(event){
 					$('#profImg').on("click", function(event){
-						$('#imageFile').change(function(){
+						$('.imageFile').change(function(){
 							readImgUrlAndPreview(this);
 							function readImgUrlAndPreview(input){
 								if (input.files && input.files[0]) {
@@ -104,7 +102,7 @@
 				});
 			</script>
 			<label id="profImg" class="custom">Upload a File<br>
-			<input id="imageFile" type="file" name="imageFile" /></label>
+			<input class="imageFile" type="file" name="imageFile" /></label>
 			<br><br>
 			<button>Register With BeerFridge!</button>
 		</form>
