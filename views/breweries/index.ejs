@@ -14,7 +14,9 @@
 	</div>
 	<br>
 	<%if(currentUser) {%>
-		<button><a href="/breweries/new">Make a New Brewery</a></button>
+		<form action="/breweries/new" method="GET">
+			<button>Make a New Brewery</button>
+		</form>
 	<%}%>
 	<br>
 </div>

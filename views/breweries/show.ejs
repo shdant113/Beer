@@ -21,6 +21,12 @@
 				<button>Edit This Brewery</button>
 			</form>
 		<%}%>
+		<br>
+		<%if (currentUser) {%>
+			<form action="/beers/new" method="GET">
+				<button>Add a New Beer</button>
+			</form>
+		<%}%>
 	</div>
 </div>
 
