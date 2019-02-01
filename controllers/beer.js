@@ -10,8 +10,11 @@ const fs = require('fs');
 // index --> get
 router.get('/', async (req, res) => {
 	try {
+		// find current user
 		const currentUser = await User.findOne({username: req.session.username});
+		// find all beers
 		const allBeers = await Beer.find({});
+		// sort alphabetically
 		allBeers.sort((a, b) => {
 			let nameA = a.name.toUpperCase(); // ignore upper and lowercase
 			let nameB = b.name.toUpperCase(); // ignore upper and lowercase
@@ -37,8 +40,7 @@ router.get('/new', async (req, res) => {
 	try {
 		// find breweries for dropdown
 		const addBrewery = await Brewery.find({});
-		// console.log(addBrewery);
-
+		// sort alphabetically
 		addBrewery.sort((a, b) => {
 			let nameA = a.name.toUpperCase(); // ignore upper and lowercase
 			let nameB = b.name.toUpperCase(); // ignore upper and lowercase
@@ -49,14 +51,7 @@ router.get('/new', async (req, res) => {
 				return 1;
 			}
 		});
-
-
-
-		// addBrewery.sort((a, b) => {
-		// 	return a.name - b.name
-		// })
-		// await addBrewery.save();
-		// find user for user option
+		// find user to set creator
 		const foundUser = await User.findOne({ username: req.session.username });
 		res.render('beers/new.ejs', {
 			breweries: addBrewery,
@@ -71,6 +66,8 @@ router.get('/new', async (req, res) => {
 // new --> post
 router.post('/', upload.single('imageFile'), async (req, res) => {
 	req.session.beerMessage = '';
+	// enter information into database
+	// upvotes will be added independently
 	const beerEntry = {};
 	beerEntry.name = req.body.name;
 	beerEntry.type = req.body.type;
@@ -81,6 +78,7 @@ router.post('/', upload.single('imageFile'), async (req, res) => {
 	beerEntry.maker = req.body.maker;
 	beerEntry.user = req.body.user;
 	beerEntry.image = {};
+	// if there is an image upload
 	if (req.file) {
 		const imageFilePath = './uploads/' + req.file.filename;
 		beerEntry.image.data = fs.readFileSync(imageFilePath);
@@ -92,30 +90,32 @@ router.post('/', upload.single('imageFile'), async (req, res) => {
 		const foundBrewery = await Brewery.findOne({name: req.body.maker});
 		// create the new beer
 		const newBeer = await Beer.create(beerEntry);
-		// console.log(newBeer);
 		// push the new beer into the brewery it belongs in
 		foundBrewery.beers.push(newBeer);
 		await foundBrewery.save();
-		// console.log(newBeer);
 		res.redirect('/beers');
 	} catch (err) {
 		req.session.beerMessage = `Need a name and brewery`;
 		res.redirect('/beers/new');
-		// res.send(err)
 	}
 });
 
 // show --> get
 router.get('/:id', async (req, res) => {
 	try {
-		// beer to show
+		// find beer to show
 		const foundBeer = await Beer.findById(req.params.id);
+		// find the brewery the beer belongs to
 		const beerBrewery = await Brewery.findOne({'beers._id': req.params.id});
 		// finding the user in order to determine if the user is logged in
 		const currentUser = await User.findOne({username: req.session.username});
 		const foundUser = await User.findOne({username: foundBeer.user});
+		// find all users with this beer in their fridge
 		const usersWithBeer = await User.find({'fridge._id': req.params.id});
+		// upvoting mechanics
 		let alreadyVoted = false;
+		// if the logged in user's id is in the array of people that upvoted a beer
+		// they cannot upvote it again
 		if (currentUser) {
 			for (let i = 0; i < foundBeer.plusOnes.length; i++) {
 				if (foundBeer.plusOnes[i].toString() === currentUser._id.toString()) {
@@ -123,8 +123,10 @@ router.get('/:id', async (req, res) => {
 				}
 			}
 		} else {
+			// if you are not logged in, you cannot upvote
 			alreadyVoted = true
 		};
+		// determining if current user should be able to edit the beer
 		let isCurrent = false;
 		if (currentUser === null) {
 			isCurrent = false;
@@ -133,8 +135,6 @@ router.get('/:id', async (req, res) => {
 		} else {
 			isCurrent = true;
 		}
-		// if (currentUser) {
-			// if the user is logged in, they can add the beer to their fridge
 		res.render('beers/show.ejs', {
 			beer: foundBeer,
 			user: foundUser,
@@ -144,14 +144,7 @@ router.get('/:id', async (req, res) => {
 			beerBrewery: beerBrewery,
 			beerOwners: usersWithBeer,
 			alreadyVoted: alreadyVoted
-		})
-		// } else {
-			// if the user is not logged in (username of 0 cannot exist because username must be a string), they cannot add a beer to their fridge, so the page renders but the button does not show up
-			// res.render('beers/show.ejs', {
-			// 	beer: foundBeer,
-			// 	user: 0
-			// })
-		// }
+		});
 	} catch (err) {
 		res.send(err)
 	}
@@ -160,10 +153,15 @@ router.get('/:id', async (req, res) => {
 // edit --> get
 router.get('/:id/edit', async (req, res) => {
 	try {
+		// finding the beer
 		const foundBeer = await Beer.findById(req.params.id);
+		// finding all breweries
 		const allBreweries = await Brewery.find({});
+		// finding the user that created the beer
 		const foundUser = await User.find({username: foundBeer.user});
+		// finding the current logged in user
 		const currentUser = await User.find({username: req.session.username});
+		// sorting breweries alphabetically
 		allBreweries.sort((a, b) => {
 			let nameA = a.name.toUpperCase(); // ignore upper and lowercase
 			let nameB = b.name.toUpperCase(); // ignore upper and lowercase
@@ -174,12 +172,15 @@ router.get('/:id/edit', async (req, res) => {
 				return 1;
 			}
 		});
+		// if the user logged in is the creator, they can edit
 		if(req.session.username === foundBeer.user){
 			res.render('beers/edit.ejs', {
 				beer: foundBeer,
 				breweries: allBreweries,
 				session: req.session
 			})
+		/* if not, redirect if they try to follow this route in their URL
+		the edit button will only appear if they are the creator */
 		} else {
 			res.redirect('/')
 		}
@@ -188,6 +189,7 @@ router.get('/:id/edit', async (req, res) => {
 	}
 });
 
+// beer image upload
 router.get('/:id/image', async (req, res) => {
 	const foundBeer = await Beer.findById(req.params.id);
 	const image = foundBeer.image;
@@ -205,6 +207,7 @@ router.put('/:id', upload.single('imageFile'), async (req, res) => {
 		const beerBrewery = await Brewery.findOne({'beers._id': req.params.id});
 		// find any user with the beer in their fridge, and return in an array
 		const userFridge = await User.find({'fridge._id': req.params.id});
+		// if there is an image to upload
 		if (req.file) {
 			console.log('inside');
 			const imageFilePath = './uploads/' + req.file.filename;
@@ -213,10 +216,8 @@ router.put('/:id', upload.single('imageFile'), async (req, res) => {
 			newPicture.image.data = fs.readFileSync(imageFilePath);
 			newPicture.image.contentType = req.file.mimetype;
 			fs.unlinkSync(imageFilePath);
-			// console.log(newPicture);
 			updateBeer.image = newPicture.image;
 			await updateBeer.save();
-			// console.log(updateBeer.picture);
 		}
 		// if old brewery != new brewery
 		if (beerBrewery.name.toString() != req.body.maker.toString()) {
@@ -244,29 +245,36 @@ router.put('/:id', upload.single('imageFile'), async (req, res) => {
 		}
 		res.redirect('/beers');
 	} catch (err) {
+		console.log(err)
 		req.session.beerMessage = `Need a name and brewery`;
 		res.redirect(`/beers/${req.params.id}/edit`);
-		// res.send(err)
 	}
 });
 
+// upvoting mechanics
 router.put('/:id/upvote/upvote', async (req, res) => {
 	try {
+		// finding creator
 		const foundBeer = await Beer.findById(req.params.id);
+		// finding out if user is logged in
 		const currentUser = await User.findById(req.session._id);
 		let alreadyVoted = false;
+		// if they are logged in
 		if (currentUser){
 			for (let i = 0; i < foundBeer.plusOnes.length; i++) {
+				// if they have already upvoted, they cannot upvote agaain
 				if (foundBeer.plusOnes[i].toString() === currentUser._id.toString()) {
 					alreadyVoted = true;
 				}
 			}
 		} else {
+			// if they are not logged in, they cannot upvote
 			alreadyVoted = true;
 		}
 		if (alreadyVoted) {
 			res.redirect(`/beers/${req.params.id}`)
 		} else {
+			// if they upvote, they cannot upvote again later
 			foundBeer.plusOnes.push(currentUser._id);
 			await foundBeer.save();
 			res.redirect(`/beers/${req.params.id}`)
@@ -279,13 +287,18 @@ router.put('/:id/upvote/upvote', async (req, res) => {
 // delete --> delete
 router.delete('/:id', async (req, res) => {
 	try {
+		// find beer to delete
 		const deleteBeer = await Beer.findByIdAndRemove(req.params.id);
+		// find all users with beer in fridge
 		const usersWithBeer = await User.find({'fridge._id': req.params.id});
+		// find all breweries with that beer
 		const breweryWithBeer = await Brewery.findOne({'beers._id': req.params.id});
+		// remove beer from users' fridges that have it
 		for (let i = 0; i < usersWithBeer.length; i++) {
 			usersWithBeer[i].fridge.id(req.params.id).remove();
 			await usersWithBeer[i].save();
 		}
+		// remove from breweries that have it
 		breweryWithBeer.beers.id(req.params.id).remove();
 		await breweryWithBeer.save();
 		res.redirect('/beers');
