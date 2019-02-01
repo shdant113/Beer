@@ -266,7 +266,7 @@ router.put('/:id/edited', upload.single('imageFile'), async (req, res) => {
 		// updateUser.fridge.push(foundUsersFridge);
 		// await updateUser.save();
 		// console.log(updateUser);
-		res.redirect('/users');
+		res.redirect(`/users/${req.params.id}`);
 	} catch (err) {
 		req.session.editMessage = `Username and email are required`;
 		res.redirect(`/users/${req.params.id}/edit`);
