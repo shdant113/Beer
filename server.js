@@ -64,7 +64,7 @@ server.get('/', (req, res) => {
 	})
 });
 
-server.listen(3000, () => {
+server.listen( process.env.PORT || 3000, () => {
 	const date = new Date(Date.now())
 	const dayOfWeek = date.toLocaleString('en-US', { weekday: 'long' })
 	console.log(date);
