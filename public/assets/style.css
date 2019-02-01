@@ -326,6 +326,11 @@ nav{
 	width: 278px
 }
 
+#profImg:hover, #editProfImg:hover, #beerImg:hover, #editBeerImg:hover {
+	box-shadow: 2px 2px 4px black;
+	cursor: pointer;
+}
+
 footer{
 	font-family: 'Arvo', serif;
 	width: 100%;
