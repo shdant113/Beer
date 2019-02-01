@@ -278,7 +278,7 @@ router.delete('/:id', async (req, res) => {
 	try {
 		// delete button only appears from edit route
 		const userDelete = await User.findByIdAndRemove(req.params.id);
-		res.redirect('/');
+		res.redirect('/users/logout');
 	} catch (err) {
 		res.send(err)
 	}

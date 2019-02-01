@@ -220,7 +220,11 @@ router.put('/:id', upload.single('imageFile'), async (req, res) => {
 			await updateBeer.save();
 		}
 		// if old brewery != new brewery
-		if (beerBrewery.name.toString() != req.body.maker.toString()) {
+		if (beerBrewery === null) {
+			const newBrewery = await Brewery.findOne({name: req.body.maker});
+			newBrewery.beers.push(updateBeer);
+			await newBrewery.save();
+		} else if (beerBrewery.name.toString() != req.body.maker.toString()) {
 			// remove beer
 			beerBrewery.beers.id(req.params.id).remove();
 			// save brewery
@@ -299,8 +303,11 @@ router.delete('/:id', async (req, res) => {
 			await usersWithBeer[i].save();
 		}
 		// remove from breweries that have it
-		breweryWithBeer.beers.id(req.params.id).remove();
-		await breweryWithBeer.save();
+		console.log('i made it here');
+		if (breweryWithBeer) {
+			breweryWithBeer.beers.id(req.params.id).remove();
+			await breweryWithBeer.save();
+		}
 		res.redirect('/beers');
 	} catch (err) {
 		res.send(err)
