@@ -42,21 +42,21 @@ TO POPULATE DATABASE, UNCOMMENT THESE
 COMMENT THEM OUT AGAIN AFTER YOU RUN THEM OR IT WILL BE UGLY
 */
 
-Brewery.collection.insertMany(brewerySeed, (err, response) => {
-	if (err) {
-		console.log(err)
-	} else {
-		console.log(response)
-	}
-});
+// Brewery.collection.insertMany(brewerySeed, (err, response) => {
+// 	if (err) {
+// 		console.log(err)
+// 	} else {
+// 		console.log(response)
+// 	}
+// });
 
-Beer.collection.insertMany(beerSeed, (err, response) => {
-	if (err) {
-		console.log(err)
-	} else {
-		console.log(response)
-	}
-});
+// Beer.collection.insertMany(beerSeed, (err, response) => {
+// 	if (err) {
+// 		console.log(err)
+// 	} else {
+// 		console.log(response)
+// 	}
+// });
 
 server.get('/', (req, res) => {
 	res.render('home.ejs', {

@@ -7,6 +7,8 @@ const bcrypt = require('bcryptjs');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const fs = require('fs');
+const beerSeed = require('./seedBeerData');
+const brewerySeed = require('./seedBreweryData');
 
 // log in page
 router.get('/login', async (req, res) => {
@@ -22,6 +24,27 @@ router.get('/new', async (req, res) => {
 		session: req.session
 	})
 });
+
+//SEED DATA
+router.get('/user/seed/seed/thisisseed/data/insert', async (req, res) => {
+	if(req.session.username === 'administrator'){
+		Brewery.collection.insertMany(brewerySeed, (err, response) => {
+			if (err) {
+				console.log(err)
+			} else {
+				console.log(response)
+			}
+		});
+		Beer.collection.insertMany(beerSeed, (err, response) => {
+			if (err) {
+				console.log(err)
+			} else {
+				console.log(response)
+			}
+		});
+	}
+	res.redirect(`/`);
+})
 
 // log in route
 router.post('/login', async (req, res) => {
