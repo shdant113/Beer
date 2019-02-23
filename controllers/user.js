@@ -3,12 +3,13 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const User = require('../models/user');
 const Beer = require('../models/beer');
+const Brewery = require('../models/brewery');
 const bcrypt = require('bcryptjs');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const fs = require('fs');
-const beerSeed = require('./seedBeerData');
-const brewerySeed = require('./seedBreweryData');
+const beerSeed = require('../seedBeerData');
+const brewerySeed = require('../seedBreweryData');
 
 // log in page
 router.get('/login', async (req, res) => {
